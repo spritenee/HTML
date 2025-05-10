@@ -1,0 +1,627 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>FFmpeg常用命令参数解析 | Ai-China</title><meta name="author" content="AI-China"><meta name="copyright" content="AI-China"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="以下是FFmpeg常用参数命令的汇总及解析，结合核心功能与高频场景整理： 一、输入&#x2F;输出控制参数  i [input_file]  作用：指定输入文件（Input缩写）。 示例：ffmpeg -i input.mp4 注意：必须置于输入文件前，支持多输入源 。   f [format]  作用：强制指定输入&#x2F;输出容器格式（如mp4、avi）。 示例：ffmpeg -i input.avi -f m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FFmpeg常用命令参数解析">
+<meta property="og:url" content="https://www.ai-china.xyz/posts/d23f92cd.html">
+<meta property="og:site_name" content="Ai-China">
+<meta property="og:description" content="以下是FFmpeg常用参数命令的汇总及解析，结合核心功能与高频场景整理： 一、输入&#x2F;输出控制参数  i [input_file]  作用：指定输入文件（Input缩写）。 示例：ffmpeg -i input.mp4 注意：必须置于输入文件前，支持多输入源 。   f [format]  作用：强制指定输入&#x2F;输出容器格式（如mp4、avi）。 示例：ffmpeg -i input.avi -f m">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.ai-china.xyz/img/avatar.jpg">
+<meta property="article:published_time" content="2025-05-08T20:52:00.000Z">
+<meta property="article:modified_time" content="2025-05-08T20:52:00.000Z">
+<meta property="article:author" content="AI-China">
+<meta property="article:tag" content="IT-issues">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.ai-china.xyz/img/avatar.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.ai-china.xyz/posts/d23f92cd.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?403c92d1560db157c2d1a5a30189814d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-EEZG901XK6"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EEZG901XK6');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;112faaeb32a149e7acdef445d2cad2f1&quot;}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"6M6J2GXVQ8","apiKey":"db1b88d08993baff4226621c59aedfbf","indexName":"ai-china.xyz","hits":{"per_page":6},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'FFmpeg常用命令参数解析',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-05-08 20:52:00'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/self/custom.css"><script src="/assets/algolia/algoliasearchLite.min.js" async></script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">200</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/pageimage.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Ai-China"><span class="site-name">Ai-China</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">FFmpeg常用命令参数解析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-05-08T20:52:00.000Z" title="发表于 2025-05-08 20:52:00">2025-05-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-08T20:52:00.000Z" title="更新于 2025-05-08 20:52:00">2025-05-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/IT%E5%B8%B8%E8%A7%81%E7%96%91%E9%9A%BE/">IT常见疑难</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="FFmpeg常用命令参数解析"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" data-lang="zh-CN"><p>以下是FFmpeg常用参数命令的汇总及解析，结合核心功能与高频场景整理：</p>
+<h3 id="一、输入-输出控制参数"><strong>一、输入/输出控制参数</strong></h3>
+<ol>
+<li><code>i [input_file]</code>
+<ul>
+<li><strong>作用</strong>：指定输入文件（Input缩写）。</li>
+<li><strong>示例</strong>：<code>ffmpeg -i input.mp4</code></li>
+<li><strong>注意</strong>：必须置于输入文件前，支持多输入源 。</li>
+</ul>
+</li>
+<li><code>f [format]</code>
+<ul>
+<li><strong>作用</strong>：强制指定输入/输出容器格式（如<code>mp4</code>、<code>avi</code>）。</li>
+<li><strong>示例</strong>：<code>ffmpeg -i input.avi -f mp4 output.mp4</code> 。</li>
+</ul>
+</li>
+<li><code>y</code>
+<ul>
+<li><strong>作用</strong>：覆盖已存在的输出文件（无需确认）。</li>
+<li><strong>示例</strong>：<code>ffmpeg -i input.mp4 -y output.mp4</code>。</li>
+</ul>
+</li>
+<li><code>hide_banner</code>
+<ul>
+<li><strong>作用</strong>：隐藏FFmpeg启动时的版本及配置信息。</li>
+<li><strong>示例</strong>：<code>ffmpeg -hide_banner -i input.mp4</code> 。</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、编解码器参数"><strong>二、编解码器参数</strong></h3>
+<ol>
+<li><code>c:v [codec]</code> / <code>vcodec [codec]</code>
+<ul>
+<li><strong>作用</strong>：指定视频编解码器（Codec:Video缩写）。</li>
+<li><strong>示例</strong>：<code>c:v libx264</code>（H.264编码）、<code>c:v copy</code>（直接复制流）。</li>
+</ul>
+</li>
+<li><code>c:a [codec]</code> / <code>acodec [codec]</code>
+<ul>
+<li><strong>作用</strong>：指定音频编解码器（Codec:Audio缩写）。</li>
+<li><strong>示例</strong>：<code>c:a aac</code>（AAC编码）、<code>c:a copy</code>。</li>
+</ul>
+</li>
+<li><code>c:s [codec]</code> / <code>scodec [codec]</code>
+<ul>
+<li><strong>作用</strong>：指定字幕编解码器（如<code>mov_text</code>）。</li>
+<li><strong>示例</strong>：<code>c:s mov_text</code>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="三、视频处理参数"><strong>三、视频处理参数</strong></h3>
+<ol>
+<li><strong><code>vf [filter]</code></strong>
+<ul>
+<li><strong>作用</strong>：应用视频滤镜（Video Filter）。</li>
+<li>示例：
+<ul>
+<li><code>vf scale=1280:720</code>（调整分辨率）</li>
+<li><code>vf &quot;transpose=1&quot;</code>（旋转90度）</li>
+<li><code>vf &quot;subtitles=file.srt&quot;</code>（添加字幕） 。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>b:v [bitrate]</code></strong>
+<ul>
+<li><strong>作用</strong>：设置视频码率（Bitrate:Video）。</li>
+<li><strong>示例</strong>：<code>b:v 2M</code>（2Mbps码率） 。</li>
+</ul>
+</li>
+<li><strong><code>r [fps]</code></strong>
+<ul>
+<li><strong>作用</strong>：强制设定输出帧率（Frame Rate）。</li>
+<li><strong>示例</strong>：<code>r 30</code>（30帧/秒） 。</li>
+</ul>
+</li>
+<li><strong><code>ss [time]</code></strong>
+<ul>
+<li><strong>作用</strong>：设置起始时间点（Seek缩写）。</li>
+<li><strong>示例</strong>：<code>ss 00:00:10</code>（从第10秒开始处理） 。</li>
+</ul>
+</li>
+<li><strong><code>t [duration]</code></strong>
+<ul>
+<li><strong>作用</strong>：设置处理时长（Time缩写）。</li>
+<li><strong>示例</strong>：<code>t 30</code>（处理30秒内容）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="四、音频处理参数"><strong>四、音频处理参数</strong></h3>
+<ol>
+<li><code>ar [rate]</code>
+<ul>
+<li><strong>作用</strong>：设定音频采样率（Audio Rate）。</li>
+<li><strong>示例</strong>：<code>ar 44100</code>（44.1kHz）。</li>
+</ul>
+</li>
+<li><code>ac [channels]</code>
+<ul>
+<li><strong>作用</strong>：设定音频声道数（Audio Channels）。</li>
+<li><strong>示例</strong>：<code>ac 2</code>（立体声）。</li>
+</ul>
+</li>
+<li><code>af [filter]</code>
+<ul>
+<li><strong>作用</strong>：应用音频滤镜（Audio Filter）。</li>
+<li><strong>示例</strong>：<code>af &quot;volume=1.5&quot;</code>（音量增强1.5倍）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="五、高级参数"><strong>五、高级参数</strong></h3>
+<ol>
+<li><strong><code>map [stream]</code></strong>
+<ul>
+<li><strong>作用</strong>：指定流映射（解决多轨道冲突）。</li>
+<li><strong>示例</strong>：<code>map 0:v:0</code>（选择首个输入文件的第一个视频流）。</li>
+</ul>
+</li>
+<li><strong><code>preset [speed]</code></strong>
+<ul>
+<li><strong>作用</strong>：平衡编码速度与压缩率。</li>
+<li><strong>示例</strong>：<code>preset fast</code>（快速编码，压缩率较低）。</li>
+</ul>
+</li>
+<li><strong><code>crf [value]</code></strong>
+<ul>
+<li><strong>作用</strong>：恒定质量因子（0-51，值越小画质越好）。</li>
+<li><strong>示例</strong>：<code>crf 23</code>（常用平衡值） 。</li>
+</ul>
+</li>
+<li><strong><code>hwaccel [type]</code></strong>
+<ul>
+<li><strong>作用</strong>：启用硬件加速（如<code>cuda</code>、<code>qsv</code>）。</li>
+<li><strong>示例</strong>：<code>hwaccel cuda -c:v h264_nvenc</code>（NVIDIA GPU加速）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="六、实战场景命令示例"><strong>六、实战场景命令示例</strong></h3>
+<ol>
+<li>
+<p><strong>转码</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -c:v libx265 -c:a aac output.mp4</span><br></pre></td></tr></table></figure>
+<ul>
+<li>解析：H.265编码视频，AAC编码音频。</li>
+</ul>
+</li>
+<li>
+<p><strong>剪切无损片段</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -ss 00:00:10 -i input.mp4 -t 30 -c copy output.mp4</span><br></pre></td></tr></table></figure>
+<ul>
+<li>解析：<code>c copy</code>直接复制流，速度极快。</li>
+</ul>
+</li>
+<li>
+<p><strong>提取音频</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -vn -c:a copy output.aac</span><br></pre></td></tr></table></figure>
+<ul>
+<li>解析：<code>vn</code>禁用视频流，<code>c:a copy</code>保留原始音频 。</li>
+</ul>
+</li>
+</ol>
+<p><strong>FFmpeg支持通过 <code>-ss</code> 和 <code>-to</code> 参数组合实现精准时间范围的视频剪辑</strong>。这对参数用于指定剪辑的起始时间点和截止时间点，适用于需要精确控制片段的场景。以下是具体用法与注意事项：</p>
+<h3 id="一、基础语法与示例"><strong>一、基础语法与示例</strong></h3>
+<p><strong>命令格式</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -ss [start_time] -i input.mp4 -to [end_time] -c copy output.mp4</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong><code>ss</code></strong>：剪辑起始时间（如 <code>00:05:20</code> 或 <code>320</code> 秒）。</p>
+</li>
+<li>
+<p><strong><code>to</code></strong>：剪辑截止时间（如 <code>00:10:00</code> 或 <code>600</code> 秒）。</p>
+</li>
+<li>
+<p><strong><code>c copy</code></strong>：无损复制流，避免重新编码，速度快且保真度高 。</p>
+<p><strong>示例</strong>：</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -ss 00:05:20 -i input.mp4 -to 00:15:20 -c copy output.mp4</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>解析</strong>：从输入视频的 <code>5分20秒</code> 开始，截取到 <code>15分20秒</code>，输出时长为10分钟的视频。</li>
+</ul>
+<h3 id="二、参数放置的影响"><strong>二、参数放置的影响</strong></h3>
+<h3 id="1-ss-放在-i-前"><strong>1. <code>ss</code> 放在 <code>i</code> 前</strong></h3>
+<ul>
+<li><strong>行为</strong>：FFmpeg <strong>快速定位到起始时间</strong>（基于关键帧跳跃），但可能不够精确。</li>
+<li><strong>适用场景</strong>：优先速度的场景，如处理长视频 。</li>
+</ul>
+<h3 id="2-ss-放在-i-后"><strong>2. <code>ss</code> 放在 <code>i</code> 后</strong></h3>
+<ul>
+<li><strong>行为</strong>：FFmpeg <strong>逐帧解码到起始时间</strong>，精度更高但速度较慢。</li>
+<li><strong>适用场景</strong>：精确到帧的剪辑（需搭配重新编码） 。</li>
+</ul>
+<h3 id="三、注意事项"><strong>三、注意事项</strong></h3>
+<ol>
+<li><strong>参数顺序</strong>：
+<ul>
+<li><strong><code>to</code> 必须放在 <code>i</code> 参数之后</strong>，否则会和 <code>t</code> 一样被解析为持续时间 。</li>
+<li><strong>错误示例</strong>：<code>ffmpeg -ss 10 -to 20 -i input.mp4</code>（效果等同于 <code>t 20</code>）。</li>
+</ul>
+</li>
+<li><strong>时间格式</strong>：
+<ul>
+<li>支持两种格式：<strong><code>HH:MM:SS.ms</code>（如 <code>01:23:45.678</code>）或纯秒数（如 <code>500</code>）</strong> 。</li>
+</ul>
+</li>
+<li><strong>时间越界处理</strong>：
+<ul>
+<li>若 <code>to</code> 超出输入视频时长，输出会自然结束在视频末尾。</li>
+<li>若 <code>to</code> 早于 <code>ss</code>，FFmpeg会报错 <code>to value smaller than -ss</code>。</li>
+</ul>
+</li>
+<li><strong>精准性问题</strong>：
+<ul>
+<li><strong>关键帧依赖</strong>：使用 <code>c copy</code> 时，若起始时间不在关键帧上，可能导致剪辑片段开头出现黑屏或卡顿（可通过 <code>force_key_frames</code> 强制插入关键帧优化）。</li>
+<li><strong>精度提升</strong>：需要精确到帧时，需移除 <code>c copy</code> 并重新编码（如 <code>c:v libx264</code>），但会耗时更长。</li>
+</ul>
+</li>
+</ol>
+<h3 id="四、扩展场景"><strong>四、扩展场景</strong></h3>
+<h3 id="1-音频-字幕剪辑"><strong>1. 音频/字幕剪辑</strong></h3>
+<p>语法与视频剪辑一致，例如提取音频片段：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -ss 00:02:30 -i audio.mp3 -to 00:03:30 -c:a copy clip.mp3</span><br></pre></td></tr></table></figure>
+<h3 id="2-多参数复合操作"><strong>2. 多参数复合操作</strong></h3>
+<p>剪辑后转码为其他格式（示例保留音频并转H.265）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -ss 00:10:00 -i input.mp4 -to 00:20:00 -c:v libx265 -c:a aac output.mp4</span><br></pre></td></tr></table></figure>
+<h3 id="五、常见误区"><strong>五、常见误区</strong></h3>
+<ul>
+<li><strong>时间计算错误</strong>：<code>to</code> 是基于输入视频的时间轴，而非 <code>ss</code> 后的相对时间。例如 <code>ss 10 -to 20</code> 表示剪辑 <code>10~20秒</code>（总长10秒），而非从 <code>10秒开始截取20秒</code> 。</li>
+<li><strong>忽略容器格式</strong>：部分格式（如MP4）要求关键帧对齐，若剪辑后出现无法播放，可尝试输出为MKV容器（兼容性更强） 。</li>
+</ul>
+<p>如需测试时间点的精确性，可通过播放器（如PotPlayer）逐帧定位后，再使用上述命令。</p>
+<h2 id="使用-FFmpeg-查询视频文件中音视频原始格式的具体命令与参数解析：">使用 <strong>FFmpeg</strong> 查询视频文件中音视频原始格式的具体命令与参数解析：</h2>
+<h3 id="核心命令"><strong>核心命令</strong></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4</span><br></pre></td></tr></table></figure>
+<p><strong>作用</strong>：查看输入文件的详细媒体信息，包括容器格式、音视频编解码器、码率、分辨率等。 <strong>参数解析</strong>：</p>
+<ul>
+<li><strong><code>i input.mp4</code></strong>：指定输入文件（<code>input.mp4</code> 替换为实际文件名）。</li>
+<li><strong>默认行为</strong>：运行后会输出媒体流的详细信息，但会因未指定输出文件而报错，此时可忽略错误提示，直接查看控制台输出的前半部分信息。</li>
+</ul>
+<h3 id="输出信息关键字段解析"><strong>输出信息关键字段解析</strong></h3>
+<p>运行命令后，控制台会显示类似以下内容（节选关键部分）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input #0, mov,mp4,m4a,3gp,3g2,mj2, from &#x27;input.mp4&#x27;:</span><br><span class="line">  Metadata:</span><br><span class="line">    major_brand     : isom</span><br><span class="line">    minor_version   : 512</span><br><span class="line">  Duration: 00:05:30.15, start: 0.000000, bitrate: 2500 kb/s</span><br><span class="line">    Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p, 1920x1080 [SAR 1:1 DAR 16:9], 2000 kb/s, 30 fps, 30 tbr, 15360 tbn, 60 tbc (default)</span><br><span class="line">    Stream #0:1(eng): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 128 kb/s (default)</span><br></pre></td></tr></table></figure>
+<p><strong>关键字段</strong>：</p>
+<ol>
+<li>
+<p>容器格式</p>
+<ul>
+<li><strong><code>Input #0, mov,mp4,m4a,3gp,3g2,mj2</code></strong>：表示容器格式为 <code>MP4</code>（<code>mov</code> 是 MP4 的基类容器）。</li>
+</ul>
+</li>
+<li>
+<p>视频流信息</p>
+<ul>
+<li><strong><code>Video: h264 (High)</code></strong>：视频编码格式为 <code>H.264</code>，编码参数为 <code>High</code> 档次。</li>
+<li><strong><code>avc1</code></strong>：H.264 在 MP4 容器中的四字符码标识。</li>
+<li><strong><code>1920x1080</code></strong>：视频分辨率。</li>
+<li><strong><code>30 fps</code></strong>：帧率。</li>
+</ul>
+</li>
+<li>
+<p>音频流信息</p>
+<ul>
+<li>
+<p><strong><code>Audio: aac (LC)</code></strong>：音频编码格式为 <code>AAC</code>，参数为 <code>Low Complexity</code> 模式。</p>
+</li>
+<li>
+<p><strong><code>44100 Hz, stereo</code></strong>：采样率 44.1kHz，立体声 。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="优化输出的附加参数"><strong>优化输出的附加参数</strong></h3>
+<ol>
+<li>
+<p><strong>隐藏冗余信息</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -hide_banner -i input.mp4</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><code>hide_banner</code></strong>：隐藏 FFmpeg 版本和编译配置信息，使输出更简洁。</li>
+</ul>
+</li>
+<li>
+<p><strong>仅输出元数据</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -f ffmetadata -</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong><code>f ffmetadata</code></strong>：强制输出元数据（需重定向到文件或结合其他工具解析） 。</li>
+</ul>
+</li>
+<li>
+<p><strong>结合过滤器查询</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 -filter_complex <span class="string">&quot;null&quot;</span> -map 0:v -f null -</span><br></pre></td></tr></table></figure>
+<ul>
+<li>强制处理视频流但丢弃输出，可查看完整的视频流参数 。</li>
+</ul>
+</li>
+</ol>
+<h3 id="自动化提取编解码器名称"><strong>自动化提取编解码器名称</strong></h3>
+<p>通过 <code>grep</code> 或类似工具快速提取编码格式（适用于Linux/macOS）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 2&gt;&amp;1 | grep -E <span class="string">&quot;Video:|Audio:&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>输出示例</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Stream #0:0: Video: h264 (High), yuv420p, 1920x1080</span><br><span class="line">Stream #0:1: Audio: aac (LC), 44100 Hz, stereo</span><br></pre></td></tr></table></figure>
+<h3 id="注意事项"><strong>注意事项</strong></h3>
+<ol>
+<li>
+<p>容器格式 ≠ 编码格式</p>
+<ul>
+<li>MP4/MKV 是容器，实际编码需查看内部的 <code>Video</code> 和 <code>Audio</code> 流信息。</li>
+</ul>
+</li>
+<li>
+<p>多流文件的映射</p>
+<ul>
+<li>若文件含多个音视频流，可使用 <code>map</code> 参数指定目标流编号（如 <code>Stream #0:0</code> 表示首个视频流）。</li>
+</ul>
+</li>
+<li>
+<p>冷门格式支持</p>
+<ul>
+<li>若 FFmpeg 未编译对应解码器，可能无法识别编码格式（需重新编译或使用官方静态版本） 。</li>
+</ul>
+</li>
+</ol>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IT-issues/">IT-issues</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="Wechat"/></a><div class="post-qr-code-desc">Wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="Alipay"/></a><div class="post-qr-code-desc">Alipay</div></li><li class="reward-item"><a href="/paypal.me/spritenee" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/paypal.png" alt="Paypal"/></a><div class="post-qr-code-desc">Paypal</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508103147758.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法</div></div></a></div><div class="next-post pull-right"><a href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250510201017801.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">下载reddit自有视频的CC字幕</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/8ed2456e.html" title="AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202501/image-20250308222701243.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-08</div><div class="title">AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法</div></div></a></div><div><a href="/posts/5d0776d5.html" title="Add to the PATH on Windows 10 and Windows 11"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240127074357404.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-27</div><div class="title">Add to the PATH on Windows 10 and Windows 11</div></div></a></div><div><a href="/posts/da4c0974.html" title="ChatTTS安装使用保姆级教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240604154404896.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-04</div><div class="title">ChatTTS安装使用保姆级教程</div></div></a></div><div><a href="/posts/e7a898a7.html" title="ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240625130250230.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-25</div><div class="title">ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决</div></div></a></div><div><a href="/posts/bb1c127d.html" title="Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240131113536868.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-31</div><div class="title">Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项</div></div></a></div><div><a href="/posts/841784b8.html" title="Create a shortcut for even lower phone brightness"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202312/image-20231218173344490.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-18</div><div class="title">Create a shortcut for even lower phone brightness</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">AI-China</div><div class="author-info__description">Something about China</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">200</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:spritenee@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://youtube.com/spritenee" target="_blank" title="Youtube"><i class="fa-brands fa-youtube" style="color: #f70808;"></i></a><a class="social-icon" href="https://weibo.com/u/1911422681" target="_blank" title="Weibo"><i class="fa-brands fa-weibo" style="color: #8e2525;"></i></a><a class="social-icon" href="https://facebook.com/spritenee" target="_blank" title="Facebook"><i class="fa-brands fa-facebook" style="color: #1f64db;"></i></a><a class="social-icon" href="https://twitter.com/spritenee" target="_blank" title="Twitter"><i class="fa-brands fa-twitter" style="color: #0b62f9;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%BE%93%E5%85%A5-%E8%BE%93%E5%87%BA%E6%8E%A7%E5%88%B6%E5%8F%82%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">一、输入&#x2F;输出控制参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BC%96%E8%A7%A3%E7%A0%81%E5%99%A8%E5%8F%82%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">二、编解码器参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%A7%86%E9%A2%91%E5%A4%84%E7%90%86%E5%8F%82%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">三、视频处理参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%9F%B3%E9%A2%91%E5%A4%84%E7%90%86%E5%8F%82%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">四、音频处理参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E9%AB%98%E7%BA%A7%E5%8F%82%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">五、高级参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AE%9E%E6%88%98%E5%9C%BA%E6%99%AF%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B"><span class="toc-number">6.</span> <span class="toc-text">六、实战场景命令示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E4%B8%8E%E7%A4%BA%E4%BE%8B"><span class="toc-number">7.</span> <span class="toc-text">一、基础语法与示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8F%82%E6%95%B0%E6%94%BE%E7%BD%AE%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">8.</span> <span class="toc-text">二、参数放置的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ss-%E6%94%BE%E5%9C%A8-i-%E5%89%8D"><span class="toc-number">9.</span> <span class="toc-text">1. ss 放在 i 前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ss-%E6%94%BE%E5%9C%A8-i-%E5%90%8E"><span class="toc-number">10.</span> <span class="toc-text">2. ss 放在 i 后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">11.</span> <span class="toc-text">三、注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%89%A9%E5%B1%95%E5%9C%BA%E6%99%AF"><span class="toc-number">12.</span> <span class="toc-text">四、扩展场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%9F%B3%E9%A2%91-%E5%AD%97%E5%B9%95%E5%89%AA%E8%BE%91"><span class="toc-number">13.</span> <span class="toc-text">1. 音频&#x2F;字幕剪辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A4%9A%E5%8F%82%E6%95%B0%E5%A4%8D%E5%90%88%E6%93%8D%E4%BD%9C"><span class="toc-number">14.</span> <span class="toc-text">2. 多参数复合操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="toc-number">15.</span> <span class="toc-text">五、常见误区</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-FFmpeg-%E6%9F%A5%E8%AF%A2%E8%A7%86%E9%A2%91%E6%96%87%E4%BB%B6%E4%B8%AD%E9%9F%B3%E8%A7%86%E9%A2%91%E5%8E%9F%E5%A7%8B%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%85%B7%E4%BD%93%E5%91%BD%E4%BB%A4%E4%B8%8E%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90%EF%BC%9A"><span class="toc-number"></span> <span class="toc-text">使用 FFmpeg 查询视频文件中音视频原始格式的具体命令与参数解析：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">核心命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E4%BF%A1%E6%81%AF%E5%85%B3%E9%94%AE%E5%AD%97%E6%AE%B5%E8%A7%A3%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">输出信息关键字段解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E8%BE%93%E5%87%BA%E7%9A%84%E9%99%84%E5%8A%A0%E5%8F%82%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">优化输出的附加参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E6%8F%90%E5%8F%96%E7%BC%96%E8%A7%A3%E7%A0%81%E5%99%A8%E5%90%8D%E7%A7%B0"><span class="toc-number">4.</span> <span class="toc-text">自动化提取编解码器名称</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">5.</span> <span class="toc-text">注意事项</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250510201017801.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="下载reddit自有视频的CC字幕"/></a><div class="content"><a class="title" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕">下载reddit自有视频的CC字幕</a><time datetime="2025-05-10T20:02:05.000Z" title="Created 2025-05-10 20:02:05">2025-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/d23f92cd.html" title="FFmpeg常用命令参数解析">FFmpeg常用命令参数解析</a><time datetime="2025-05-08T20:52:00.000Z" title="Created 2025-05-08 20:52:00">2025-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508103147758.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"/></a><div class="content"><a class="title" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法">digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法</a><time datetime="2025-05-08T09:53:39.000Z" title="Created 2025-05-08 09:53:39">2025-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9619220f.html" title="视频导入PR后声画不对位问题的解决方案"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508092536452.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="视频导入PR后声画不对位问题的解决方案"/></a><div class="content"><a class="title" href="/posts/9619220f.html" title="视频导入PR后声画不对位问题的解决方案">视频导入PR后声画不对位问题的解决方案</a><time datetime="2025-05-08T09:19:52.000Z" title="Created 2025-05-08 09:19:52">2025-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/959a1914.html" title="PR中双语字幕的制作"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250502114724900.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PR中双语字幕的制作"/></a><div class="content"><a class="title" href="/posts/959a1914.html" title="PR中双语字幕的制作">PR中双语字幕的制作</a><time datetime="2025-05-02T11:37:06.000Z" title="Created 2025-05-02 11:37:06">2025-05-02</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By AI-China</div><div class="footer_custom_text">Hi, everyone. Just ask me something!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.ai-china.xyz',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.umd.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'spritenee/Giscus',
+      'data-repo-id': 'R_kgDOKmHsUg',
+      'data-category-id': 'DIC_kwDOKmHsUs4Cagfw',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },null)
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Waline' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!--在此添加你的javascript文件：--><script src="/self/js/algoliasearch.js"></script></body></html>
