@@ -1,0 +1,454 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>使用yt-dlp和ffmpeg实现Youtube等视频的完整和部分（片断）下载 | Ai-China</title><meta name="author" content="AI-China"><meta name="copyright" content="AI-China"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="下载youtube等视频网站中视频部分片断的有效方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用yt-dlp和ffmpeg实现Youtube等视频的完整和部分（片断）下载">
+<meta property="og:url" content="https://www.ai-china.xyz/posts/b7af31b3.html">
+<meta property="og:site_name" content="Ai-China">
+<meta property="og:description" content="下载youtube等视频网站中视频部分片断的有效方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240608153236265.png">
+<meta property="article:published_time" content="2024-06-08T12:36:56.000Z">
+<meta property="article:modified_time" content="2024-06-08T12:36:56.000Z">
+<meta property="article:author" content="AI-China">
+<meta property="article:tag" content="IT-issues">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240608153236265.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.ai-china.xyz/posts/b7af31b3.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?403c92d1560db157c2d1a5a30189814d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-EEZG901XK6"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EEZG901XK6');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;112faaeb32a149e7acdef445d2cad2f1&quot;}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"6M6J2GXVQ8","apiKey":"db1b88d08993baff4226621c59aedfbf","indexName":"ai-china.xyz","hits":{"per_page":6},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '使用yt-dlp和ffmpeg实现Youtube等视频的完整和部分（片断）下载',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-08 12:36:56'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/self/custom.css"><script src="/assets/algolia/algoliasearchLite.min.js" async></script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">202</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240608153236265.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Ai-China"><span class="site-name">Ai-China</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">使用yt-dlp和ffmpeg实现Youtube等视频的完整和部分（片断）下载</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-08T12:36:56.000Z" title="发表于 2024-06-08 12:36:56">2024-06-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-08T12:36:56.000Z" title="更新于 2024-06-08 12:36:56">2024-06-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/IT%E5%B8%B8%E8%A7%81%E7%96%91%E9%9A%BE/">IT常见疑难</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="使用yt-dlp和ffmpeg实现Youtube等视频的完整和部分（片断）下载"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" data-lang="zh-CN"><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240608153236265.png" alt="image-20240608153236265"></p>
+<p>Youtube之类的视频网站中，总有许多想要下载的片断（fraction, portion, partial），因为整片下载耗时耗力又没必要。</p>
+<p>Ai-China在网上找了找工具，有倒是有，就是找到的都是，要么过时不好用了（Github上的工具们），要么点开10多页广告还用不起（Youtube cutter们），要么只能下载360P清晰度且每月只允许下载几百M（streamable们）……</p>
+<p>于是只好自己动手，基本原理就是使用<code>yt-dlp</code>下载，使用<code>ffmpeg</code>为指定的时间段随时编码。</p>
+<p>步骤如下：</p>
+<p>确保已安装必要工具和库</p>
+<ul>
+<li>安装 <code>yt-dlp</code>：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install yt-dlp</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>安装<code>ffmpeg</code>  (根据操作系统不同)：</p>
+<ul>
+<li>在 Ubuntu/Debian 上：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ffmpeg</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 macOS 上：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install ffmpeg</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>在 Windows 上，下载并安装 ffmpeg，然后将其添加到系统路径（PATH）中。</p>
+</li>
+<li>
+<p>在 Windows 上下载和安装 <code>ffmpeg</code> 可以按照以下步骤进行：</p>
+<h5 id="步骤-1：下载-ffmpeg">步骤 1：下载 <code>ffmpeg</code></h5>
+<ol>
+<li>打开你的浏览器并访问 <a target="_blank" rel="noopener" href="https://ffmpeg.org/download.html">FFmpeg官网</a>。</li>
+<li>在页面上找到 “Windows” 选项卡，点击并选择适合的 Windows 版本。你可以直接前往 <a target="_blank" rel="noopener" href="https://www.gyan.dev/ffmpeg/builds/">Gyan.dev FFmpeg Builds</a> 进行下载。</li>
+<li>在下载页面中，点击 “Release builds”，下载最新的 <code>ffmpeg-release-essentials.zip</code> 文件。（推荐下载 Essentials 版本）</li>
+</ol>
+<h5 id="步骤-2：解压缩-ffmpeg">步骤 2：解压缩 <code>ffmpeg</code></h5>
+<ol>
+<li>下载完成后，右键点击 <code>ffmpeg-release-essentials.zip</code> 文件，然后选择 “解压到当前文件夹” 或 “Extract Here”。你可以使用 Windows 内置的解压工具或第三方工具如 WinRAR、7-Zip。</li>
+<li>解压后，你会看到一个文件夹，其中包含诸如 <code>bin</code>, <code>doc</code>, <code>presets</code> 和 <code>LICENSE.txt</code> 文件。</li>
+</ol>
+<h5 id="步骤-3：配置系统环境变量">步骤 3：配置系统环境变量</h5>
+<ol>
+<li>将解压后的文件夹移动到一个永久路径，比如 <code>C:\ffmpeg</code>。</li>
+<li>打开文件夹，进入 <code>bin</code> 文件夹，你会看到 <code>ffmpeg.exe</code>, <code>ffplay.exe</code>, 和 <code>ffprobe.exe</code>。</li>
+</ol>
+<h5 id="步骤-4：设置系统环境变量">步骤 4：设置系统环境变量</h5>
+<ol>
+<li>找到 Windows “开始” 菜单，搜索 “环境变量” 并选择 “编辑系统环境变量”。</li>
+<li>在弹出的 “系统属性” 窗口中，点击 “环境变量”。</li>
+<li>在 “系统变量” 部分，找到并选择 <code>Path</code>，然后点击 “编辑”。</li>
+<li>在 “编辑环境变量” 窗口中，点击 “新建” 并将 <code>C:\ffmpeg\bin</code> （即你的 <code>ffmpeg.exe</code> 所在的路径）添加进去，然后点击 “确定”。</li>
+</ol>
+<h5 id="步骤-5：验证安装">步骤 5：验证安装</h5>
+<ol>
+<li>打开命令提示符（按 <code>Win + R</code>，输入 <code>cmd</code>，然后按回车）。</li>
+<li>在命令提示符中，输入：</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -version</span><br></pre></td></tr></table></figure>
+<p>​	如果安装成功，你会看到 <code>ffmpeg</code> 的版本信息及相关信息。</p>
+<h5 id="示例命令">示例命令</h5>
+<p>一些简单的命令可以帮助你确认 <code>ffmpeg</code> 是否正常工作：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -version</span><br></pre></td></tr></table></figure>
+<p>这将显示 <code>ffmpeg</code> 的版本信息。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i input.mp4 output.avi</span><br></pre></td></tr></table></figure>
+<p>这是一个简单的格式转换命令，将 <code>input.mp4</code> 转换为 <code>output.avi</code>。</p>
+</li>
+</ul>
+<h4 id="运行时报错">运行时报错</h4>
+<p><code>ModuleNotFoundError: No module named 'yt_dlp'</code></p>
+<p>说明你的系统还没有安装 <code>yt-dlp</code> 模块。你可以按照以下步骤安装 <code>yt-dlp</code>：</p>
+<h5 id="安装-yt-dlp">安装 <code>yt-dlp</code></h5>
+<ol>
+<li><strong>打开命令提示符</strong>：
+<ul>
+<li>按 <code>Win + R</code>，输入 <code>cmd</code>，然后按回车。</li>
+</ul>
+</li>
+<li><strong>安装 <code>yt-dlp</code></strong>：
+<ul>
+<li>在命令提示符中运行如下命令：</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install yt-dlp</span><br></pre></td></tr></table></figure>
+<p>如果你没有安装 <code>pip</code>，可以先按照以下步骤安装 <code>pip</code>：</p>
+<ul>
+<li><strong>安装 <code>pip</code></strong>：</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m ensurepip --upgrade</span><br></pre></td></tr></table></figure>
+<h5 id="验证-yt-dlp-安装">验证 <code>yt-dlp</code> 安装</h5>
+<p><strong>在命令提示符中执行以下命令来验证安装</strong>：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m yt_dlp --version</span><br></pre></td></tr></table></figure>
+<p>如果命令返回 <code>yt-dlp</code> 版本号，表示安装成功。</p>
+<h4 id="运行时报错-2">运行时报错</h4>
+<p><code>yt_dlp.utils.DownloadError: ERROR: ffmpeg exited with code 4294967158</code></p>
+<p><code>ffmpeg</code> 退出代码 4294967158 这个错误，通常是由于 <code>ffmpeg</code> 可执行文件无法正常运行，可能的原因包括：</p>
+<ol>
+<li><code>ffmpeg</code> 的路径设置不正确。</li>
+<li><code>ffmpeg</code> 二进制文件损坏或不兼容。</li>
+<li>系统没有权限访问 <code>ffmpeg</code> 可执行文件。</li>
+</ol>
+<p>请按照以下步骤逐一排查并解决问题：</p>
+<h5 id="步骤-1：验证-ffmpeg-安装">步骤 1：验证 ffmpeg 安装</h5>
+<p>确保 <code>ffmpeg</code> 已正确安装并在环境变量 <code>PATH</code> 中配置。</p>
+<p>打开新的命令提示符窗口，输入以下命令并检查是否能看到 <code>ffmpeg</code> 的版本信息：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -version</span><br></pre></td></tr></table></figure>
+<p>如果上述命令返回 <code>ffmpeg</code> 的版本信息，则表示路径设置正确。如果没有，则需要检查 <code>ffmpeg</code> 是否正确下载并解压，确认路径是否添加到了系统的 <code>PATH</code> 中。</p>
+<h5 id="检查环境变量-PATH">检查环境变量 <code>PATH</code></h5>
+<ol>
+<li><strong>检查 <code>PATH</code> 环境变量</strong>：
+<ul>
+<li>打开控制面板，转到 “系统和安全” -&gt; “系统”，然后点击 “高级系统设置”。</li>
+<li>在系统属性窗口中，点击 “环境变量”。</li>
+<li>在 “系统变量” 部分，找到变量名为 <code>Path</code>，点击 “编辑”。</li>
+<li>确认 <code>ffmpeg</code> 的 <code>bin</code> 文件夹路径（例如 <code>C:\ffmpeg\bin</code>）在 <code>Path</code> 列表中。</li>
+</ul>
+</li>
+<li><strong>添加 <code>ffmpeg</code> 路径</strong>（如果不存在）：
+<ul>
+<li>点击 “新建”，输入 <code>ffmpeg</code> 的 <code>bin</code> 文件夹路径（例如 <code>C:\ffmpeg\bin</code>）。</li>
+<li>点击 “确定” 保存更改，然后关闭所有窗口。</li>
+</ul>
+</li>
+</ol>
+<h5 id="步骤-2：重新下载-ffmpeg">步骤 2：重新下载 ffmpeg</h5>
+<p>如果 <code>ffmpeg</code> 并没有正确运行，尝试重新下载并安装可能会解决这个问题。</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://ffmpeg.org/download.html">访问 FFmpeg 官网</a> 重新下载（推荐从 Gyan.dev 下载）。</li>
+<li>解压下载的文件并确保将 <code>bin</code> 目录添加到系统 PATH 中。</li>
+</ol>
+<h5 id="其他可能的解决办法">其他可能的解决办法</h5>
+<ol>
+<li>如果你使用的是管理员用户账号，尝试以管理员身份运行命令提示符。</li>
+<li>检查 <code>ffmpeg</code> 可执行文件是否有权限执行操作。</li>
+<li>尝试在其他目录下运行脚本，避免路径中包含特殊字符或空格的问题。</li>
+</ol>
+<p>如果问题仍然存在，可以尝试手动调用 <code>ffmpeg</code> 命令来测试。例如，先下载视频然后再用 <code>ffmpeg</code> 裁剪，以排除脚本问题。</p>
+<h4 id="运行时报错-3">运行时报错</h4>
+<p><code>ERROR: ffmpeg exited with code 4294967158</code></p>
+<p>错误代码 4294967158 表示 <code>ffmpeg</code> 运行时出错，这通常和路径、权限或传递参数的问题相关。</p>
+<p><code>[tcp @ 00000284704a8400] Connection attempt to 31.13.67.33 port 443 failed: Error number -138 occurred</code></p>
+<p><code>ffmpeg</code> 由于连接到 <code>manifest.googlevideo.com</code> 端口 443 失败而退出，错误码 <code>-138</code> 一般表示网络连接问题。这可能是网络不稳定、防火墙配置、VPN、代理服务等导致的问题。解决办法：在代码中添加 VPN proxy 项。</p>
+<p><code>[download] Got error: 8746106 bytes read, 1254885 more expected</code></p>
+<p>错误提示显示下载中途发生了不一致的问题：预期读取 10045991 字节，但实际只读取了 8746106 字节。这可能是由网络连接不稳定、服务器响应问题或者代理配置错误等引起的。</p>
+<p>如果仅需要下载特定时间段的视频，直接<strong>指定时间段</strong>会更为高效。我们可以使用 <code>yt-dlp</code> 的 <code>postprocessor</code> 来截取视频片段，而不是下载整个视频文件再进行裁剪。</p>
+<p>此时可以使用 <code>external_downloader_args</code> 参数来传递给 <code>ffmpeg</code>，直接在下载时截取所需的时间段。</p>
+<p>成品程序如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> yt_dlp</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_dependencies</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Check if yt-dlp and ffmpeg are installed, if not provide installation instructions.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">import</span> yt_dlp</span><br><span class="line">    <span class="keyword">except</span> ImportError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;yt-dlp is not installed. Install it using &#x27;pip install yt-dlp&#x27;&quot;</span>)</span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> os.system(<span class="string">&quot;ffmpeg -version&quot;</span>) != <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;ffmpeg is not installed or not added to PATH.&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> sys.platform.startswith(<span class="string">&quot;linux&quot;</span>):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;On Linux, install it using &#x27;sudo apt-get install ffmpeg&#x27;&quot;</span>)</span><br><span class="line">        <span class="keyword">elif</span> sys.platform == <span class="string">&quot;darwin&quot;</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;On macOS, install it using &#x27;brew install ffmpeg&#x27;&quot;</span>)</span><br><span class="line">        <span class="keyword">elif</span> sys.platform == <span class="string">&quot;win32&quot;</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;On Windows, download ffmpeg from https://ffmpeg.org/download.html and add it to PATH&quot;</span>)</span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    check_dependencies()</span><br><span class="line"></span><br><span class="line">    url = <span class="built_in">input</span>(<span class="string">&quot;Enter the YouTube video URL: &quot;</span>)</span><br><span class="line">    start_time = <span class="built_in">input</span>(<span class="string">&quot;Enter the start time (e.g., 00:00:10 for 10 seconds): &quot;</span>)</span><br><span class="line">    end_time = <span class="built_in">input</span>(<span class="string">&quot;Enter the end time (e.g., 00:00:20 for 20 seconds): &quot;</span>)</span><br><span class="line">    output_format = <span class="built_in">input</span>(<span class="string">&quot;Enter the output format (e.g., mp4, mkv): &quot;</span>)</span><br><span class="line">    output_path = <span class="built_in">input</span>(<span class="string">&quot;Enter the output file path (e.g., output.mp4): &quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Configure proxy settings (Modify the port no. if neccessary)</span></span><br><span class="line">    proxy = <span class="string">&#x27;http://127.0.0.1:1080&#x27;</span></span><br><span class="line">    os.environ[<span class="string">&#x27;http_proxy&#x27;</span>] = proxy</span><br><span class="line">    os.environ[<span class="string">&#x27;https_proxy&#x27;</span>] = proxy</span><br><span class="line"></span><br><span class="line">    <span class="comment"># yt-dlp options configuration</span></span><br><span class="line">    opts = &#123;</span><br><span class="line">        <span class="string">&#x27;format&#x27;</span>: <span class="string">&#x27;bestvideo+bestaudio&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;outtmpl&#x27;</span>: output_path,</span><br><span class="line">        <span class="string">&#x27;proxy&#x27;</span>: proxy,</span><br><span class="line">        <span class="string">&#x27;verbose&#x27;</span>: <span class="literal">True</span>,  <span class="comment"># 启用详细输出便于调试</span></span><br><span class="line">        <span class="string">&#x27;retries&#x27;</span>: <span class="number">10</span>,  <span class="comment"># 重试次数</span></span><br><span class="line">        <span class="string">&#x27;fragment_retries&#x27;</span>: <span class="number">10</span>,  <span class="comment"># 块重试次数</span></span><br><span class="line">        <span class="string">&#x27;continuedl&#x27;</span>: <span class="literal">True</span>,  <span class="comment"># 启用断点续传</span></span><br><span class="line">        <span class="string">&#x27;socket_timeout&#x27;</span>: <span class="number">30</span>,  <span class="comment"># 套接字超时时间（秒）</span></span><br><span class="line">        <span class="string">&#x27;external_downloader&#x27;</span>: <span class="string">&#x27;ffmpeg&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;external_downloader_args&#x27;</span>: [  <span class="comment"># 直接在下载时进行裁剪</span></span><br><span class="line">            <span class="string">&#x27;-ss&#x27;</span>, start_time,</span><br><span class="line">            <span class="string">&#x27;-to&#x27;</span>, end_time,</span><br><span class="line">        ],</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> yt_dlp.YoutubeDL(opts) <span class="keyword">as</span> ydl:</span><br><span class="line">            ydl.download([url])</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Download and conversion complete, saved to <span class="subst">&#123;output_path&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> yt_dlp.utils.DownloadError <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;An error occurred with yt-dlp: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;An unexpected error occurred: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IT-issues/">IT-issues</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240608153236265.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="Wechat"/></a><div class="post-qr-code-desc">Wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="Alipay"/></a><div class="post-qr-code-desc">Alipay</div></li><li class="reward-item"><a href="/paypal.me/spritenee" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/paypal.png" alt="Paypal"/></a><div class="post-qr-code-desc">Paypal</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/da4c0974.html" title="ChatTTS安装使用保姆级教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240604154404896.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">ChatTTS安装使用保姆级教程</div></div></a></div><div class="next-post pull-right"><a href="/posts/30d88752.html" title="Win11没有休眠选项怎么办？"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/Video_2024-06-25_111711.gif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Win11没有休眠选项怎么办？</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/8ed2456e.html" title="AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202501/image-20250308222701243.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-08</div><div class="title">AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法</div></div></a></div><div><a href="/posts/5d0776d5.html" title="Add to the PATH on Windows 10 and Windows 11"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240127074357404.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-27</div><div class="title">Add to the PATH on Windows 10 and Windows 11</div></div></a></div><div><a href="/posts/e7a898a7.html" title="ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240625130250230.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-25</div><div class="title">ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决</div></div></a></div><div><a href="/posts/da4c0974.html" title="ChatTTS安装使用保姆级教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240604154404896.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-04</div><div class="title">ChatTTS安装使用保姆级教程</div></div></a></div><div><a href="/posts/bb1c127d.html" title="Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240131113536868.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-31</div><div class="title">Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项</div></div></a></div><div><a href="/posts/841784b8.html" title="Create a shortcut for even lower phone brightness"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202312/image-20231218173344490.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-18</div><div class="title">Create a shortcut for even lower phone brightness</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">AI-China</div><div class="author-info__description">Something about China</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">202</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:spritenee@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://youtube.com/spritenee" target="_blank" title="Youtube"><i class="fa-brands fa-youtube" style="color: #f70808;"></i></a><a class="social-icon" href="https://weibo.com/u/1911422681" target="_blank" title="Weibo"><i class="fa-brands fa-weibo" style="color: #8e2525;"></i></a><a class="social-icon" href="https://facebook.com/spritenee" target="_blank" title="Facebook"><i class="fa-brands fa-facebook" style="color: #1f64db;"></i></a><a class="social-icon" href="https://twitter.com/spritenee" target="_blank" title="Twitter"><i class="fa-brands fa-twitter" style="color: #0b62f9;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-1%EF%BC%9A%E4%B8%8B%E8%BD%BD-ffmpeg"><span class="toc-number">1.</span> <span class="toc-text">步骤 1：下载 ffmpeg</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-2%EF%BC%9A%E8%A7%A3%E5%8E%8B%E7%BC%A9-ffmpeg"><span class="toc-number">2.</span> <span class="toc-text">步骤 2：解压缩 ffmpeg</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-3%EF%BC%9A%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">3.</span> <span class="toc-text">步骤 3：配置系统环境变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-4%EF%BC%9A%E8%AE%BE%E7%BD%AE%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">4.</span> <span class="toc-text">步骤 4：设置系统环境变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-5%EF%BC%9A%E9%AA%8C%E8%AF%81%E5%AE%89%E8%A3%85"><span class="toc-number">5.</span> <span class="toc-text">步骤 5：验证安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E5%91%BD%E4%BB%A4"><span class="toc-number">6.</span> <span class="toc-text">示例命令</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%8A%A5%E9%94%99"><span class="toc-number"></span> <span class="toc-text">运行时报错</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-yt-dlp"><span class="toc-number">1.</span> <span class="toc-text">安装 yt-dlp</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81-yt-dlp-%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">验证 yt-dlp 安装</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%8A%A5%E9%94%99-2"><span class="toc-number"></span> <span class="toc-text">运行时报错</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-1%EF%BC%9A%E9%AA%8C%E8%AF%81-ffmpeg-%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">步骤 1：验证 ffmpeg 安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A3%80%E6%9F%A5%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F-PATH"><span class="toc-number">2.</span> <span class="toc-text">检查环境变量 PATH</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-2%EF%BC%9A%E9%87%8D%E6%96%B0%E4%B8%8B%E8%BD%BD-ffmpeg"><span class="toc-number">3.</span> <span class="toc-text">步骤 2：重新下载 ffmpeg</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%8F%AF%E8%83%BD%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">其他可能的解决办法</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%8A%A5%E9%94%99-3"><span class="toc-number"></span> <span class="toc-text">运行时报错</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/61eeaf34.html" title="关于批量替换epub文件中图片的尝试"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202510/image-20251023073648545.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于批量替换epub文件中图片的尝试"/></a><div class="content"><a class="title" href="/posts/61eeaf34.html" title="关于批量替换epub文件中图片的尝试">关于批量替换epub文件中图片的尝试</a><time datetime="2025-10-23T07:03:48.000Z" title="Created 2025-10-23 07:03:48">2025-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4d697bdd.html" title="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202509/image-20250927104709612.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法"/></a><div class="content"><a class="title" href="/posts/4d697bdd.html" title="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法">IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法</a><time datetime="2025-09-27T10:37:42.000Z" title="Created 2025-09-27 10:37:42">2025-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250510201017801.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="下载reddit自有视频的CC字幕"/></a><div class="content"><a class="title" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕">下载reddit自有视频的CC字幕</a><time datetime="2025-05-10T20:02:05.000Z" title="Created 2025-05-10 20:02:05">2025-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/d23f92cd.html" title="FFmpeg常用命令参数解析">FFmpeg常用命令参数解析</a><time datetime="2025-05-08T20:52:00.000Z" title="Created 2025-05-08 20:52:00">2025-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508103147758.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"/></a><div class="content"><a class="title" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法">digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法</a><time datetime="2025-05-08T09:53:39.000Z" title="Created 2025-05-08 09:53:39">2025-05-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By AI-China</div><div class="footer_custom_text">Hi, everyone. Just ask me something!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.ai-china.xyz',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.umd.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'spritenee/Giscus',
+      'data-repo-id': 'R_kgDOKmHsUg',
+      'data-category-id': 'DIC_kwDOKmHsUs4Cagfw',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },null)
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Waline' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!--在此添加你的javascript文件：--><script src="/self/js/algoliasearch.js"></script></body></html>

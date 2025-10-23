@@ -1,0 +1,406 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title># 阿里最强语音克隆模型CosyVoice安装与使用避坑教程 | Ai-China</title><meta name="author" content="AI-China"><meta name="copyright" content="AI-China"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="CosyVoice安装各种报错的解决方案，简便使用方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="# 阿里最强语音克隆模型CosyVoice安装与使用避坑教程">
+<meta property="og:url" content="https://www.ai-china.xyz/posts/fd9a6873.html">
+<meta property="og:site_name" content="Ai-China">
+<meta property="og:description" content="CosyVoice安装各种报错的解决方案，简便使用方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240719105735071.png">
+<meta property="article:published_time" content="2024-07-19T08:39:05.000Z">
+<meta property="article:modified_time" content="2024-07-19T08:39:05.000Z">
+<meta property="article:author" content="AI-China">
+<meta property="article:tag" content="IT-issue">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240719105735071.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.ai-china.xyz/posts/fd9a6873.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?403c92d1560db157c2d1a5a30189814d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-EEZG901XK6"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EEZG901XK6');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;112faaeb32a149e7acdef445d2cad2f1&quot;}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"6M6J2GXVQ8","apiKey":"db1b88d08993baff4226621c59aedfbf","indexName":"ai-china.xyz","hits":{"per_page":6},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '# 阿里最强语音克隆模型CosyVoice安装与使用避坑教程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-19 08:39:05'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/self/custom.css"><script src="/assets/algolia/algoliasearchLite.min.js" async></script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">202</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240719105735071.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Ai-China"><span class="site-name">Ai-China</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title"># 阿里最强语音克隆模型CosyVoice安装与使用避坑教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-19T08:39:05.000Z" title="发表于 2024-07-19 08:39:05">2024-07-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-07-19T08:39:05.000Z" title="更新于 2024-07-19 08:39:05">2024-07-19</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/IT%E5%B8%B8%E8%A7%81%E7%96%91%E9%9A%BE/">IT常见疑难</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="# 阿里最强语音克隆模型CosyVoice安装与使用避坑教程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" data-lang="zh-CN"><h1>Win11 阿里最强语音克隆模型CosyVoice安装与使用避坑教程</h1>
+<p>阿里推出两款语音大模型，实测效果强于ChatTTS。一个是SenseVoice，主要是whisper的“听”；一个是CosyVoice，是“说”，内置音色、克隆音色的“说”。</p>
+<p>之前Ai-China出过ChatTTS的教程，当时惊艳不已。但在实际使用过程中，ChatTTS是有一些问题的，最主要的就是固定音色。因为使用的是WebUI，生成长文本音频时无论怎样设置都是多种音色（甚至男女多人都出现了，明明设置的单音色）。实测CosyVoice完美解决了这个问题，而且几秒的音频即可克隆喜爱的音色。</p>
+<p>今天就教大家如何避开安装使用CosyVoice过程中Ai-China亲历的坑。</p>
+<h2 id="安装CosyVoice">安装CosyVoice</h2>
+<h3 id="一、准备工作">一、准备工作</h3>
+<h4 id="1-Github作者主页-https-github-com-FunAudioLLM-CosyVoice">1. Github作者主页 <a target="_blank" rel="noopener" href="https://github.com/FunAudioLLM/CosyVoice">https://github.com/FunAudioLLM/CosyVoice</a></h4>
+<h4 id="2-安装好Git和Conda">2. 安装好Git和Conda</h4>
+<h5 id="1-Git-https-git-scm-com-downloads">(1) Git <a target="_blank" rel="noopener" href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></h5>
+<h5 id="（2）Conda-https-docs-conda-io-en-latest-miniconda-html">（2）Conda <a target="_blank" rel="noopener" href="https://docs.conda.io/en/latest/miniconda.html">https://docs.conda.io/en/latest/miniconda.html</a></h5>
+<p>安装上述miniconda即可，Anaconda太大，安装包就有近1G，安装时注意如下图一样勾选第2项</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240719090746171.png" alt="image-20240719090746171"></p>
+<h3 id="二、-克隆作者Github库">二、 克隆作者Github库</h3>
+<p>在想要安装的位置创建一个<code>CosyVoice</code>文件夹，进入该文件夹，在地址栏输入<code>cmd</code>或<code>powershell</code>后回车，即打开命令行，在命令行依次输入以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone --recursive https://github.com/FunAudioLLM/CosyVoice.git # 克隆repo</span><br><span class="line">cd CosyVoice # 进入CosyVoice文件夹</span><br><span class="line">git submodule update --init --recursive # 如果下面的克隆子模块命令未成功执行，请一直执行直到成功</span><br></pre></td></tr></table></figure>
+<h3 id="三、-创建Conda虚拟环境并在虚拟环境下安装">三、 创建Conda虚拟环境并在虚拟环境下安装</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">conda create -n cosyvoice python=<span class="number">3.10</span> <span class="comment"># 即创建一个名称为“cosyvoice”、python版本为“3.10”的虚拟环境，原作者选择的python版本是3.8</span></span><br><span class="line">conda activate cosyvoice <span class="comment"># 激活虚拟环境，只有激活后，才可继续进行安装、启动等操作，否则必然出错。激活后的标志是命令行开头增加了“(cosyvoice)”字符</span></span><br><span class="line">conda install -y -c conda-forge pynini==<span class="number">2.1</span><span class="number">.5</span> <span class="comment"># pynini 是 WeTextProcessing 的必需模块，且可在任何平台上运行。该模块在windows下只有用conda命令才可安装，这也是开头建议windows上使用conda的原因。注意：安装中会出现一个要求输入确认的提示，此时输入y然后回车</span></span><br><span class="line">pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host=mirrors.aliyun.com <span class="comment"># 安装 requirements.txt 中规定的依赖项，并启用阿里镜像</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 若遇 sox 兼容性问题，请如下安装</span></span><br><span class="line"><span class="comment"># ubuntu</span></span><br><span class="line">sudo apt-get install sox libsox-dev</span><br><span class="line"><span class="comment"># centos</span></span><br><span class="line">sudo yum install sox sox-devel</span><br></pre></td></tr></table></figure>
+<h4 id="1-Python版本">1. Python版本</h4>
+<p>原作者指定的python版本为3.8，但Ai-China实测安装时会弹出大量的<code>Warning</code>，报SSL错误而无法完成安装，选择<strong>python 3.10</strong>则无此报错。而且，选择了3.8进行安装之后，最后也会报某些依赖项最低要求3.9之类。所以，Ai-China觉得可以放弃python 3.8了。</p>
+<h4 id="2-requirements-txt中内容的调整">2. requirements.txt中内容的调整</h4>
+<p>打开<code>requirements.txt</code>文件，删掉最后一行的<code>WeTextProcessing==1.0.3</code>,否则肯定是安装失败的，因为这个模块依赖 <code>pynini</code>,而pynini在windows的pip下无法安装</p>
+<p>然后在 requirements.txt 里增加一行 <code>Matcha-TTS</code></p>
+<p>如果要使用 api 服务，必须再增加2行内容，分别是 <code>flask</code>和 <code>waitress</code></p>
+<p>onnxruntime这个模块的下载有问题，如下图所示：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240719091643813.png" alt="image-20240719091643813"></p>
+<p>或者现在就将高亮的两行改成<code>onnxruntime==1.16.0</code>，如果之后下载还是报错<code>ModuleNotFoundError: No module named 'onnxruntime'</code>，则运行命令</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install <span class="literal">-c</span> anaconda onnx</span><br><span class="line">conda install <span class="literal">-c</span> anaconda onnxruntime</span><br></pre></td></tr></table></figure>
+<p>单独安装<code>onnxruntime</code>模块</p>
+<h4 id="3-依赖项安装">3. 依赖项安装</h4>
+<p>输入<code>pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host=mirrors.aliyun.com</code>命令开始安装</p>
+<p>……</p>
+<p>……</p>
+<p>漫长的等待过程，Ai-China等了1个小时10分钟左右</p>
+<h4 id="4-预训练库安装">4. 预训练库安装</h4>
+<p>利用Git和下述命令导入预训练库，会生成一个<code>pretrained_models</code>文件夹并将下述库文件放到里面</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git模型下载，请确保已安装git lfs</span></span><br><span class="line">mkdir <span class="literal">-p</span> pretrained_models</span><br><span class="line">git clone https://www.modelscope.cn/iic/CosyVoice<span class="literal">-300M</span>.git pretrained_models/CosyVoice<span class="literal">-300M</span></span><br><span class="line">git clone https://www.modelscope.cn/iic/CosyVoice<span class="literal">-300M-SFT</span>.git pretrained_models/CosyVoice<span class="literal">-300M-SFT</span></span><br><span class="line">git clone https://www.modelscope.cn/iic/CosyVoice<span class="literal">-300M-Instruct</span>.git pretrained_models/CosyVoice<span class="literal">-300M-Instruct</span></span><br><span class="line">git clone https://www.modelscope.cn/iic/CosyVoice<span class="literal">-ttsfrd</span>.git pretrained_models/CosyVoice<span class="literal">-ttsfrd</span></span><br></pre></td></tr></table></figure>
+<h3 id="四、-利用Python运行CosyVoice">四、 利用Python运行CosyVoice</h3>
+<h4 id="1-添加到Python路径">1. 添加到Python路径</h4>
+<p>首先将 <code>third_party/Matcha-TTS</code> 添加到你的 <code>PYTHONPATH</code>.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> PYTHONPATH=third_party/Matcha<span class="literal">-TTS</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-利用下述代码制作一个Python可执行文件">2. 利用下述代码制作一个Python可执行文件</h4>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> cosyvoice.cli.cosyvoice <span class="keyword">import</span> CosyVoice</span><br><span class="line"><span class="keyword">from</span> cosyvoice.utils.file_utils <span class="keyword">import</span> load_wav</span><br><span class="line"><span class="keyword">import</span> torchaudio</span><br><span class="line"></span><br><span class="line">cosyvoice = CosyVoice(<span class="string">&#x27;pretrained_models/CosyVoice-300M-SFT&#x27;</span>)</span><br><span class="line"><span class="comment"># sft usage</span></span><br><span class="line"><span class="built_in">print</span>(cosyvoice.list_avaliable_spks())</span><br><span class="line">output = cosyvoice.inference_sft(<span class="string">&#x27;你好，我是通义生成式语音大模型，请问有什么可以帮您的吗？&#x27;</span>, <span class="string">&#x27;中文女&#x27;</span>)</span><br><span class="line">torchaudio.save(<span class="string">&#x27;sft.wav&#x27;</span>, output[<span class="string">&#x27;tts_speech&#x27;</span>], <span class="number">22050</span>)</span><br><span class="line"></span><br><span class="line">cosyvoice = CosyVoice(<span class="string">&#x27;pretrained_models/CosyVoice-300M&#x27;</span>)</span><br><span class="line"><span class="comment"># zero_shot usage, &lt;|zh|&gt;&lt;|en|&gt;&lt;|jp|&gt;&lt;|yue|&gt;&lt;|ko|&gt; for Chinese/English/Japanese/Cantonese/Korean</span></span><br><span class="line">prompt_speech_16k = load_wav(<span class="string">&#x27;zero_shot_prompt.wav&#x27;</span>, <span class="number">16000</span>)</span><br><span class="line">output = cosyvoice.inference_zero_shot(<span class="string">&#x27;收到好友从远方寄来的生日礼物，那份意外的惊喜与深深的祝福让我心中充满了甜蜜的快乐，笑容如花儿般绽放。&#x27;</span>, <span class="string">&#x27;希望你以后能够做的比我还好呦。&#x27;</span>, prompt_speech_16k)</span><br><span class="line">torchaudio.save(<span class="string">&#x27;zero_shot.wav&#x27;</span>, output[<span class="string">&#x27;tts_speech&#x27;</span>], <span class="number">22050</span>)</span><br><span class="line"><span class="comment"># cross_lingual usage</span></span><br><span class="line">prompt_speech_16k = load_wav(<span class="string">&#x27;cross_lingual_prompt.wav&#x27;</span>, <span class="number">16000</span>)</span><br><span class="line">output = cosyvoice.inference_cross_lingual(<span class="string">&#x27;&lt;|en|&gt;And then later on, fully acquiring that company. So keeping management in line, interest in line with the asset that\&#x27;s coming into the family is a reason why sometimes we don\&#x27;t buy the whole thing.&#x27;</span>, prompt_speech_16k)</span><br><span class="line">torchaudio.save(<span class="string">&#x27;cross_lingual.wav&#x27;</span>, output[<span class="string">&#x27;tts_speech&#x27;</span>], <span class="number">22050</span>)</span><br><span class="line"></span><br><span class="line">cosyvoice = CosyVoice(<span class="string">&#x27;pretrained_models/CosyVoice-300M-Instruct&#x27;</span>)</span><br><span class="line"><span class="comment"># instruct usage, support &lt;laughter&gt;&lt;/laughter&gt;&lt;strong&gt;&lt;/strong&gt;[laughter][breath]</span></span><br><span class="line">output = cosyvoice.inference_instruct(<span class="string">&#x27;在面对挑战时，他展现了非凡的&lt;strong&gt;勇气&lt;/strong&gt;与&lt;strong&gt;智慧&lt;/strong&gt;。&#x27;</span>, <span class="string">&#x27;中文男&#x27;</span>, <span class="string">&#x27;Theo \&#x27;Crimson\&#x27;, is a fiery, passionate rebel leader. Fights with fervor for justice, but struggles with impulsiveness.&#x27;</span>)</span><br><span class="line">torchaudio.save(<span class="string">&#x27;instruct.wav&#x27;</span>, output[<span class="string">&#x27;tts_speech&#x27;</span>], <span class="number">22050</span>)</span><br></pre></td></tr></table></figure>
+<p>将以上代码保存为<code>run_cosyvoice.py</code>文件，放到<code>CosyVoice</code>文件夹根目录下</p>
+<h4 id="3-执行py文件">3. 执行py文件</h4>
+<p>在<code>cmd</code>或<code>powershell</code>下进入此根目录，如果你没有退出或更改，当前应该就在此目录下。如果已经退出或更改，请参照上文进入此目录和虚拟环境。</p>
+<p>输入命令<code>python run_cosyvoice.py</code></p>
+<p>如果一切顺利的话，CosyVoice程序会开始运行，几秒后在<code>CosyVoice</code>文件夹下生成几个音频文件，分别代表上述代码中的音色选择、推理文字生成等内容。如果想生成自己的文字变语音，在代码中修改相应的文字部分即可。</p>
+<p>但是，以Ai-China反复装过不下10次的经验来看，如果此时就已经可用了，那表明你的人品可以中千万彩票了。</p>
+<h4 id="4-执行python-run-cosyvoice-py后通常会报的错误：">4. 执行<code>python run_cosyvoice.py</code>后通常会报的错误：</h4>
+<h5 id="1-ModuleNotFoundError-No-module-named-ttsfrd">(1) <code>ModuleNotFoundError: No module named 'ttsfrd'</code></h5>
+<p>解决方案：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https://www.modelscope.cn/speech_tts/speech_kantts_ttsfrd.git ./speech_kantts_ttsfrd</span><br><span class="line">pip install ./speech_kantts_ttsfrd/ttsfrd<span class="literal">-0</span>.<span class="number">3.6</span><span class="literal">-cp38-cp38-linux_x86_64</span>.whl</span><br></pre></td></tr></table></figure>
+<h5 id="2-ModuleNotFoundError-No-module-named-tn">(2) <code>ModuleNotFoundError: No module named 'tn'</code></h5>
+<p>此报错的原因是缺少<code>WeTextProcessing</code>，解决方案：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install <span class="literal">-c</span> anaconda sox <span class="comment">#先安装sox，不知有无影响</span></span><br><span class="line">pip install WeTextProcessing</span><br></pre></td></tr></table></figure>
+<h5 id="3-ModuleNotFoundError-No-module-named-onnxruntime">(3) <code>ModuleNotFoundError: No module named 'onnxruntime'</code></h5>
+<p>无法正常下载安装，那就从anaconda库中下载安装，解决方案：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install <span class="literal">-c</span> anaconda onnx</span><br><span class="line">conda install <span class="literal">-c</span> anaconda onnxruntime</span><br></pre></td></tr></table></figure>
+<h5 id="4-ERROR-Failed-building-wheel-for-Matcha-TTS-Failed-to-build-Matcha-TTS-ERROR-Could-not-build-wheels-for-Matcha-TTS-which-is-required-to-install-pyproject-toml-based-projects">(4) <code> ERROR: Failed building wheel for Matcha_TTS Failed to build Matcha_TTS ERROR: Could not build wheels for Matcha_TTS, which is required to install pyproject.toml-based projects</code></h5>
+<p>看<code>TTS</code>字样，就知道<code>Matcha_TTS</code>是一个重要模块，它的出错，解决起来很棘手。</p>
+<p>这个报错就是因为Windows中对于编译特定Python包的最低要求，包括Microsoft Visual C++ 14.0或以上。</p>
+<p>为了心心念念的CosyVoice，Ai-China义无反顾地下载安装了<a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/visual-cpp-build-tools/">Microsoft Visual C++</a>，实在是大，最低要求的安装包都近5G</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240719103338480.png" alt="image-20240719103338480"></p>
+<p>然后再安装<code>Matcha_TTS</code></p>
+<p><code>pip install matcha-tts</code>，世界瞬间平滑安静了许多。</p>
+<h5 id="5-diffusers版本冲突">(5) <code>diffusers</code>版本冲突</h5>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">ERROR: Cannot install <span class="literal">-r</span> requirements.txt (line <span class="number">31</span>) and diffusers==<span class="number">0.27</span>.<span class="number">2</span> because these package versions have conflicting dependencies.</span><br><span class="line"></span><br><span class="line">The conflict is caused by:</span><br><span class="line">    The user requested diffusers==<span class="number">0.27</span>.<span class="number">2</span></span><br><span class="line">    matcha<span class="literal">-tts</span> <span class="number">0.0</span>.<span class="number">6.0</span> depends on diffusers==<span class="number">0.25</span>.<span class="number">0</span></span><br><span class="line">    The user requested diffusers==<span class="number">0.27</span>.<span class="number">2</span></span><br><span class="line">    matcha<span class="literal">-tts</span> <span class="number">0.0</span>.<span class="number">5.1</span> depends on diffusers==<span class="number">0.25</span>.<span class="number">0</span></span><br><span class="line">    The user requested diffusers==<span class="number">0.27</span>.<span class="number">2</span></span><br><span class="line">    matcha<span class="literal">-tts</span> <span class="number">0.0</span>.<span class="number">4</span> depends on diffusers==<span class="number">0.21</span>.<span class="number">3</span></span><br><span class="line">    The user requested diffusers==<span class="number">0.27</span>.<span class="number">2</span></span><br><span class="line">    matcha<span class="literal">-tts</span> <span class="number">0.0</span>.<span class="number">3</span> depends on diffusers==<span class="number">0.21</span>.<span class="number">2</span></span><br><span class="line">    The user requested diffusers==<span class="number">0.27</span>.<span class="number">2</span></span><br><span class="line">    matcha<span class="literal">-tts</span> <span class="number">0.0</span>.<span class="number">2</span> depends on diffusers==<span class="number">0.21</span>.<span class="number">2</span></span><br><span class="line"></span><br><span class="line">To fix this you could <span class="keyword">try</span> to:</span><br><span class="line"><span class="number">1</span>. loosen the range of package versions you<span class="string">&#x27;ve specified</span></span><br><span class="line"><span class="string">2. remove package versions to allow pip attempt to solve the dependency conflict</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">ERROR: ResolutionImpossible: for help visit https://pip.pypa.io/en/latest/topics/dependency-resolution/#dealing-with-dependency-conflicts</span></span><br></pre></td></tr></table></figure>
+<p>可以看出，有的要求版本0.27，有的要求0.25，还有的要求0.21，还真是众口难调啊</p>
+<p>解决方案：</p>
+<p>修改<code>requirements.txt</code>，你们的要求，朕都准了！</p>
+<p>将<code>diffusers</code>那一行改为<code>diffusers&gt;=0.21.2,&lt;=0.27.2</code>。</p>
+<h5 id="6-运行WebUItyping-extensions报错">(6) 运行WebUI<code>typing_extensions</code>报错</h5>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">运行 `python webui.py <span class="literal">--port</span> <span class="number">50000</span> <span class="literal">--model_dir</span> pretrained_models/CosyVoice<span class="literal">-300M</span>` 后报错(注意使用python3运行无反应)</span><br><span class="line">ImportError: cannot import name <span class="string">&#x27;Doc&#x27;</span> from <span class="string">&#x27;typing_extensions&#x27;</span> (C:\Programs\miniconda3\envs\cosyvoice\lib\site<span class="literal">-packages</span>\typing_extensions.py) <span class="comment">#此报错是因为 typing_extensions的版本不对</span></span><br><span class="line"></span><br><span class="line">`pip install typing_extensions==<span class="number">4.8</span>.<span class="number">0</span>` <span class="comment">#输入命令后显示</span></span><br><span class="line">Collecting typing_extensions==<span class="number">4.8</span>.<span class="number">0</span></span><br><span class="line">  Downloading typing_extensions<span class="literal">-4</span>.<span class="number">8.0</span><span class="literal">-py3-none-any</span>.whl.metadata (<span class="number">3.0</span> kB)</span><br><span class="line">Downloading typing_extensions<span class="literal">-4</span>.<span class="number">8.0</span><span class="literal">-py3-none-any</span>.whl (<span class="number">31</span> kB)</span><br><span class="line">Installing collected packages: typing_extensions</span><br><span class="line">  Attempting uninstall: typing_extensions</span><br><span class="line">    Found existing installation: typing_extensions <span class="number">4.12</span>.<span class="number">2</span> <span class="comment">#找到当前版本</span></span><br><span class="line">    Uninstalling typing_extensions<span class="literal">-4</span>.<span class="number">12.2</span>: <span class="comment">#卸载当前版本</span></span><br><span class="line">      Successfully uninstalled typing_extensions<span class="literal">-4</span>.<span class="number">12.2</span> <span class="comment">#成功卸载当前版本</span></span><br><span class="line">ERROR: pip<span class="string">&#x27;s dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.</span></span><br><span class="line"><span class="string">typeguard 4.3.0 requires typing-extensions&gt;=4.10.0, but you have typing-extensions 4.8.0 which is incompatible. #报错：4.8.0版本不兼容，需要4.10，我没有再试4.10，因为下面自动安装了4.7.1</span></span><br><span class="line"><span class="string">Successfully installed typing_extensions-4.7.1</span></span><br></pre></td></tr></table></figure>
+<h5 id="7-其他缺失报错下载失败">(7) 其他缺失报错下载失败</h5>
+<p>有样学样，如果<code>pip install</code>命令安装下载出错，可以添加<code>-i https://mirrors.aliyun.com/pypi/simple/ --trusted-host=mirrors.aliyun.com</code>镜像参数，多数都能正常下载。也可以如上所说，使用conda/anaconda命令或库下载安装。</p>
+<p>注意：一定要看requirements.txt中规定的依赖项都安装完，之所以选择python 3.10也是因为这一点（只有它能完整安装依赖项）。一旦不完整，就会各种模块子模块缺失报错，人工手动安装不过来！</p>
+<h3 id="五、-其他更方便的使用方式">五、 其他更方便的使用方式</h3>
+<h4 id="1-官方WebUI">1. 官方WebUI</h4>
+<p>使用命令<code>python webui.py</code></p>
+<p>命令行运行快结束的时候，需要找一下，会提示<code>running on:</code> ，后面就是本地地址</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240719105703983.png" alt="image-20240719105703983"></p>
+<p>输入浏览器后</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240719105735071.png" alt="image-20240719105735071"></p>
+<p>但Ai-China第一次运行WebUI的时候，提示就不一样。记得是<code>0.0.0.0:50000</code>，如果想在Public网上运行的话，需要修改<code>webui.py</code>文件末行，加上<code>share=True</code>之类。这里值得一提的是，<code>0.0.0.0</code>实际上是一种“本地网络”的表述，在windows的浏览器中输入<code>0.0.0.0</code>并无任何作用（Linux下可以）。需要换成任何表述本地网络的地址：<code>127.0.0.1:50000</code> <code>localhost:50000</code>甚至是<code>你的主机本地IP（192.168.x.x）:端口号</code>也完全没问题。</p>
+<p>这个WebUI应该是把几个预训练模型整合到了一起，下面介绍将各个不同模型分开来使用的方法。</p>
+<h4 id="2-根据模型启用WebUI">2. 根据模型启用WebUI</h4>
+<h5 id="1-克隆音色生成">(1) 克隆音色生成</h5>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">call</span> conda activate cosyvoice</span><br><span class="line"><span class="built_in">start</span> http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">50001</span></span><br><span class="line">python webui.py --port <span class="number">50001</span> --model_dir pretrained_models/CosyVoice-<span class="number">300</span>M</span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
+<p>将以上内容保存为<code>克隆音色生成.bat</code></p>
+<h5 id="2-内置音色-语气微调">(2) 内置音色+语气微调</h5>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">call</span> conda activate cosyvoice</span><br><span class="line"><span class="built_in">start</span> http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">50002</span></span><br><span class="line">python webui.py --port <span class="number">50002</span> --model_dir pretrained_models/CosyVoice-<span class="number">300</span>M-Instruct</span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
+<p>将此内容保存为<code>内置音色+语气微调.bat</code></p>
+<h5 id="3-内置音色生成">(3) 内置音色生成</h5>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line"><span class="keyword">call</span> conda activate cosyvoice</span><br><span class="line"><span class="built_in">start</span> http://<span class="number">127</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">1</span>:<span class="number">50000</span></span><br><span class="line">python webui.py --port <span class="number">50000</span> --model_dir pretrained_models/CosyVoice-<span class="number">300</span>M-SFT</span><br><span class="line"><span class="built_in">pause</span></span><br></pre></td></tr></table></figure>
+<p>也保存为<code>内置音色生成.bat</code></p>
+<p>将以上3个文件放置到CosyVoice文件夹根目录下，需要使用哪种，直接双击对应的<code>bat</code>文件即可。双击会自动打开浏览器新页面，但会稍等一下刷新页面才会出现WebUI。可以看出，此方法也是调用WebUI，只不过作了区分。另外要注意，虽然端口已经作了区分，但还是尽量不要同时运行上述2或3个程序，容易爆显存。</p>
+<p>PS：本文主要参考<br>
+<a target="_blank" rel="noopener" href="https://github.com/FunAudioLLM/CosyVoice">官网</a><br>
+<a target="_blank" rel="noopener" href="https://juejin.cn/post/7389946395066368035">CosyVoice:阿里最强语音克隆模型体验并封装API接口</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=SMpGpDc0vHs">Youtube教程</a></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IT-issue/">IT-issue</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240719105735071.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="Wechat"/></a><div class="post-qr-code-desc">Wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="Alipay"/></a><div class="post-qr-code-desc">Alipay</div></li><li class="reward-item"><a href="/paypal.me/spritenee" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/paypal.png" alt="Paypal"/></a><div class="post-qr-code-desc">Paypal</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/2db20a46.html" title="Serv00主机的申请与配置、使用教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/register.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Serv00主机的申请与配置、使用教程</div></div></a></div><div class="next-post pull-right"><a href="/posts/a43358f2.html" title="关于将ass特效字幕制作成透明背景视频后导入PR的记事"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240731120946482.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">关于将ass特效字幕制作成透明背景视频后导入PR的记事</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/61eeaf34.html" title="关于批量替换epub文件中图片的尝试"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202510/image-20251023073648545.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-23</div><div class="title">关于批量替换epub文件中图片的尝试</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">AI-China</div><div class="author-info__description">Something about China</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">202</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:spritenee@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://youtube.com/spritenee" target="_blank" title="Youtube"><i class="fa-brands fa-youtube" style="color: #f70808;"></i></a><a class="social-icon" href="https://weibo.com/u/1911422681" target="_blank" title="Weibo"><i class="fa-brands fa-weibo" style="color: #8e2525;"></i></a><a class="social-icon" href="https://facebook.com/spritenee" target="_blank" title="Facebook"><i class="fa-brands fa-facebook" style="color: #1f64db;"></i></a><a class="social-icon" href="https://twitter.com/spritenee" target="_blank" title="Twitter"><i class="fa-brands fa-twitter" style="color: #0b62f9;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Win11 阿里最强语音克隆模型CosyVoice安装与使用避坑教程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85CosyVoice"><span class="toc-number">1.1.</span> <span class="toc-text">安装CosyVoice</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.1.1.</span> <span class="toc-text">一、准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Github%E4%BD%9C%E8%80%85%E4%B8%BB%E9%A1%B5-https-github-com-FunAudioLLM-CosyVoice"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">1. Github作者主页 https:&#x2F;&#x2F;github.com&#x2F;FunAudioLLM&#x2F;CosyVoice</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85%E5%A5%BDGit%E5%92%8CConda"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">2. 安装好Git和Conda</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-Git-https-git-scm-com-downloads"><span class="toc-number">1.1.1.2.1.</span> <span class="toc-text">(1) Git https:&#x2F;&#x2F;git-scm.com&#x2F;downloads</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89Conda-https-docs-conda-io-en-latest-miniconda-html"><span class="toc-number">1.1.1.2.2.</span> <span class="toc-text">（2）Conda https:&#x2F;&#x2F;docs.conda.io&#x2F;en&#x2F;latest&#x2F;miniconda.html</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E5%85%8B%E9%9A%86%E4%BD%9C%E8%80%85Github%E5%BA%93"><span class="toc-number">1.1.2.</span> <span class="toc-text">二、 克隆作者Github库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81-%E5%88%9B%E5%BB%BAConda%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B9%B6%E5%9C%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%B8%8B%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.3.</span> <span class="toc-text">三、 创建Conda虚拟环境并在虚拟环境下安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Python%E7%89%88%E6%9C%AC"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">1. Python版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-requirements-txt%E4%B8%AD%E5%86%85%E5%AE%B9%E7%9A%84%E8%B0%83%E6%95%B4"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">2. requirements.txt中内容的调整</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%BE%9D%E8%B5%96%E9%A1%B9%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">3. 依赖项安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%A2%84%E8%AE%AD%E7%BB%83%E5%BA%93%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">4. 预训练库安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E5%88%A9%E7%94%A8Python%E8%BF%90%E8%A1%8CCosyVoice"><span class="toc-number">1.1.4.</span> <span class="toc-text">四、 利用Python运行CosyVoice</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%B7%BB%E5%8A%A0%E5%88%B0Python%E8%B7%AF%E5%BE%84"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">1. 添加到Python路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%88%A9%E7%94%A8%E4%B8%8B%E8%BF%B0%E4%BB%A3%E7%A0%81%E5%88%B6%E4%BD%9C%E4%B8%80%E4%B8%AAPython%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">2. 利用下述代码制作一个Python可执行文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%89%A7%E8%A1%8Cpy%E6%96%87%E4%BB%B6"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">3. 执行py文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%89%A7%E8%A1%8Cpython-run-cosyvoice-py%E5%90%8E%E9%80%9A%E5%B8%B8%E4%BC%9A%E6%8A%A5%E7%9A%84%E9%94%99%E8%AF%AF%EF%BC%9A"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">4. 执行python run_cosyvoice.py后通常会报的错误：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-ModuleNotFoundError-No-module-named-ttsfrd"><span class="toc-number">1.1.4.4.1.</span> <span class="toc-text">(1) ModuleNotFoundError: No module named &#39;ttsfrd&#39;</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-ModuleNotFoundError-No-module-named-tn"><span class="toc-number">1.1.4.4.2.</span> <span class="toc-text">(2) ModuleNotFoundError: No module named &#39;tn&#39;</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-ModuleNotFoundError-No-module-named-onnxruntime"><span class="toc-number">1.1.4.4.3.</span> <span class="toc-text">(3) ModuleNotFoundError: No module named &#39;onnxruntime&#39;</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-ERROR-Failed-building-wheel-for-Matcha-TTS-Failed-to-build-Matcha-TTS-ERROR-Could-not-build-wheels-for-Matcha-TTS-which-is-required-to-install-pyproject-toml-based-projects"><span class="toc-number">1.1.4.4.4.</span> <span class="toc-text">(4)  ERROR: Failed building wheel for Matcha_TTS Failed to build Matcha_TTS ERROR: Could not build wheels for Matcha_TTS, which is required to install pyproject.toml-based projects</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-diffusers%E7%89%88%E6%9C%AC%E5%86%B2%E7%AA%81"><span class="toc-number">1.1.4.4.5.</span> <span class="toc-text">(5) diffusers版本冲突</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E8%BF%90%E8%A1%8CWebUItyping-extensions%E6%8A%A5%E9%94%99"><span class="toc-number">1.1.4.4.6.</span> <span class="toc-text">(6) 运行WebUItyping_extensions报错</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E5%85%B6%E4%BB%96%E7%BC%BA%E5%A4%B1%E6%8A%A5%E9%94%99%E4%B8%8B%E8%BD%BD%E5%A4%B1%E8%B4%A5"><span class="toc-number">1.1.4.4.7.</span> <span class="toc-text">(7) 其他缺失报错下载失败</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81-%E5%85%B6%E4%BB%96%E6%9B%B4%E6%96%B9%E4%BE%BF%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.5.</span> <span class="toc-text">五、 其他更方便的使用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AE%98%E6%96%B9WebUI"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">1. 官方WebUI</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%A0%B9%E6%8D%AE%E6%A8%A1%E5%9E%8B%E5%90%AF%E7%94%A8WebUI"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">2. 根据模型启用WebUI</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-%E5%85%8B%E9%9A%86%E9%9F%B3%E8%89%B2%E7%94%9F%E6%88%90"><span class="toc-number">1.1.5.2.1.</span> <span class="toc-text">(1) 克隆音色生成</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-%E5%86%85%E7%BD%AE%E9%9F%B3%E8%89%B2-%E8%AF%AD%E6%B0%94%E5%BE%AE%E8%B0%83"><span class="toc-number">1.1.5.2.2.</span> <span class="toc-text">(2) 内置音色+语气微调</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E5%86%85%E7%BD%AE%E9%9F%B3%E8%89%B2%E7%94%9F%E6%88%90"><span class="toc-number">1.1.5.2.3.</span> <span class="toc-text">(3) 内置音色生成</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/61eeaf34.html" title="关于批量替换epub文件中图片的尝试"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202510/image-20251023073648545.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于批量替换epub文件中图片的尝试"/></a><div class="content"><a class="title" href="/posts/61eeaf34.html" title="关于批量替换epub文件中图片的尝试">关于批量替换epub文件中图片的尝试</a><time datetime="2025-10-23T07:03:48.000Z" title="Created 2025-10-23 07:03:48">2025-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4d697bdd.html" title="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202509/image-20250927104709612.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法"/></a><div class="content"><a class="title" href="/posts/4d697bdd.html" title="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法">IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法</a><time datetime="2025-09-27T10:37:42.000Z" title="Created 2025-09-27 10:37:42">2025-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250510201017801.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="下载reddit自有视频的CC字幕"/></a><div class="content"><a class="title" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕">下载reddit自有视频的CC字幕</a><time datetime="2025-05-10T20:02:05.000Z" title="Created 2025-05-10 20:02:05">2025-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/d23f92cd.html" title="FFmpeg常用命令参数解析">FFmpeg常用命令参数解析</a><time datetime="2025-05-08T20:52:00.000Z" title="Created 2025-05-08 20:52:00">2025-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508103147758.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"/></a><div class="content"><a class="title" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法">digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法</a><time datetime="2025-05-08T09:53:39.000Z" title="Created 2025-05-08 09:53:39">2025-05-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By AI-China</div><div class="footer_custom_text">Hi, everyone. Just ask me something!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.ai-china.xyz',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.umd.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'spritenee/Giscus',
+      'data-repo-id': 'R_kgDOKmHsUg',
+      'data-category-id': 'DIC_kwDOKmHsUs4Cagfw',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },null)
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Waline' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!--在此添加你的javascript文件：--><script src="/self/js/algoliasearch.js"></script></body></html>

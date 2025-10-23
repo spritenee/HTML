@@ -1,0 +1,417 @@
+<!DOCTYPE html><html lang="en | zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Serv00主机的申请与配置、使用教程 | Ai-China</title><meta name="author" content="AI-China"><meta name="copyright" content="AI-China"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Serv00提供10年免费VPS服务，可用来搭建好用的梯子，这里有两种自测好用的方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Serv00主机的申请与配置、使用教程">
+<meta property="og:url" content="https://www.ai-china.xyz/posts/2db20a46.html">
+<meta property="og:site_name" content="Ai-China">
+<meta property="og:description" content="Serv00提供10年免费VPS服务，可用来搭建好用的梯子，这里有两种自测好用的方法。">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/register.webp">
+<meta property="article:published_time" content="2024-07-08T08:09:10.000Z">
+<meta property="article:modified_time" content="2024-07-08T08:09:10.000Z">
+<meta property="article:author" content="AI-China">
+<meta property="article:tag" content="IT-issues">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/register.webp"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.ai-china.xyz/posts/2db20a46.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?403c92d1560db157c2d1a5a30189814d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-EEZG901XK6"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EEZG901XK6');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;112faaeb32a149e7acdef445d2cad2f1&quot;}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"6M6J2GXVQ8","apiKey":"db1b88d08993baff4226621c59aedfbf","indexName":"ai-china.xyz","hits":{"per_page":6},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Serv00主机的申请与配置、使用教程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-07-08 08:09:10'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/self/custom.css"><script src="/assets/algolia/algoliasearchLite.min.js" async></script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">202</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/register.webp')"><nav id="nav"><span id="blog-info"><a href="/" title="Ai-China"><span class="site-name">Ai-China</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Serv00主机的申请与配置、使用教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-07-08T08:09:10.000Z" title="Created 2024-07-08 08:09:10">2024-07-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-07-08T08:09:10.000Z" title="Updated 2024-07-08 08:09:10">2024-07-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/IT%E5%B8%B8%E8%A7%81%E7%96%91%E9%9A%BE/">IT常见疑难</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word Count:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading Time:</span><span>9mins</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Serv00主机的申请与配置、使用教程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" data-lang="en | zh-CN"><h1><strong>非 root 用户使用Serv00服务自建 wstunnel和v2ray 梯子</strong></h1>
+<h2 id="Serv00介绍"><strong>Serv00介绍</strong></h2>
+<p>Serv00 是一家来自波兰的主机服务提供商，因提供 <strong><u>10</u></strong> 年免费的虚拟主机火爆全网。Serv00 提供的主机完全免费、无广告，规格如下图。唯一的要求是每 3 个月需登录一次控制面板或 ssh，否则会回收账号。Serv00 提供的主机服务更接近于 vps 而非 web host（网站空间/网站托管），提供易用的 devilWeb 面板和 ssh，最多可以开放 3 个端口、创建 3 个非 MySQL 数据库、10 个 MySQL 数据库、100 个站点等等，可以开通额外的程序执行权限，非常实用。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/spec-1.webp" alt=""></p>
+<h2 id="Serv00注册">Serv00注册</h2>
+<p>Serv00 的注册、开通几乎没有任何门槛。前往 serv00 官网（<a target="_blank" rel="noopener" href="https://serv00.com/">Serv00.com</a>）自行注册一个账号，serv00 会不断刷新注册人数，不同域名对应的服务器会有注册人数限制，如果达到上限可能不再开放注册或新增服务器继续接受注册。点击『Register an account』进行注册。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/register.webp" alt=""></p>
+<p>开始注册之后，首先会显示 servoo 提供的 10年免费 vps 规格，点击该页面的下方『Create account』，接下来填写信息。注意3点：</p>
+<ul>
+<li>邮箱务必为真实邮箱，需要验证激活</li>
+<li>用户名（Username）自行确定，用户名就是域名（<strong>username</strong>.serv00.com）</li>
+<li>答案（Answer）处不要留空，填写 free，也就是免费。Ai-China注册时是填写的<code>0</code>，也是注册了多个邮箱才成功（每个邮箱都提示已被注册，直到第二天才在其中一个邮箱中收到注册成功邮件），不知有无关系。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/createaccount.webp" alt=""></p>
+<p>填好后，点击『Create account』，如果用户名没有被占用，后台会进行资源分配、开通，并向填写的邮箱发送邮件。页面上方出现绿色的提示信息，意味着 serv00 账户已经创建完成，检查邮箱查看所有信息。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/email.webp" alt=""></p>
+<p>Serv00 后台管理面板为 devilWeb，很好用，ssh 账户（用户名、密码）与管理面板完全相同，在 ssh 或面板中修改密码，对 ssh 和面板同时生效。没有安装第三方 ssh 客户端的，可以直接使用 windows 自带的 openssh 客户端登录。Ai-China建议使用<code>Windterm</code>工具，很好用，下载替换文件等操作简便，且登录一次下次无需再输入登录信息。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/ssh.webp" alt=""></p>
+<p>领完了免费的服务器，准备自建个梯子，却发现网上的教程都是<strong>一键搭建</strong>，都得需要 <strong>root</strong> 权限，不然就操作不了。但Serv00并未提供Root权限，只有自己用户目录下的权限。所以我们要<strong>手动</strong>安装 v2ray，步骤并不繁琐，跟着一步步做，保证没问题。</p>
+<h2 id="一、登录-ssh"><strong>一、登录 ssh</strong></h2>
+<h3 id="①-获取账密"><strong>① 获取账密</strong></h3>
+<p>首先拿到 serv00 给的服务器地址和账密，我这个是直接发到邮箱的</p>
+<h3 id="②-登录-ssh"><strong>② 登录 ssh</strong></h3>
+<p>以windterm为例</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240708084735380.png" alt="image-20240708084735380"></p>
+<p>点击<code>连接</code>后出现如下界面，输入邮件中提供的用户名</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240708085113972.png" alt="image-20240708085113972"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240708085212280.png" alt="image-20240708085212280"></p>
+<p>将邮件中提供的密码粘贴进来，这里需要注意打开框后面的可视，因为粘贴过程中可能前后出现空格，导致登录失败。出现如下界面即表明登录成功！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/202403251714060.webp" alt="ssh"></p>
+<h2 id="二、开通端口、额外服务"><strong>二、开通端口、额外服务</strong></h2>
+<p>登录服务器管理后台 <a target="_blank" rel="noopener" href="https://panel2.serv00.com/">https://panel2.serv00.com/</a></p>
+<h3 id="①-打开额外服务"><strong>① 打开额外服务</strong></h3>
+<p>首先按照步骤打开额外服务，让 status 处于 Enabled 状态</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/202403251726603.webp" alt=""></p>
+<h3 id="②-创建端口"><strong>② 创建端口</strong></h3>
+<p>其次按照步骤创建端口，勾选随机端口号避免创建重复的端口导致失败</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/202403251727386.webp" alt=""></p>
+<h3 id="③-记住刚才创建的端口号"><strong>③ 记住刚才创建的端口号</strong></h3>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/202403251728890.webp" alt=""></p>
+<hr>
+<h2 id="安装-v2ray">安装 v2ray</h2>
+<h3 id="①-查看系统"><strong>① 查看系统</strong></h3>
+<p>回到之前登录的 ssh 界面 输入 <code>uname -a</code> 查看服务器系统</p>
+<p><code>FreeBSD s2.serv00.com 13.2-RELEASE-p10 FreeBSD 13.2-RELEASE-p10 #4 releng/13.2-n254661-a839681443b6-dirty: Tue Feb 20 23:03:40 CET 2024 root@pkg0.admin.net.pl:/usr/obj/usr/src/amd64.amd64/sys/devil amd64</code></p>
+<p>我这儿返回的是这样的，<code>FreeBSD amd64</code></p>
+<h3 id="②-下载-v2ray"><strong>② 下载 v2ray</strong></h3>
+<h3 id="由于没有-root-权限，我们无法使用官方提供的一键安装脚本，只能自行手动安装。"><strong>由于没有 root 权限，我们无法使用官方提供的一键安装脚本，只能自行手动安装。</strong></h3>
+<p>前往 <a target="_blank" rel="noopener" href="https://github.com/v2fly/v2ray-core/releases">https://github.com/v2fly/v2ray-core/releases</a> 找到你的系统版本所对应的 v2ray 版本 我这个服务器的系统是 <code>FreeBSD amd64</code>，那么我就找的是 <code>freebsd-64.zip</code> ，<strong>右键</strong>这个 zip 地址，<strong>复制</strong>下载连接。 然后回到 ssh 中，输入</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ./domains/ <span class="comment">#我这边是有个domains的目录，根据你们服务器情况自行操作</span></span><br><span class="line">mkdir v2ray <span class="comment">#建议新建一个v2ray的文件夹</span></span><br><span class="line"><span class="built_in">cd</span> v2ray <span class="comment">#进入到这个文件夹中</span></span><br><span class="line"><span class="built_in">wget</span> &lt;https://github.com/v2fly/v2ray<span class="literal">-core</span>/releases/download/v5.<span class="number">14.1</span>/v2ray<span class="literal">-freebsd-64</span>.zip&gt; <span class="comment">#选择对应系统的版本下载v2ray，这里将刚才复制的下载链接粘贴过来即可，不要按这里提供的地址。windterm的复制为Shift+Delete，粘贴为Shift+Insert</span></span><br></pre></td></tr></table></figure>
+<p>等待下载完成之后，输入<code>ls</code> 命令查看当前目录文件，可以看到这个 zip 包已经在这个目录里了。</p>
+<h3 id="③-配置-v2ray"><strong>③ 配置 v2ray</strong></h3>
+<p>还是在刚刚的 v2ray 目录下</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip v2ray<span class="literal">-freebsd-64</span>.zip <span class="comment">#这边换成你刚刚下载的对应的zip包</span></span><br></pre></td></tr></table></figure>
+<p>然后等待解压完成，再执行 <code>ls</code> 命令时能看到很多个文件</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./v2ray version</span><br></pre></td></tr></table></figure>
+<p>先验证下能否正常启动</p>
+<p><code>V2Ray 5.14.1 (V2Fly, a community-driven edition of V2Ray.) Custom (go1.22.0 freebsd/amd64) A unified platform for anti-censorship.</code></p>
+<p>我这边正确的返回版本号了，如果提示其他异常的话，请检查一下下载的 v2ray 版本是否是你服务器系统所适配的版本。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./v2ray uuid</span><br></pre></td></tr></table></figure>
+<p>这边先生成一个 uuid，记录一下，后面配置的时候会用到</p>
+<h3 id="④-配置-config"><strong>④ 配置 config</strong></h3>
+<p>接下来，我们需要先将配置文件下载下来，进行修改后，再上传回去</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240708103109590.png" alt="image-20240708103109590"></p>
+<p>Windterm左侧中间位置的<code>文件管理器</code>，双击进入我们刚刚创建v2ray的文件夹，<code>domains</code>–&gt; <code>v2ray</code>，右键选择<code>config.json</code>文件，点击<code>下载</code>。</p>
+<p>使用文本编辑器将下载到本地的<code>config.json</code>文件打开，具体配置文件可以如图对照，当配置完成之后，保存好。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/202403251810082.webp" alt=""></p>
+<p>然后将修改好的<code>config.json</code>文件保存后拖入同一文件夹内，自动上传更新</p>
+<h2 id="⑤-启动-v2ray">⑤ 启动 v2ray</h2>
+<p>回到之前的 ssh 窗口 先查看这个服务器的外网 ip</p>
+<p><code>curl ifconfig.me</code></p>
+<p>返回具体的服务器 ip 然后再执行<code>./v2ray run</code> 启动 v2ray</p>
+<p>如果需要持续保持后台运行 <code>screen -S v2ray ~/domains/v2ray/v2ray -config ~/domains/v2ray/config.json</code></p>
+<p>按下 Ctrl + A 然后按 D 来脱离 screen 会话。</p>
+<p>使用 screen -r v2ray 可以重新连接到会话。</p>
+<p>再在控制台增加一个任务，当服务器重启后自动执行 <code>screen -S v2ray ~/domains/v2ray/v2ray -config ~/domains/v2ray/config.json</code></p>
+<h2 id="启动本地代理">启动本地代理</h2>
+<p>启动本地代理的方法可以使用 <a target="_blank" rel="noopener" href="https://github.com/MatsuriDayo/nekoray">Nekobox</a> 代理工具。</p>
+<p>新建一个代理配置，<code>服务器</code> <code>手动输入</code>选择代理类型为 vmess</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240708092055378.png" alt="image-20240708092055378"></p>
+<p>配置方式如图，填入服务器 ip、端口号、uuid，然后保存，再启动代理，你就发现成功了！</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240708092557876.png" alt="image-20240708092557876"></p>
+<p>访问上了谷歌，显示的地址也跟服务器一致是波兰的地址～</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/202403251827132.webp" alt=""></p>
+<p>但Ai-China开始的时候就没连接上，提示对方主机主动拒绝连接之类，这是监听地址、端口不对应造成的。我的解决办法是neko-box、Chrome浏览器的SwitchyOmega插件都使用完全对应的端口配置，如下图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240708092932124.png" alt="image-20240708092932124"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240708093103603.png" alt="image-20240708093103603"></p>
+<p>对了，原教程中如下图的配置，画红线的listen部分原是<code>127.0.0.1</code>的本地loop，Ai-China这里试过不能连接，改成<code>0.0.0.0</code>即可。而<code>0.0.0.0</code>是IPv4地址，不适用IPv6，所以更好的办法是直接设置成<code>::</code>。对应的nekobox监听端口也要设置为<code>::</code>，如上图。还有，例图中都有了<code>//</code>注释，真正的<code>config.json</code>文件中是没有的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240708093400587.png" alt="image-20240708093400587"></p>
+<hr>
+<h2 id="Serv00-搭建wss和https代理节点">Serv00-搭建wss和https代理节点</h2>
+<p>wstunnel、gost 等代理工具同样也有 freebsd 二进制预编译版本，能运行 panindex 的 serv00 自然也能运行这些代理程序。我们就以 wstunnel 为例，快速搭建一个 https 代理节点，建立 web tunnel。</p>
+<p>整体来看，web tunnel （wstunnel 新版本支持客户端请求协议为 https，基于 http2 实现）是完全合规的常规流量，没有任何“特征”，是不会被屏蔽的。相比来看，现有针对 serv00 上的 vless、ss2022 等搭建方式都是照搬古老的容器化节点部署方式，把简单的事情复杂化，不仅低效率、自定义非标准化、易于检测，而且提高了部署、应用门槛。理论上，不需要编辑、创建网络接口的代理程序都可以在 serv00 上直接运行，没有任何必要使用低效的 js 脚本和作茧自缚的花式“协议”。</p>
+<h3 id="服务端">服务端</h3>
+<p>有了前文的基础，我们不必再重复激活程序运行权限，但需要添加一个服务端口（这里以 18443 为例，你可以随机生成并做相应修改）。左侧导航栏点击『Port reservation』，选择『Add port』选项卡，输入 18443 即可。端口类型『Port type』确保为默认的 tcp，描述『Description』可留空，也可以指定一个便于记忆、区分的关键词。最后点击『+Add』按钮放行 18443 端口，如果系统提示该端口已被其他人使用，可以换其他未被使用的端口，wstunnel 等程序对监听端口没有任何要求。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/add8443.webp" alt=""></p>
+<p>端口放行之后，就可以使用以下命令下载、解压 freebsd 版本的 wstunnel 并启动。可使用命令<code>mkdir Wstunnel</code>直接将 Wstunnel 放置于用户根目录之下。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240708094858888.png" alt="image-20240708094858888"></p>
+<p>然后运行</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ./Wstunnel //进入Wstunnel文件夹</span><br><span class="line"><span class="built_in">wget</span> https://github.com/erebe/wstunnel/releases/download/v9.<span class="number">7.2</span>/wstunnel_9.<span class="number">7.2</span>_freebsd_amd64.tar.gz //获取程序包</span><br><span class="line">tar zxvf wstunnel_9.<span class="number">7.2</span><span class="literal">-rc1_freebsd_amd64</span>.tar.gz //解压程序包</span><br><span class="line"><span class="built_in">rm</span> <span class="operator">-f</span> wstunnel_9.<span class="number">7.2</span><span class="literal">-rc1_freebsd_amd64</span>.tar.gz //程序已安装完毕，删除无用程序包</span><br><span class="line">chmod +x Wstunnel //赋予Wstunnel文件夹权限</span><br></pre></td></tr></table></figure>
+<p>使用如下命令<code>./Wstunnel server wss://0.0.0.0:分配的端口号</code>启动wstunnel服务端，须将端口号改为实际放行的端口。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/wss-running.webp" alt=""></p>
+<h3 id="客户端">客户端</h3>
+<p>以 windows 为例，下载<a target="_blank" rel="noopener" href="https://github.com/erebe/wstunnel">客户端</a>，版本不必和服务端一致，如仅使用 wss 协议不低于 7.0 即可，如使用 http2 协议应确保客户端版本不低于 9.0。解压后，在解压目录下运行Powershell或CMD，直接参照以下命令运行、启动 wstunnel 客户端。</p>
+<p><code>.\wstunnel client -L socks5://127.0.0.1:本地监听端口号（可在SwitchyOmega中查询） https://服务器网址:分配的端口号</code></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/wss-localclient.webp" alt=""></p>
+<p>一旦 wstunnel 启动运行，就可以打开浏览器，将代理指向 wstunnel client 使用的监听协议和端口，这里协议是 socks5、端口是 1080，就可以访问互联网了。你会注意到，serv00 目前还并没有走出波兰。</p>
+<hr>
+<p>以上两种方式，自测都可以用上Serv00的波兰VPS梯子，速度还可以，youtube 1080P没有问题，4K的确有些卡。Ai-China利用这把梯子，手机通过PC上网，成功用国内手机号申请了Telegram电报号（以前的都是无法收到验证短信），各位亦可一试。</p>
+<p>本文参考文章：<a target="_blank" rel="noopener" href="https://geneliunx.com/2024/03/25/2024-03-25-A-non-root-user-construct-v2ray/">https://geneliunx.com/2024/03/25/2024-03-25-A-non-root-user-construct-v2ray/</a></p>
+<p>​			   <a target="_blank" rel="noopener" href="https://appscross.com/blog/set-up-a-wss-proxy-and-bypass-node-on-sero00-vps.html">https://appscross.com/blog/set-up-a-wss-proxy-and-bypass-node-on-sero00-vps.html</a></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IT-issues/">IT-issues</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/register.webp" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="Wechat"/></a><div class="post-qr-code-desc">Wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="Alipay"/></a><div class="post-qr-code-desc">Alipay</div></li><li class="reward-item"><a href="/paypal.me/spritenee" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/paypal.png" alt="Paypal"/></a><div class="post-qr-code-desc">Paypal</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/e7a898a7.html" title="ChatTTS安装使用过程中CUDA/Pytorch/Cudnn/VisualStudio等相关疑难的解决"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240625130250230.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous</div><div class="prev_info">ChatTTS安装使用过程中CUDA/Pytorch/Cudnn/VisualStudio等相关疑难的解决</div></div></a></div><div class="next-post pull-right"><a href="/posts/fd9a6873.html" title="# 阿里最强语音克隆模型CosyVoice安装与使用避坑教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202407/image-20240719105735071.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next</div><div class="next_info"># 阿里最强语音克隆模型CosyVoice安装与使用避坑教程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/posts/8ed2456e.html" title="AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202501/image-20250308222701243.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-08</div><div class="title">AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法</div></div></a></div><div><a href="/posts/5d0776d5.html" title="Add to the PATH on Windows 10 and Windows 11"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240127074357404.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-27</div><div class="title">Add to the PATH on Windows 10 and Windows 11</div></div></a></div><div><a href="/posts/e7a898a7.html" title="ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240625130250230.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-25</div><div class="title">ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决</div></div></a></div><div><a href="/posts/da4c0974.html" title="ChatTTS安装使用保姆级教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240604154404896.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-04</div><div class="title">ChatTTS安装使用保姆级教程</div></div></a></div><div><a href="/posts/bb1c127d.html" title="Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240131113536868.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-31</div><div class="title">Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项</div></div></a></div><div><a href="/posts/841784b8.html" title="Create a shortcut for even lower phone brightness"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202312/image-20231218173344490.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-18</div><div class="title">Create a shortcut for even lower phone brightness</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">AI-China</div><div class="author-info__description">Something about China</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">202</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:spritenee@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://youtube.com/spritenee" target="_blank" title="Youtube"><i class="fa-brands fa-youtube" style="color: #f70808;"></i></a><a class="social-icon" href="https://weibo.com/u/1911422681" target="_blank" title="Weibo"><i class="fa-brands fa-weibo" style="color: #8e2525;"></i></a><a class="social-icon" href="https://facebook.com/spritenee" target="_blank" title="Facebook"><i class="fa-brands fa-facebook" style="color: #1f64db;"></i></a><a class="social-icon" href="https://twitter.com/spritenee" target="_blank" title="Twitter"><i class="fa-brands fa-twitter" style="color: #0b62f9;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">非 root 用户使用Serv00服务自建 wstunnel和v2ray 梯子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Serv00%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">Serv00介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Serv00%E6%B3%A8%E5%86%8C"><span class="toc-number">1.2.</span> <span class="toc-text">Serv00注册</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%99%BB%E5%BD%95-ssh"><span class="toc-number">1.3.</span> <span class="toc-text">一、登录 ssh</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A0-%E8%8E%B7%E5%8F%96%E8%B4%A6%E5%AF%86"><span class="toc-number">1.3.1.</span> <span class="toc-text">① 获取账密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A1-%E7%99%BB%E5%BD%95-ssh"><span class="toc-number">1.3.2.</span> <span class="toc-text">② 登录 ssh</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%BC%80%E9%80%9A%E7%AB%AF%E5%8F%A3%E3%80%81%E9%A2%9D%E5%A4%96%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.4.</span> <span class="toc-text">二、开通端口、额外服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A0-%E6%89%93%E5%BC%80%E9%A2%9D%E5%A4%96%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.4.1.</span> <span class="toc-text">① 打开额外服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A1-%E5%88%9B%E5%BB%BA%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.4.2.</span> <span class="toc-text">② 创建端口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A2-%E8%AE%B0%E4%BD%8F%E5%88%9A%E6%89%8D%E5%88%9B%E5%BB%BA%E7%9A%84%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="toc-number">1.4.3.</span> <span class="toc-text">③ 记住刚才创建的端口号</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-v2ray"><span class="toc-number">1.5.</span> <span class="toc-text">安装 v2ray</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A0-%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.5.1.</span> <span class="toc-text">① 查看系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A1-%E4%B8%8B%E8%BD%BD-v2ray"><span class="toc-number">1.5.2.</span> <span class="toc-text">② 下载 v2ray</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B1%E4%BA%8E%E6%B2%A1%E6%9C%89-root-%E6%9D%83%E9%99%90%EF%BC%8C%E6%88%91%E4%BB%AC%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E5%AE%98%E6%96%B9%E6%8F%90%E4%BE%9B%E7%9A%84%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%EF%BC%8C%E5%8F%AA%E8%83%BD%E8%87%AA%E8%A1%8C%E6%89%8B%E5%8A%A8%E5%AE%89%E8%A3%85%E3%80%82"><span class="toc-number">1.5.3.</span> <span class="toc-text">由于没有 root 权限，我们无法使用官方提供的一键安装脚本，只能自行手动安装。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A2-%E9%85%8D%E7%BD%AE-v2ray"><span class="toc-number">1.5.4.</span> <span class="toc-text">③ 配置 v2ray</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%91%A3-%E9%85%8D%E7%BD%AE-config"><span class="toc-number">1.5.5.</span> <span class="toc-text">④ 配置 config</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%91%A4-%E5%90%AF%E5%8A%A8-v2ray"><span class="toc-number">1.6.</span> <span class="toc-text">⑤ 启动 v2ray</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%90%86"><span class="toc-number">1.7.</span> <span class="toc-text">启动本地代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Serv00-%E6%90%AD%E5%BB%BAwss%E5%92%8Chttps%E4%BB%A3%E7%90%86%E8%8A%82%E7%82%B9"><span class="toc-number">1.8.</span> <span class="toc-text">Serv00-搭建wss和https代理节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="toc-number">1.8.1.</span> <span class="toc-text">服务端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">1.8.2.</span> <span class="toc-text">客户端</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/61eeaf34.html" title="关于批量替换epub文件中图片的尝试"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202510/image-20251023073648545.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于批量替换epub文件中图片的尝试"/></a><div class="content"><a class="title" href="/posts/61eeaf34.html" title="关于批量替换epub文件中图片的尝试">关于批量替换epub文件中图片的尝试</a><time datetime="2025-10-23T07:03:48.000Z" title="Created 2025-10-23 07:03:48">2025-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4d697bdd.html" title="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202509/image-20250927104709612.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法"/></a><div class="content"><a class="title" href="/posts/4d697bdd.html" title="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法">IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法</a><time datetime="2025-09-27T10:37:42.000Z" title="Created 2025-09-27 10:37:42">2025-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250510201017801.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="下载reddit自有视频的CC字幕"/></a><div class="content"><a class="title" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕">下载reddit自有视频的CC字幕</a><time datetime="2025-05-10T20:02:05.000Z" title="Created 2025-05-10 20:02:05">2025-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/d23f92cd.html" title="FFmpeg常用命令参数解析">FFmpeg常用命令参数解析</a><time datetime="2025-05-08T20:52:00.000Z" title="Created 2025-05-08 20:52:00">2025-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508103147758.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"/></a><div class="content"><a class="title" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法">digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法</a><time datetime="2025-05-08T09:53:39.000Z" title="Created 2025-05-08 09:53:39">2025-05-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By AI-China</div><div class="footer_custom_text">Hi, everyone. Just ask me something!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.ai-china.xyz',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.umd.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'spritenee/Giscus',
+      'data-repo-id': 'R_kgDOKmHsUg',
+      'data-category-id': 'DIC_kwDOKmHsUs4Cagfw',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },null)
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Waline' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!--在此添加你的javascript文件：--><script src="/self/js/algoliasearch.js"></script></body></html>

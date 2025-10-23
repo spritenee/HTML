@@ -1,0 +1,448 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>视频导入PR后声画不对位问题的解决方案 | Ai-China</title><meta name="author" content="AI-China"><meta name="copyright" content="AI-China"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="很多情况下，视频一导入PR后，就会随着时间的推移越来越不声画对位，视频音频错位现象会随着时长越来越严重。原因大概率是帧率的不统一，源视频很多都是可变帧率，而PR处理的是固定帧率。许多屏幕录制软件和手机摄像头会以可变帧率录制视频。这意味着视频的帧率不是恒定的，而是根据录制时的内容动态变化。PR 对 VFR 视频的兼容性不佳，容易导致音频和视频流不同步。 首先告诉大家最终的有效解决方案：使用HandB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="视频导入PR后声画不对位问题的解决方案">
+<meta property="og:url" content="https://www.ai-china.xyz/posts/9619220f.html">
+<meta property="og:site_name" content="Ai-China">
+<meta property="og:description" content="很多情况下，视频一导入PR后，就会随着时间的推移越来越不声画对位，视频音频错位现象会随着时长越来越严重。原因大概率是帧率的不统一，源视频很多都是可变帧率，而PR处理的是固定帧率。许多屏幕录制软件和手机摄像头会以可变帧率录制视频。这意味着视频的帧率不是恒定的，而是根据录制时的内容动态变化。PR 对 VFR 视频的兼容性不佳，容易导致音频和视频流不同步。 首先告诉大家最终的有效解决方案：使用HandB">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508092536452.png">
+<meta property="article:published_time" content="2025-05-08T09:19:52.000Z">
+<meta property="article:modified_time" content="2025-05-08T09:19:52.000Z">
+<meta property="article:author" content="AI-China">
+<meta property="article:tag" content="IT-issues">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508092536452.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.ai-china.xyz/posts/9619220f.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?403c92d1560db157c2d1a5a30189814d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-EEZG901XK6"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EEZG901XK6');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;112faaeb32a149e7acdef445d2cad2f1&quot;}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"6M6J2GXVQ8","apiKey":"db1b88d08993baff4226621c59aedfbf","indexName":"ai-china.xyz","hits":{"per_page":6},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '视频导入PR后声画不对位问题的解决方案',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2025-05-08 09:19:52'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/self/custom.css"><script src="/assets/algolia/algoliasearchLite.min.js" async></script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">202</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508092536452.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Ai-China"><span class="site-name">Ai-China</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">视频导入PR后声画不对位问题的解决方案</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-05-08T09:19:52.000Z" title="发表于 2025-05-08 09:19:52">2025-05-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-08T09:19:52.000Z" title="更新于 2025-05-08 09:19:52">2025-05-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/IT%E5%B8%B8%E8%A7%81%E7%96%91%E9%9A%BE/">IT常见疑难</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="视频导入PR后声画不对位问题的解决方案"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" data-lang="zh-CN"><p>很多情况下，视频一导入PR后，就会随着时间的推移越来越不声画对位，视频音频错位现象会随着时长越来越严重。原因大概率是帧率的不统一，源视频很多都是可变帧率，而PR处理的是固定帧率。许多屏幕录制软件和手机摄像头会以可变帧率录制视频。这意味着视频的帧率不是恒定的，而是根据录制时的内容动态变化。PR 对 VFR 视频的兼容性不佳，容易导致音频和视频流不同步。</p>
+<p>首先告诉大家最终的有效解决方案：使用<a href="handbrake.fr">HandBrake</a>工具重新编码一遍视频即可。格式工厂也可以，只是免费版的强制加个片头，过后处理比较费力。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508092536452.png" alt="image-20250508092536452"></p>
+<p><strong>转换帧率：</strong> 使用 HandBrake 等工具将视频转换为固定帧率 (CFR)。在 HandBrake 中，选择您的视频，然后在“视频”选项卡中将“帧率”设置为一个固定值（例如 25fps、30fps 或与您的项目设置相匹配的帧率），并确保选中“固定帧率”。</p>
+<p>主要是上图的帧率设置，改为适当的<code>固定帧率</code>，然后编码即可。</p>
+<p>工具用对了，就是这么简单。网友还有使用<code>比率拉伸工具</code>（快捷键<code>R</code>）对音视频进行加/减速来处理的，这里也介绍一下。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508093134139.png" alt="image-20250508093134139"></p>
+<p>先将时间轴上的音视频解绑，找到音频最后的空白区域（没有声音波形的部分），将其删除，再用</p>
+<p><code>比率拉伸工具</code>（快捷键<code>R</code>）将音视频拖动对齐。</p>
+<p>另外：</p>
+<p>有时是因为将素材直接放入PR项目中原有的不同序列导致的帧率差异，所以尽量用素材直接生成序列以保证一致性。而且，可以先行<code>解释素材</code>。</p>
+<p><strong>在 PR 中解释素材：</strong> 选中时间线上的视频素材，右键单击，选择“修改”&gt;“解释素材”。在弹出的对话框中，选择“假定此帧率”，然后输入视频的实际帧率。但这并非在所有情况下都有效，转换帧率通常是更可靠的解决方案。</p>
+<p><strong>编码不兼容或问题：</strong></p>
+<ul>
+<li><strong>原因：</strong> 视频文件可能使用了 PR 不完全兼容的编码格式或编码参数。虽然其他播放器可能能够更好地处理这些编码，但 PR 在导入和编辑时可能会出现问题。</li>
+<li>解决方法：
+<ul>
+<li><strong>重新编码视频：</strong> 使用 Media Encoder 或其他视频转换软件将视频重新编码为 PR 推荐的格式，例如 H.264。在编码设置中，确保音频编码也选择为 PR 兼容的格式（例如 AAC）。</li>
+</ul>
+</li>
+</ul>
+<p><strong>PR 项目设置不匹配：</strong></p>
+<ul>
+<li><strong>原因：</strong> 您在 PR 中创建的项目序列设置可能与导入视频的属性（例如帧率、场序）不匹配。</li>
+<li>解决方法：
+<ul>
+<li><strong>创建匹配序列：</strong> 在新建序列时，选择与您的视频素材属性相匹配的预设。您可以通过右键单击导入的视频素材，选择“新建序列自剪辑”来自动创建匹配的序列。</li>
+<li><strong>修改序列设置：</strong> 如果您已经创建了序列，可以选中序列，然后选择“序列”&gt;“序列设置”，检查并修改时间基准（帧率）等参数，使其与您的视频素材相符。</li>
+</ul>
+</li>
+</ul>
+<p><strong>音频采样率不匹配：</strong></p>
+<ul>
+<li><strong>原因：</strong> 视频的音频采样率可能与 PR 项目的音频采样率不一致。</li>
+<li>解决方法：
+<ul>
+<li><strong>检查项目音频设置：</strong> 转到“编辑”&gt;“首选项”&gt;“音频硬件”，查看您的默认音频采样率。</li>
+<li><strong>重新编码音频：</strong> 如果需要，在重新编码视频时，确保将音频采样率设置为与您的项目一致的值（通常为 48000 Hz）。</li>
+</ul>
+</li>
+</ul>
+<p>使用 Adobe Media Encoder 重新编码视频，可确保输出 H.264 视频和 AAC 音频，这通常与 Premiere Pro 兼容性良好：</p>
+<p><strong>步骤 1：将视频导入 Media Encoder</strong></p>
+<ol>
+<li><strong>启动 Adobe Media Encoder。</strong></li>
+<li>您可以通过以下几种方式将您的视频文件导入到 Media Encoder 的“队列”面板中：
+<ul>
+<li><strong>拖放：</strong> 直接将您的视频文件从文件资源管理器 (Windows) 或访达 (macOS) 拖放到 Media Encoder 的“队列”面板中。</li>
+<li><strong>添加源:</strong> 点击“队列”面板左上角的 <strong>“+” (添加源)</strong> 按钮，然后在弹出的对话框中选择您的视频文件并点击“打开”。</li>
+<li><strong>从 Premiere Pro 发送：</strong> 如果您的视频项目在 Premiere Pro 中，您可以选中时间线或项目中的序列，然后选择 <strong>“文件” &gt; “导出” &gt; “媒体”</strong>。在导出设置窗口中，将“格式”设置为“H.264”，然后点击 <strong>“队列”</strong> 按钮。这会将您的导出任务发送到 Media Encoder。</li>
+</ul>
+</li>
+</ol>
+<p><strong>步骤 2：选择 H.264 格式和预设</strong></p>
+<ol>
+<li>在 Media Encoder 的“队列”面板中，您导入的视频文件会显示在一行中。在“格式”列中，您可能会看到源视频的格式。</li>
+<li>点击该行中 <strong>“格式”</strong> 列下的当前格式（例如，MP4、MOV 等）。</li>
+<li>在弹出的 <strong>“导出设置”</strong> 对话框中，将 <strong>“格式”</strong> 下拉菜单更改为 <strong>“H.264”</strong>。</li>
+<li>在 “预设” 下拉菜单中，您可以选择一个适合您需求的预设。Adobe Media Encoder 提供了许多内置预设，例如针对 Web、广播或特定设备的预设。
+<ul>
+<li>如果您不确定选择哪个预设，可以先尝试 <strong>“匹配源 - 适应性高比特率”</strong> 或 <strong>“匹配源 - 适应性中比特率”</strong>。这些预设会尝试根据您的源视频属性进行编码。</li>
+<li>如果您有特定的输出要求（例如特定的分辨率、帧率或比特率），您可以选择一个接近的预设然后进行自定义。</li>
+</ul>
+</li>
+</ol>
+<p><strong>步骤 3：配置视频编码设置 (H.264)</strong></p>
+<ol>
+<li>
+<p>在 “导出设置” 对话框的 “视频” 选项卡中，您可以进一步自定义 H.264 的编码参数：</p>
+<ul>
+<li>
+<p>基本视频设置：</p>
+<ul>
+<li><strong>宽度和高度：</strong> 根据需要调整输出视频的分辨率。通常建议保持与源视频相同的宽高比。取消选中“取消链接宽高比”可以独立调整宽度和高度。</li>
+<li><strong>帧率：</strong> 确保帧率与您的 Premiere Pro 项目设置或您希望的输出帧率一致。通常建议与源视频的帧率相同，或者转换为一个固定帧率（如 25fps 或 30fps）。</li>
+<li><strong>场序：</strong> 如果您的源视频是隔行扫描的，请选择相应的场序（通常是“上场优先”或“下场优先”）。对于逐行扫描视频，选择“逐行”。</li>
+<li><strong>宽高比：</strong> 通常保持为“方形像素 (1.0)”。</li>
+<li><strong>配置文件：</strong> 常用的配置文件有 “High”、“Main” 和 “Baseline”。“High” 通常提供最佳质量，但可能在某些旧设备上的兼容性较差。“Main” 是一个很好的折衷方案。</li>
+<li><strong>级别：</strong> 级别限制了视频的某些属性，例如最大分辨率和比特率。通常情况下，Media Encoder 会根据您选择的预设自动设置级别。</li>
+</ul>
+</li>
+<li>
+<p>比特率设置：</p>
+<p>这是控制视频质量和文件大小的关键设置。</p>
+<ul>
+<li>比特率编码：
+<ul>
+<li><strong>VBR，1 次编码 (VBR, 1 Pass)：</strong> 编码器分析视频一次并根据内容复杂度调整比特率。速度较快，但质量可能不如两次编码。</li>
+<li><strong>VBR，2 次编码 (VBR, 2 Pass)：</strong> 编码器分析视频两次，第一次分析用于确定最佳比特率分配，第二次根据分析结果进行编码。通常提供更好的质量，但编码时间更长。</li>
+<li><strong>CBR (恒定比特率)：</strong> 编码器在整个视频中使用相同的比特率。文件大小更可预测，但对于复杂场景，质量可能下降。</li>
+</ul>
+</li>
+<li><strong>目标比特率 (Mbps)：</strong> 设置您希望的平均比特率。较高的比特率通常意味着更好的质量和更大的文件大小。根据您的输出需求进行调整。对于高清视频，常见的比特率范围是 10-30 Mbps 或更高。</li>
+<li><strong>最大比特率 (Mbps)：</strong> （仅在 VBR 模式下可用）设置允许的最大比特率，以应对复杂场景。</li>
+</ul>
+</li>
+<li>
+<p><strong>关键帧距离：</strong> 控制关键帧的插入频率。较小的关键帧距离通常在快速运动的场景中提供更好的质量，但会增加文件大小。通常保持默认值即可。</p>
+</li>
+<li>
+<p><strong>渲染最大深度：</strong> 选中此选项可以提高颜色精度，尤其是在处理具有平滑渐变的素材时。</p>
+</li>
+<li>
+<p><strong>使用最大渲染质量：</strong> 选中此选项可以进行更精细的缩放和其他图像处理，但会增加渲染时间。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>步骤 4：配置音频编码设置 (AAC)</strong></p>
+<ol>
+<li>切换到 <strong>“导出设置”</strong> 对话框的 <strong>“音频”</strong> 选项卡。</li>
+<li>确保 <strong>“音频”</strong> 选项已选中。</li>
+<li>将 <strong>“音频编码格式”</strong> 下拉菜单设置为 <strong>“AAC (高级音频编码)”</strong>。</li>
+<li>配置 AAC 的编码参数：
+<ul>
+<li><strong>编解码器：</strong> 通常保持为 “AAC”。</li>
+<li><strong>采样率：</strong> 将采样率设置为 <strong>48000 Hz</strong>，以匹配您 Premiere Pro 音频硬件的设置。这是一个常见的广播和视频制作标准采样率，与 PR 的兼容性通常较好。</li>
+<li><strong>通道：</strong> 根据您的源音频选择 “立体声” 或 “单声道”。</li>
+<li><strong>比特率 (kbps)：</strong> 设置音频的比特率。较高的比特率通常意味着更好的音质和更大的文件大小。对于高质量音频，可以尝试 192 kbps 或更高。较低的比特率（例如 128 kbps）适用于文件大小更重要的场景。</li>
+<li><strong>质量：</strong> 选择 “高” 通常可以获得更好的音质。</li>
+</ul>
+</li>
+</ol>
+<p><strong>步骤 5：选择输出文件名和位置</strong></p>
+<ol>
+<li>在 <strong>“导出设置”</strong> 对话框的顶部，点击 <strong>“输出文件名”</strong> 右侧的蓝色文本（通常是源文件的名称）。</li>
+<li>在弹出的对话框中，选择您希望保存编码后文件的位置，并输入您希望的文件名。点击 <strong>“保存”</strong>。</li>
+</ol>
+<p><strong>步骤 6：开始编码</strong></p>
+<ol>
+<li>在 <strong>“导出设置”</strong> 对话框中，仔细检查您的所有设置，确保它们符合您的需求。</li>
+<li>点击右下角的 <strong>“确定”</strong> 按钮，关闭 “导出设置” 对话框。</li>
+<li>在 Media Encoder 的 <strong>“队列”</strong> 面板中，您会看到您的编码任务已准备就绪。</li>
+<li>点击队列面板右上角的 <strong>“开始队列” (绿色播放按钮)</strong> 按钮，开始编码过程。</li>
+<li>Media Encoder 将开始根据您设置的参数重新编码您的视频文件。您可以在 “编码” 面板中查看编码进度。</li>
+</ol>
+<p>编码完成后，您将在指定的输出文件夹中找到重新编码的 H.264 视频文件，该文件应包含 AAC 音频。将此文件导入到您的 Premiere Pro 项目中，看看声画不同步的问题是否得到解决。</p>
+<p><strong>重要提示：</strong></p>
+<ul>
+<li><strong>测试：</strong> 在重新编码整个视频之前，建议先对一小段视频进行测试编码，以确保设置正确并且输出结果符合您的预期。</li>
+<li><strong>文件大小与质量：</strong> 比特率是影响文件大小和质量的关键因素。较高的比特率会产生更大的文件和更好的质量，而较低的比特率则相反。根据您的存储空间和输出需求进行权衡。</li>
+</ul>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IT-issues/">IT-issues</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508092536452.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="Wechat"/></a><div class="post-qr-code-desc">Wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="Alipay"/></a><div class="post-qr-code-desc">Alipay</div></li><li class="reward-item"><a href="/paypal.me/spritenee" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/paypal.png" alt="Paypal"/></a><div class="post-qr-code-desc">Paypal</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/959a1914.html" title="PR中双语字幕的制作"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250502114724900.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">PR中双语字幕的制作</div></div></a></div><div class="next-post pull-right"><a href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508103147758.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/8ed2456e.html" title="AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202501/image-20250308222701243.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-08</div><div class="title">AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法</div></div></a></div><div><a href="/posts/5d0776d5.html" title="Add to the PATH on Windows 10 and Windows 11"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240127074357404.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-27</div><div class="title">Add to the PATH on Windows 10 and Windows 11</div></div></a></div><div><a href="/posts/e7a898a7.html" title="ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240625130250230.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-25</div><div class="title">ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决</div></div></a></div><div><a href="/posts/da4c0974.html" title="ChatTTS安装使用保姆级教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240604154404896.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-04</div><div class="title">ChatTTS安装使用保姆级教程</div></div></a></div><div><a href="/posts/bb1c127d.html" title="Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240131113536868.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-31</div><div class="title">Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项</div></div></a></div><div><a href="/posts/841784b8.html" title="Create a shortcut for even lower phone brightness"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202312/image-20231218173344490.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-18</div><div class="title">Create a shortcut for even lower phone brightness</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">AI-China</div><div class="author-info__description">Something about China</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">202</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:spritenee@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://youtube.com/spritenee" target="_blank" title="Youtube"><i class="fa-brands fa-youtube" style="color: #f70808;"></i></a><a class="social-icon" href="https://weibo.com/u/1911422681" target="_blank" title="Weibo"><i class="fa-brands fa-weibo" style="color: #8e2525;"></i></a><a class="social-icon" href="https://facebook.com/spritenee" target="_blank" title="Facebook"><i class="fa-brands fa-facebook" style="color: #1f64db;"></i></a><a class="social-icon" href="https://twitter.com/spritenee" target="_blank" title="Twitter"><i class="fa-brands fa-twitter" style="color: #0b62f9;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome!</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/61eeaf34.html" title="关于批量替换epub文件中图片的尝试"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202510/image-20251023073648545.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于批量替换epub文件中图片的尝试"/></a><div class="content"><a class="title" href="/posts/61eeaf34.html" title="关于批量替换epub文件中图片的尝试">关于批量替换epub文件中图片的尝试</a><time datetime="2025-10-23T07:03:48.000Z" title="Created 2025-10-23 07:03:48">2025-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4d697bdd.html" title="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202509/image-20250927104709612.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法"/></a><div class="content"><a class="title" href="/posts/4d697bdd.html" title="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法">IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法</a><time datetime="2025-09-27T10:37:42.000Z" title="Created 2025-09-27 10:37:42">2025-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250510201017801.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="下载reddit自有视频的CC字幕"/></a><div class="content"><a class="title" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕">下载reddit自有视频的CC字幕</a><time datetime="2025-05-10T20:02:05.000Z" title="Created 2025-05-10 20:02:05">2025-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/d23f92cd.html" title="FFmpeg常用命令参数解析">FFmpeg常用命令参数解析</a><time datetime="2025-05-08T20:52:00.000Z" title="Created 2025-05-08 20:52:00">2025-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508103147758.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"/></a><div class="content"><a class="title" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法">digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法</a><time datetime="2025-05-08T09:53:39.000Z" title="Created 2025-05-08 09:53:39">2025-05-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By AI-China</div><div class="footer_custom_text">Hi, everyone. Just ask me something!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.ai-china.xyz',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.umd.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'spritenee/Giscus',
+      'data-repo-id': 'R_kgDOKmHsUg',
+      'data-category-id': 'DIC_kwDOKmHsUs4Cagfw',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },null)
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Waline' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!--在此添加你的javascript文件：--><script src="/self/js/algoliasearch.js"></script></body></html>

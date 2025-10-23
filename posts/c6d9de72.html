@@ -1,0 +1,422 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>修复 Vercel/Github Actions 部署 hexo 导致文章的更新时间错误 | Ai-China</title><meta name="author" content="AI-China"><meta name="copyright" content="AI-China"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="git 在推送更新的时候不会保存文件的访问时间、修改时间等元信息。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修复 Vercel&#x2F;Github Actions 部署 hexo 导致文章的更新时间错误">
+<meta property="og:url" content="https://www.ai-china.xyz/posts/c6d9de72.html">
+<meta property="og:site_name" content="Ai-China">
+<meta property="og:description" content="git 在推送更新的时候不会保存文件的访问时间、修改时间等元信息。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240111104821876.png">
+<meta property="article:published_time" content="2024-01-11T10:40:41.000Z">
+<meta property="article:modified_time" content="2024-01-29T15:03:09.000Z">
+<meta property="article:author" content="AI-China">
+<meta property="article:tag" content="IT-issues">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="Vercel">
+<meta property="article:tag" content="github actions">
+<meta property="article:tag" content="timestamp">
+<meta property="article:tag" content="update time">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240111104821876.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.ai-china.xyz/posts/c6d9de72.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?403c92d1560db157c2d1a5a30189814d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-EEZG901XK6"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EEZG901XK6');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;112faaeb32a149e7acdef445d2cad2f1&quot;}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"6M6J2GXVQ8","apiKey":"db1b88d08993baff4226621c59aedfbf","indexName":"ai-china.xyz","hits":{"per_page":6},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '修复 Vercel/Github Actions 部署 hexo 导致文章的更新时间错误',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-01-29 15:03:09'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/self/custom.css"><script src="/assets/algolia/algoliasearchLite.min.js" async></script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">202</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240111104821876.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Ai-China"><span class="site-name">Ai-China</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">修复 Vercel/Github Actions 部署 hexo 导致文章的更新时间错误</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-01-11T10:40:41.000Z" title="发表于 2024-01-11 10:40:41">2024-01-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-01-29T15:03:09.000Z" title="更新于 2024-01-29 15:03:09">2024-01-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/IT%E5%B8%B8%E8%A7%81%E7%96%91%E9%9A%BE/">IT常见疑难</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="修复 Vercel/Github Actions 部署 hexo 导致文章的更新时间错误"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" data-lang="zh-CN"><p>本文转载自：<a target="_blank" rel="noopener" href="https://blog.im0o.cn/posts/c6d9de72.html">https://blog.im0o.cn/posts/c6d9de72.html</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240111104821876.png" alt="image-20240111104821876"></p>
+<p>在使用 <code>Vercel</code> 或 <code>Github Actions</code> 自动化部署 hexo 博客时会发现所有文章的更新时间都变成了此次提交修改的时间，但实际上这些文章是没有任何修改的。</p>
+<p>这是因为 <code>git</code> 在推送更新的时候不会保存文件的访问时间、修改时间等元信息。</p>
+<details class="toggle" ><summary class="toggle-button" style="">Git SCM Wiki 中的解释</summary><div class="toggle-content"><p>Why isn’t Git preserving modification time on files?</p>
+<p>Modification time on files is a feature that affects build tools. Most build tools compare the timestamp of the source(s) with the timestamp of the derived file(s). If the source is newer, then a rebuild takes place, otherwise nothing happens. This speeds up the build process a lot.</p>
+<p>…</p>
+<p>Git sets the current time as the timestamp on every file it modifies, but only those. The other files are left untouched, which means build tools will be able to depend on modification time and rebuild properly. If build rules change, that can cause a failure anyway, but that is a far less common problem than accidentally not rebuilding.</p>
+<p>From: <a target="_blank" rel="noopener" href="https://git.wiki.kernel.org/index.php/Git_FAQ#Why_isn.27t_Git_preserving_modification_time_on_files.3F">Why isn’t Git preserving modification time on files?</a></p>
+</div></details>
+<p>所以每次使用 <code>git clone</code> 下载的项目的文件元数据都是当前系统时间，而不是项目的创建时间。</p>
+<p>在 <code>Hexo</code> 中的文章默认是通过使用 <strong>文件的最后修改时间</strong> 作为文章的更新时间，只有在 <code>font-matter</code> 中指定了 <code>updated</code> 才会使用 <code>updated</code> 的值作为文章的更新时间，所以才会出现 CI 构建后所有文章的更新时间都变成了此次构建的时间，因为推送上去的文件的元信息不会保存。</p>
+<h1>方法一：使用 updated 属性</h1>
+<p>在所有文章的 <code>front-matter</code> 中添加 <code>updated: 更新时间</code> 项</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">article</span> <span class="string">title</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2023-01-01 00:00:00</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加 updated: 更新时间</span></span><br><span class="line"><span class="attr">updated:</span> <span class="number">2023-01-01 00:00:00</span></span><br></pre></td></tr></table></figure>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/202302120252189.png" alt=""></p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">hexo.io - Front Matter</a></p>
+<p>以后需要修改文件的更新时间时，只需要修改 <code>updated</code> 的值即可，但是这样做的话就需要手动维护所有文章的更新时间，不太方便。</p>
+<h2 id="使用-PowerShell-脚本自动更新所有文章的-updated-属性">使用 PowerShell 脚本自动更新所有文章的 updated 属性</h2>
+<p>在 <a target="_blank" rel="noopener" href="https://moeci.com/">@yiyun</a> 的博客中，他使用了一个 PowerShell 脚本来自动更新所有文章的 <code>updated</code> 属性。</p>
+<p>在 Hexo 博客根目录中创建 <code>update.ps1</code> 文件</p>
+<details class="toggle" ><summary class="toggle-button" style="">update.ps1</summary><div class="toggle-content"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">$fileEncoding = &quot;UTF8&quot;;</span><br><span class="line"></span><br><span class="line">Function Convert-FromUnixDate ($UnixDate) &#123;</span><br><span class="line">    [timezone]::CurrentTimeZone.ToLocalTime(([datetime]&#x27;1/1/1970&#x27;).AddSeconds($UnixDate))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$fileNum = 0;</span><br><span class="line">Get-ChildItem -Path &quot;./source/_posts&quot; -recurse *.md | ForEach-Object -Process&#123;</span><br><span class="line">    $fileNum = $fileNum + 1;</span><br><span class="line">    if ($_ -is [System.IO.FileInfo]) &#123;</span><br><span class="line"></span><br><span class="line">        $filePath = $_.FullName;</span><br><span class="line">        Write-Host(&#x27;&#123;0&#125;. &#123;1&#125;&#x27; -f $fileNum, $filePath);</span><br><span class="line"></span><br><span class="line">        $lineNum = 0; # yaml 格式占据行数</span><br><span class="line">        $yamlStartEndNum = 0;</span><br><span class="line">        $existUpdated = $false;</span><br><span class="line">        $updatedNum = 0;</span><br><span class="line">        $newstreamreader = New-Object System.IO.StreamReader($filePath);</span><br><span class="line">        while (($readeachline = $newstreamreader.ReadLine()) -ne $null) &#123;</span><br><span class="line">            $lineNum = $lineNum + 1;</span><br><span class="line">            $temp = $readeachline -replace &quot; &quot;,&quot;&quot; -replace &quot;\n&quot;,&quot;&quot;</span><br><span class="line">            if ($temp -match &quot;---&quot;) &#123;</span><br><span class="line">                $yamlStartEndNum = $yamlStartEndNum + 1;</span><br><span class="line">            &#125;</span><br><span class="line">            if ($readeachline.Contains(&quot;updated:&quot;)) &#123;</span><br><span class="line">                $existUpdated = $true;</span><br><span class="line">                $updatedNum = $lineNum;</span><br><span class="line">            &#125;</span><br><span class="line">            if ($yamlStartEndNum -ge 2) &#123;</span><br><span class="line">                # yaml end</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        $newstreamreader.Dispose();</span><br><span class="line"></span><br><span class="line">        $filedata = Get-Content -Path $filePath -Encoding $fileEncoding;</span><br><span class="line">        $oldYamlStr = $filedata | Select-Object -First $lineNum</span><br><span class="line"></span><br><span class="line">        # git log format: https://www.cnblogs.com/ckAng/p/11205055.html https://git-scm.com/docs/git-log</span><br><span class="line">        # 此文件 最后一次 commit 的 Unix时间戳</span><br><span class="line">        $dateUpdated = git log -1 --format=&#x27;%ct&#x27; $filepath</span><br><span class="line">        $dateUpdated = Convert-FromUnixDate $dateUpdated</span><br><span class="line">        $dateUpdated = $dateUpdated.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">        $newUpdated = &quot;updated: &quot; + $dateUpdated;</span><br><span class="line"></span><br><span class="line">        #Write-Host(&quot;newUpdated: &quot; + $newUpdated)</span><br><span class="line"></span><br><span class="line">        $newYamlStr = &quot;&quot;</span><br><span class="line">        # 注意: yamlStr 是一个数组, 每一个元素为一行字符串</span><br><span class="line">        $tempOldYamlStr = $oldYamlStr;</span><br><span class="line">        if ($existUpdated) &#123;</span><br><span class="line">            #Write-Host($yamlStr[$updatedNum-1])</span><br><span class="line">            $oldUpdated = $oldYamlStr[$updatedNum-1];</span><br><span class="line">            $tempOldYamlStr[$updatedNum-1] = $oldYamlStr[$updatedNum-1] -replace $oldUpdated,$newUpdated</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            # 修改 yaml 结束行</span><br><span class="line">            # TODO: 好像取到的这一行不包括 最后的换行符, 导致加一个 换行 反而多了, 不过为了保险, 还是加上一个换行</span><br><span class="line">            $tempOldYamlStr[$lineNum-1] = $newUpdated + $([System.Environment]::NewLine) + &quot;---&quot; + $([System.Environment]::NewLine)</span><br><span class="line">        &#125;</span><br><span class="line">        $newYamlStr = $tempOldYamlStr</span><br><span class="line"></span><br><span class="line">        Write-Output $newYamlStr</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        $newFiledata = $newYamlStr + $filedata[$lineNum..$filedata.count]</span><br><span class="line">        $newFiledata | Set-Content -Path $filePath -Encoding $fileEncoding</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#Write-Host(&quot;更新 updated 完成&quot;);</span><br></pre></td></tr></table></figure>
+</div></details>
+<p>出处：<a target="_blank" rel="noopener" href="https://moeci.com/posts/2022/01/powershell-hexo-updated/">yiyun’s Blog - 使用 PowerShell 一键更新 Hexo 文章的 updated</a></p>
+<h2 id="修改-front-matter-模板">修改 front-matter 模板</h2>
+<p>默认的 <code>front-matter</code> 模板中不包括 <code>updated</code> 属性，所以需要修改模板使以后新建的文章也包含 <code>updated</code> 属性。</p>
+<p>打开 <code>Hexo</code> 博客根目录下的 <code>/scaffolds/post.md</code> 文件，添加 <code>updated</code> 属性</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> &#123;&#123; <span class="string">title</span> &#125;&#125;</span><br><span class="line"><span class="attr">date:</span> &#123;&#123; <span class="string">date</span> &#125;&#125;</span><br><span class="line"><span class="comment"># 添加 updated 属性</span></span><br><span class="line"><span class="attr">updated:</span> &#123;&#123; <span class="string">date</span> &#125;&#125;</span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">  <span class="bullet">-</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">  <span class="bullet">-</span></span><br></pre></td></tr></table></figure>
+<p>以后新建的文章就会自动包含 <code>updated</code> 属性了，其默认值为文章的创建时间。</p>
+<h1>方法二：修改 updated_option</h1>
+<p><code>updated_option</code> 控制了当 Front Matter 中没有指定 <code>updated</code> 时，<code>updated</code> 如何取值：</p>
+<ul>
+<li><code>mtime</code>: 使用文件的最后修改时间。这是从 Hexo 3.0.0 开始的默认行为。</li>
+<li><code>date</code>: 使用 <code>date</code> 作为 <code>updated</code> 的值。可被用于 Git 工作流之中，因为使用 Git 管理站点时，文件的最后修改日期常常会发生改变</li>
+<li><code>empty</code>: 直接删除 <code>updated</code>。使用这一选项可能会导致大部分主题和插件无法正常工作。</li>
+</ul>
+<p><code>use_date_for_updated</code> 选项已经被废弃，将会在下个重大版本发布时去除。请改为使用 <code>updated_option: 'date'</code>。</p>
+<p>From: <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration#updated_option">hexo.io - 配置</a></p>
+<p>在 Hexo 博客根目录下的 <code>_config.yml</code> 文件中修改 <code>updated_option</code> 的值为 <code>date</code> 即可。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 文章的更新时间</span></span><br><span class="line"><span class="attr">updated_option:</span> <span class="string">date</span></span><br></pre></td></tr></table></figure>
+<p>然而，这样做会导致所有文章默认的 <code>updated</code> 属性都变成了文章的创建时间，而不是修改时间，治标不治本。</p>
+<h1>方法三：使用 Github Action 部署到 Vercel</h1>
+<p>本站使用的就是这种方法，由于本站使用的是 Vercel 作为托管平台，每次推送到仓库后，Vercel 会自动构建并部署。</p>
+<p>我们需要在 Vercel 构建之前使文件的最后修改时间与文章的更新时间一致，这样 Vercel 构建后的文件的最后修改时间才会与文章的更新时间一致。</p>
+<p>因为 Vercel 绑定仓库后，每次推送会自动进行部署，不能修改 Vercel 的构建流程，所以我们需要在 Github 仓库中添加 Github Action。</p>
+<h2 id="原理">原理</h2>
+<p>在 <a target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/issues/893">hexo-theme-next issue # 893</a> 中提到了这个问题，<a target="_blank" rel="noopener" href="https://github.com/sli1989">@sli1989</a> 提出了一个解决方案：</p>
+<blockquote>
+<p>hi, the updated time with CI deployment can be fixed using this. please check Continuous Integration configurations carefully.</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Restore last modified time</span></span><br><span class="line"> <span class="bullet">-</span> <span class="string">&quot;git ls-files -z | while read -d &#x27;&#x27; path; do touch -d \&quot;$(git log -1 --format=\&quot;@%ct\&quot; \&quot;$path\&quot;)\&quot; \&quot;$path\&quot;; done&quot;</span></span><br></pre></td></tr></table></figure>
+<p>该条命令会将文件的最后修改时间修改为 Git 仓库中文件的最后提交时间，即文章的更新时间。</p>
+<p>同样使用 <code>find</code> 命令也可以实现这个功能：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BASH</span><br><span class="line">find source/_posts -name &#x27;*.md&#x27; | while read file; do touch -d &quot;$(git log -1 --format=&quot;@%ct&quot; &quot;$file&quot;)&quot; &quot;$file&quot;; done</span><br></pre></td></tr></table></figure>
+<h2 id="准备工作">准备工作</h2>
+<p>首先，将 <code>Vercel 项目</code> 与 <code>Github 仓库</code> 的绑定关系解除，因为我们将要在 Github Action 中手动部署到 Vercel 中。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/202302120235219.png" alt="img"></p>
+<details class="toggle" ><summary class="toggle-button" style="">不想解除仓库绑定？查看关闭自动部署教程</summary><div class="toggle-content"><p>在 <a target="_blank" rel="noopener" href="https://vercel.com/docs/concepts/projects/project-configuration/git-configuration#git.deploymentenabled">Git Configuration | Vercel Docs</a> 中提到：</p>
+<p>git.deploymentEnabled</p>
+<p>Type: <code>Object</code> of key branch identifier <code>String</code> and value <code>Boolean</code>, or <code>Boolean</code>.</p>
+<p>Specify the branches that will not trigger an auto-deployment when committing to them. Any non specified branch is <code>true</code> by default.</p>
+<p>Property’s default value is <code>true</code>. In case you want to turn auto-deployments off for every branch, property value must be set to <code>false</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;git&quot;: &#123;</span><br><span class="line">    &quot;deploymentEnabled&quot;: &#123;</span><br><span class="line">      &quot;main&quot;: false</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以我们可以在博客根目录中创建一个 <code>vercel.json</code> 文件，添加以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;git&quot;: &#123;</span><br><span class="line">    &quot;deploymentEnabled&quot;: &#123;</span><br><span class="line">      &quot;main&quot;: false</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样 Vercel 就不会在 Github 仓库更新时自动部署了。</p>
+</div></details>
+<p>在 Github Action 中需要使用以下两个环境变量、一个秘钥：</p>
+<ul>
+<li>VERCEL_ORG_ID</li>
+<li>VERCEL_PROJECT_ID</li>
+<li>VERCEL_TOKEN</li>
+</ul>
+<h2 id="获取-Vercel-Access-Token">获取 Vercel Access Token</h2>
+<p>我们需要在 Vercel 中获取一段 <a target="_blank" rel="noopener" href="https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token">Vercel Access Token</a> 用于 Github Action 部署到 Vercel。<a target="_blank" rel="noopener" href="https://vercel.com/account/tokens">快速前往 Access Token 页面</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/202302120232608.png" alt="img"></p>
+<h2 id="获取-VERCEL-ORG-ID-和-VERCEL-PROJECT-ID">获取 VERCEL_ORG_ID 和 VERCEL_PROJECT_ID</h2>
+<p>在本地安装 <a target="_blank" rel="noopener" href="https://vercel.com/docs/cli">Vercel CLI</a> 后，使用 <code>vercel login</code> 登录 Vercel</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># npm</span></span><br><span class="line">npm i -g vercel</span><br><span class="line"></span><br><span class="line"><span class="comment"># yarn</span></span><br><span class="line">yarn global add vercel</span><br></pre></td></tr></table></figure>
+<p>在博客根目录下执行 <code>vercel link</code>，创建一个 Vercel 项目，此操作会在博客根目录下生成一个 <code>.vercel</code> 文件夹，<code>.vercel/project.json</code> 里面包含了 <code>VERCEL_ORG_ID</code> 和 <code>VERCEL_PROJECT_ID</code>。</p>
+<h2 id="在-Github-仓库中添加-secrets">在 Github 仓库中添加 secrets</h2>
+<p>在 Github 仓库中的 <code>Settings</code> -&gt; <code>Secrets and Variables</code> -&gt; <code>Actions</code> 中添加以下秘钥和环境变量：</p>
+<ul>
+<li>VERCEL_TOKEN</li>
+<li>VERCEL_ORG_ID</li>
+<li>VERCEL_PROJECT_ID</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/202302120252189.png" alt="img"></p>
+<h2 id="创建-Github-Action">创建 Github Action</h2>
+<p>在 Github 仓库中创建一个名为 <code>.github/workflows/deploy.yml</code> 的文件，添加以下内容：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">Blog</span> <span class="string">to</span> <span class="string">Vercel</span> <span class="string">Production</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">env:</span></span><br><span class="line">  <span class="attr">VERCEL_ORG_ID:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.VERCEL_ORG_ID</span> <span class="string">&#125;&#125;</span></span><br><span class="line">  <span class="attr">VERCEL_PROJECT_ID:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.VERCEL_PROJECT_ID</span> <span class="string">&#125;&#125;</span></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build-and-deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">persist-credentials:</span> <span class="literal">false</span></span><br><span class="line">          <span class="comment"># 0 indicates all history for all branches and tags.</span></span><br><span class="line">          <span class="attr">fetch-depth:</span> <span class="number">0</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Restore</span> <span class="string">file</span> <span class="string">modification</span> <span class="string">time</span> <span class="string">🕒</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">find</span> <span class="string">source/_posts</span> <span class="string">-name</span> <span class="string">&#x27;*.md&#x27;</span> <span class="string">|</span> <span class="string">while</span> <span class="string">read</span> <span class="string">file;</span> <span class="string">do</span> <span class="string">touch</span> <span class="string">-d</span> <span class="string">&quot;$(git log -1 --format=&quot;</span><span class="string">@%ct&quot;</span> <span class="string">&quot;$file&quot;</span><span class="string">)&quot;</span> <span class="string">&quot;$file&quot;</span><span class="string">;</span> <span class="string">done</span></span><br><span class="line">        <span class="comment"># run: &quot;git ls-files -z | while read -d &#x27;&#x27; path; do touch -d \&quot;$(git log -1 --format=\&quot;@%ct\&quot; \&quot;$path\&quot;)\&quot; \&quot;$path\&quot;; done&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">Vercel-cli🔧</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">npm</span> <span class="string">install</span> <span class="string">--global</span> <span class="string">vercel@latest</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Pull</span> <span class="string">Vercel</span> <span class="string">Environment</span> <span class="string">Information</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">vercel</span> <span class="string">pull</span> <span class="string">--yes</span> <span class="string">--environment=production</span> <span class="string">--token=$&#123;&#123;</span> <span class="string">secrets.VERCEL_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Build</span> <span class="string">Project</span> <span class="string">Artifacts</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">vercel</span> <span class="string">build</span> <span class="string">--prod</span> <span class="string">--token=$&#123;&#123;</span> <span class="string">secrets.VERCEL_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">Project</span> <span class="string">Artifacts</span> <span class="string">to</span> <span class="string">Vercel</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">vercel</span> <span class="string">deploy</span> <span class="string">--prebuilt</span> <span class="string">--prod</span> <span class="string">--token=$&#123;&#123;</span> <span class="string">secrets.VERCEL_TOKEN</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>注意</p>
+<p>如果 <code>github actions</code> 中使用 <code>actions/checkout@v2</code>，请设定它的参数 <code>fetch-depth: 0</code>，因为 <code>0</code> 表示获取所有分支和标签的所有历史记录。默认值为 <code>1</code></p>
+<h2 id="推送代码到-Github">推送代码到 Github</h2>
+<p>在本地执行 <code>git push</code> 推送代码到 Github，Github Action 会自动部署到 Vercel。</p>
+<h1>方法三（Github Page版）：使用 Github Action 部署到 Github Page</h1>
+<p>如果你的博客源文件托管在 Github 上，且使用 Github Action 部署到 Github Page，那么可以在你的部署 Action 中添加以下代码：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Restore</span> <span class="string">file</span> <span class="string">modification</span> <span class="string">time</span> <span class="string">🕒</span></span><br><span class="line">  <span class="attr">run:</span> <span class="string">find</span> <span class="string">source/_posts</span> <span class="string">-name</span> <span class="string">&#x27;*.md&#x27;</span> <span class="string">|</span> <span class="string">while</span> <span class="string">read</span> <span class="string">file;</span> <span class="string">do</span> <span class="string">touch</span> <span class="string">-d</span> <span class="string">&quot;$(git log -1 --format=&quot;</span><span class="string">@%ct&quot;</span> <span class="string">&quot;$file&quot;</span><span class="string">)&quot;</span> <span class="string">&quot;$file&quot;</span><span class="string">;</span> <span class="string">done</span></span><br></pre></td></tr></table></figure>
+<p>其余步骤与 <code>方法三 -&gt; 创建 Github Action</code> 中一致，只是部署方式不同。</p>
+<h2 id="例子">例子</h2>
+<p>以下是一个完整的 Github Action 部署到 gh-pages 分支的例子：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">deploy</span> <span class="string">blog</span> <span class="string">to</span> <span class="string">github</span></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build-and-deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Checkout</span> <span class="string">🛎️</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">persist-credentials:</span> <span class="literal">false</span></span><br><span class="line">          <span class="comment"># 0 indicates all history for all branches and tags.</span></span><br><span class="line">          <span class="attr">fetch-depth:</span> <span class="number">0</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Restore</span> <span class="string">file</span> <span class="string">modification</span> <span class="string">time</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">find</span> <span class="string">source</span> <span class="string">-name</span> <span class="string">&#x27;*.md&#x27;</span> <span class="string">|</span> <span class="string">while</span> <span class="string">read</span> <span class="string">file;</span> <span class="string">do</span> <span class="string">touch</span> <span class="string">-d</span> <span class="string">&quot;$(git log -1 --format=&quot;</span><span class="string">@%ct&quot;</span> <span class="string">&quot;$file&quot;</span><span class="string">)&quot;</span> <span class="string">&quot;$file&quot;</span><span class="string">;</span> <span class="string">done</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Install</span> <span class="string">and</span> <span class="string">Build</span> <span class="string">🔧</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm install</span></span><br><span class="line"><span class="string">          npm run build</span></span><br><span class="line"><span class="string"></span>      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">Deploy</span> <span class="string">🚀</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">JamesIves/github-pages-deploy-action@3.7.1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">ACCESS_TOKEN:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.DEPLOY_TOKEN</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">BRANCH:</span> <span class="string">gh-pages</span> <span class="comment"># The branch the action should deploy to.</span></span><br><span class="line">          <span class="attr">FOLDER:</span> <span class="string">public</span> <span class="comment"># The folder the action should deploy.</span></span><br><span class="line">          <span class="attr">CLEAN:</span> <span class="literal">true</span> <span class="comment"># Automatically remove deleted files from the deploy branch</span></span><br></pre></td></tr></table></figure>
+<p>不要忘了在 secrets 中添加 <code>DEPLOY_TOKEN</code> 秘钥</p>
+<h1>参考链接</h1>
+<p>除了文中直接引用的链接出处，还有以下作为参考：</p>
+<p><a target="_blank" rel="noopener" href="https://devpress.csdn.net/cicd/62ed9b157e66823466181357.html">使用 GitHub Actions and Releases 将您的站点部署到 Vercel</a></p>
+<p><a target="_blank" rel="noopener" href="https://mrseawave.github.io/blogs/articles/2021/01/07/ci-hexo-update-time/">修复 CI 构建博客造成的更新时间错误</a></p>
+<p><a target="_blank" rel="noopener" href="https://vercel.com/guides/how-can-i-use-github-actions-with-vercel">How can I use GitHub Actions with Vercel? - Vercel Docs</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vercel/examples/blob/main/ci-cd/github-actions/.github/workflows/production.yaml">examples/production.yaml at main - vercel/examples</a></p>
+<p>头图/封面素材更改于 <a target="_blank" rel="noopener" href="https://unsplash.com/it/@rayhennessy?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Ray Hennessy</a> on <a target="_blank" rel="noopener" href="https://unsplash.com/images/animals/fox?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IT-issues/">IT-issues</a><a class="post-meta__tags" href="/tags/hexo/">hexo</a><a class="post-meta__tags" href="/tags/Vercel/">Vercel</a><a class="post-meta__tags" href="/tags/github-actions/">github actions</a><a class="post-meta__tags" href="/tags/timestamp/">timestamp</a><a class="post-meta__tags" href="/tags/update-time/">update time</a><a class="post-meta__tags" href="/tags/git/">git</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240111104821876.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="Wechat"/></a><div class="post-qr-code-desc">Wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="Alipay"/></a><div class="post-qr-code-desc">Alipay</div></li><li class="reward-item"><a href="/paypal.me/spritenee" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/paypal.png" alt="Paypal"/></a><div class="post-qr-code-desc">Paypal</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/bd4fc289.html" title="向onedrive发送文件夹或文件的链接实现同步"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240111100802162.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">向onedrive发送文件夹或文件的链接实现同步</div></div></a></div><div class="next-post pull-right"><a href="/posts/2982332b.html" title="鬼谷封神——最牛逼的老师"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240112115508053.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">鬼谷封神——最牛逼的老师</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/7fd4e952.html" title="Github Actions使用教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240108143213015.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-30</div><div class="title">Github Actions使用教程</div></div></a></div><div><a href="/posts/89f1eb4d.html" title="Hexo生成网站自定义css样式的设置位置和选择器(selector)应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240130075346702.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-30</div><div class="title">Hexo生成网站自定义css样式的设置位置和选择器(selector)应用</div></div></a></div><div><a href="/posts/2ea56ed.html" title="Hexo采用Waline评论系统recent comments最近评论不显示"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202312/image-20231217160841224.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-12-17</div><div class="title">Hexo采用Waline评论系统recent comments最近评论不显示</div></div></a></div><div><a href="/posts/8ed2456e.html" title="AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202501/image-20250308222701243.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-08</div><div class="title">AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法</div></div></a></div><div><a href="/posts/5d0776d5.html" title="Add to the PATH on Windows 10 and Windows 11"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240127074357404.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-27</div><div class="title">Add to the PATH on Windows 10 and Windows 11</div></div></a></div><div><a href="/posts/e7a898a7.html" title="ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240625130250230.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-25</div><div class="title">ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">AI-China</div><div class="author-info__description">Something about China</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">202</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">343</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">17</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:spritenee@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://youtube.com/spritenee" target="_blank" title="Youtube"><i class="fa-brands fa-youtube" style="color: #f70808;"></i></a><a class="social-icon" href="https://weibo.com/u/1911422681" target="_blank" title="Weibo"><i class="fa-brands fa-weibo" style="color: #8e2525;"></i></a><a class="social-icon" href="https://facebook.com/spritenee" target="_blank" title="Facebook"><i class="fa-brands fa-facebook" style="color: #1f64db;"></i></a><a class="social-icon" href="https://twitter.com/spritenee" target="_blank" title="Twitter"><i class="fa-brands fa-twitter" style="color: #0b62f9;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">方法一：使用 updated 属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-PowerShell-%E8%84%9A%E6%9C%AC%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0%E6%89%80%E6%9C%89%E6%96%87%E7%AB%A0%E7%9A%84-updated-%E5%B1%9E%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">使用 PowerShell 脚本自动更新所有文章的 updated 属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-front-matter-%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.2.</span> <span class="toc-text">修改 front-matter 模板</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">方法二：修改 updated_option</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">方法三：使用 Github Action 部署到 Vercel</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">3.2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96-Vercel-Access-Token"><span class="toc-number">3.3.</span> <span class="toc-text">获取 Vercel Access Token</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96-VERCEL-ORG-ID-%E5%92%8C-VERCEL-PROJECT-ID"><span class="toc-number">3.4.</span> <span class="toc-text">获取 VERCEL_ORG_ID 和 VERCEL_PROJECT_ID</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8-Github-%E4%BB%93%E5%BA%93%E4%B8%AD%E6%B7%BB%E5%8A%A0-secrets"><span class="toc-number">3.5.</span> <span class="toc-text">在 Github 仓库中添加 secrets</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-Github-Action"><span class="toc-number">3.6.</span> <span class="toc-text">创建 Github Action</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E9%80%81%E4%BB%A3%E7%A0%81%E5%88%B0-Github"><span class="toc-number">3.7.</span> <span class="toc-text">推送代码到 Github</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">方法三（Github Page版）：使用 Github Action 部署到 Github Page</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">4.1.</span> <span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">参考链接</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/61eeaf34.html" title="关于批量替换epub文件中图片的尝试"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202510/image-20251023073648545.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="关于批量替换epub文件中图片的尝试"/></a><div class="content"><a class="title" href="/posts/61eeaf34.html" title="关于批量替换epub文件中图片的尝试">关于批量替换epub文件中图片的尝试</a><time datetime="2025-10-23T07:03:48.000Z" title="Created 2025-10-23 07:03:48">2025-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4d697bdd.html" title="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202509/image-20250927104709612.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法"/></a><div class="content"><a class="title" href="/posts/4d697bdd.html" title="IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法">IDM(D版)频繁弹窗文件损坏并弹出官方网页的解决方法</a><time datetime="2025-09-27T10:37:42.000Z" title="Created 2025-09-27 10:37:42">2025-09-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250510201017801.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="下载reddit自有视频的CC字幕"/></a><div class="content"><a class="title" href="/posts/20404fae.html" title="下载reddit自有视频的CC字幕">下载reddit自有视频的CC字幕</a><time datetime="2025-05-10T20:02:05.000Z" title="Created 2025-05-10 20:02:05">2025-05-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/d23f92cd.html" title="FFmpeg常用命令参数解析">FFmpeg常用命令参数解析</a><time datetime="2025-05-08T20:52:00.000Z" title="Created 2025-05-08 20:52:00">2025-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202505/image-20250508103147758.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法"/></a><div class="content"><a class="title" href="/posts/213ce1de.html" title="digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法">digitalplat平台申请了几个免费域名但暂时还不能托管到Cloudflare的解决办法</a><time datetime="2025-05-08T09:53:39.000Z" title="Created 2025-05-08 09:53:39">2025-05-08</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By AI-China</div><div class="footer_custom_text">Hi, everyone. Just ask me something!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.ai-china.xyz',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.umd.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'spritenee/Giscus',
+      'data-repo-id': 'R_kgDOKmHsUg',
+      'data-category-id': 'DIC_kwDOKmHsUs4Cagfw',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },null)
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Waline' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!--在此添加你的javascript文件：--><script src="/self/js/algoliasearch.js"></script></body></html>
