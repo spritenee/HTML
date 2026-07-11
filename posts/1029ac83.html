@@ -1,0 +1,394 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>微信读书刷时长+保持挑战赛天数的自动化脚本操作详细教程 | Ai-China</title><meta name="author" content="AI-China"><meta name="copyright" content="AI-China"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="微信读书刷时长+保持挑战赛天数的自动化脚本操作详细教程这个 GitHub 仓库（findmover&#x2F;wxread）是一个用于微信读书自动刷阅读时长、保持挑战赛天数的自动化脚本。它不需要你开着手机或电脑模拟器，而是通过模拟微信读书网页版的请求（抓包）来实现的。 针对完全没有编程基础的“小白”，推荐使用**第一种方法（GitHub Action）*来运行。这种方法*完全免费，不需要你自己买服务器或整天">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信读书刷时长+保持挑战赛天数的自动化脚本操作详细教程">
+<meta property="og:url" content="https://www.ai-china.xyz/posts/1029ac83.html">
+<meta property="og:site_name" content="Ai-China">
+<meta property="og:description" content="微信读书刷时长+保持挑战赛天数的自动化脚本操作详细教程这个 GitHub 仓库（findmover&#x2F;wxread）是一个用于微信读书自动刷阅读时长、保持挑战赛天数的自动化脚本。它不需要你开着手机或电脑模拟器，而是通过模拟微信读书网页版的请求（抓包）来实现的。 针对完全没有编程基础的“小白”，推荐使用**第一种方法（GitHub Action）*来运行。这种方法*完全免费，不需要你自己买服务器或整天">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260623150244514.png">
+<meta property="article:published_time" content="2026-06-23T14:59:11.000Z">
+<meta property="article:modified_time" content="2026-06-23T14:59:11.000Z">
+<meta property="article:author" content="AI-China">
+<meta property="article:tag" content="IT-issues">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260623150244514.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.ai-china.xyz/posts/1029ac83.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?403c92d1560db157c2d1a5a30189814d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-EEZG901XK6"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EEZG901XK6');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;112faaeb32a149e7acdef445d2cad2f1&quot;}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"6M6J2GXVQ8","apiKey":"db1b88d08993baff4226621c59aedfbf","indexName":"ai-china.xyz","hits":{"per_page":6},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '微信读书刷时长+保持挑战赛天数的自动化脚本操作详细教程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-23 14:59:11'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/self/custom.css"><script src="/assets/algolia/algoliasearchLite.min.js" async></script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">219</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">345</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">18</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260623150244514.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Ai-China"><span class="site-name">Ai-China</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">微信读书刷时长+保持挑战赛天数的自动化脚本操作详细教程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-06-23T14:59:11.000Z" title="发表于 2026-06-23 14:59:11">2026-06-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-06-23T14:59:11.000Z" title="更新于 2026-06-23 14:59:11">2026-06-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/IT%E5%B8%B8%E8%A7%81%E7%96%91%E9%9A%BE/">IT常见疑难</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="微信读书刷时长+保持挑战赛天数的自动化脚本操作详细教程"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" data-lang="zh-CN"><h1 id="微信读书刷时长-保持挑战赛天数的自动化脚本操作详细教程"><a href="#微信读书刷时长-保持挑战赛天数的自动化脚本操作详细教程" class="headerlink" title="微信读书刷时长+保持挑战赛天数的自动化脚本操作详细教程"></a>微信读书刷时长+保持挑战赛天数的自动化脚本操作详细教程</h1><p>这个 GitHub 仓库（<code>findmover/wxread</code>）是一个用于<strong>微信读书自动刷阅读时长、保持挑战赛天数</strong>的自动化脚本。它不需要你开着手机或电脑模拟器，而是通过模拟微信读书网页版的请求（抓包）来实现的。</p>
+<p>针对完全没有编程基础的“小白”，推荐使用**第一种方法（GitHub Action）*<em>来运行。这种方法*<em>完全免费</em></em>，不需要你自己买服务器或整天开着电脑，只要配置一次，GitHub 的服务器每天就会自动帮你运行。</p>
+<p>以下是为你整理的超详细“小白”保姆级操作步骤：</p>
+<h3 id="第一步：获取你的微信读书“凭证”（抓包）"><a href="#第一步：获取你的微信读书“凭证”（抓包）" class="headerlink" title="第一步：获取你的微信读书“凭证”（抓包）"></a>第一步：获取你的微信读书“凭证”（抓包）</h3><p>这是最关键的一步，脚本需要知道是“哪个账号”在读书。</p>
+<ol>
+<li>在电脑上使用浏览器（推荐使用 Google Chrome 或 Edge 浏览器），打开<a target="_blank" rel="noopener" href="https://weread.qq.com/">微信读书官网 (weread.qq.com)</a> 并登录你的账号。</li>
+<li>随便搜索一本书（比如【金瓶梅】），点击进入阅读界面。</li>
+<li><strong>打开开发者工具</strong>：在键盘上按下 <code>F12</code> 键（Mac 电脑按 <code>Cmd + Option + I</code>），或者在页面任意地方右键选择“检查”（Inspect）。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260623150244514.png"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260623150548296.png" alt="image-20260623150548296"></li>
+<li>在弹出的工具栏顶部，切换到 <strong>“Network”（网络）</strong> 标签页。</li>
+<li>在页面上点击“下一页”或“上一页”随便翻几页书。</li>
+<li>回到网络（Network）面板，在左侧的搜索框或者请求列表里，寻找一个名为 <strong><code>read</code></strong> 的接口（完整的 URL 通常类似 <code>https://weread.qq.com/web/book/read</code>）。<ul>
+<li><em>怎么确认找对了？</em> 点击它，看右侧的 <code>Preview</code> 或 <code>Response</code>，如果显示类似 <code>&#123;&quot;succ&quot;: 1, ...&#125;</code> 就说明找对了。</li>
+</ul>
+</li>
+<li><strong>复制数据</strong>：在 <code>read</code> 这个请求上<strong>右键</strong> -&gt; 选择 <strong>Copy（复制）</strong> -&gt; 点击 <strong>Copy as cURL (bash)</strong>。</li>
+<li>把复制下来的这长串文本先新建一个记事本保存起来，一会儿要用。</li>
+</ol>
+<h3 id="第二步：将项目复制到你自己的-GitHub"><a href="#第二步：将项目复制到你自己的-GitHub" class="headerlink" title="第二步：将项目复制到你自己的 GitHub"></a>第二步：将项目复制到你自己的 GitHub</h3><ol>
+<li>登录你的 GitHub 账号（如果没有，请先去 <a target="_blank" rel="noopener" href="https://github.com/">github.com</a> 注册一个）。</li>
+<li>打开该项目的网址：<code>https://github.com/findmover/wxread</code>。</li>
+<li>页面右上角有一个 <strong>Fork</strong> 按钮，点击它。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260623150648895.png" alt="image-20260623150648895"></li>
+<li>页面会跳转，直接点击 <strong>Create fork</strong>。这样，这个项目的代码就被完整复制到你自己的账号下了。</li>
+</ol>
+<h3 id="第三步：在-GitHub-中配置运行参数"><a href="#第三步：在-GitHub-中配置运行参数" class="headerlink" title="第三步：在 GitHub 中配置运行参数"></a>第三步：在 GitHub 中配置运行参数</h3><p>现在需要把你第一步抓到的凭证填入你刚刚 Fork 的仓库里：</p>
+<ol>
+<li>在你自己的这个 <code>wxread</code> 仓库页面，点击顶部的 <strong>Settings（设置）</strong> 菜单。</li>
+<li>在左侧列表里找到 <strong>Secrets and variables</strong>，点击展开，然后选择 <strong>Actions</strong>。</li>
+<li><strong>添加核心凭证（Secrets）：</strong><ul>
+<li>点击右侧的 <strong>New repository secret</strong> 按钮。</li>
+<li><strong>Name</strong> 填入：<code>WXREAD_CURL_BASH</code></li>
+<li><strong>Value</strong> 填入：把你第一步在记事本里保存的那长串 <code>cURL (bash)</code> 文本全部粘贴进去。</li>
+<li>点击 <strong>Add secret</strong> 确认保存。</li>
+</ul>
+</li>
+<li><strong>添加阅读时间变量（Variables）：</strong><ul>
+<li>在当前页面（Actions）中，把标签页从 <em>Secrets</em> 切换到 <strong>Variables</strong>。</li>
+<li>点击 <strong>New repository variable</strong>。</li>
+<li><strong>Name</strong> 填入：<code>READ_NUM</code></li>
+<li><strong>Value</strong> 填入你想要的阅读次数（脚本每 1 次代表阅读 30 秒。比如填 <code>120</code> 就是 60 分钟，填 <code>200</code> 就是 100 分钟）。</li>
+<li>点击 <strong>Add variable</strong> 确认保存。</li>
+</ul>
+</li>
+</ol>
+<p><em>(可选)</em> 如果需要每天阅读完后把结果推送到你的微信上，可以在 <strong>Secrets</strong> 里面再添加 <code>PUSH_METHOD</code>（可选 pushplus、wxpusher 等）以及对应的 Token，不配置则默认不推送，但不影响刷时长。</p>
+<h3 id="第四步：启动并静待自动运行"><a href="#第四步：启动并静待自动运行" class="headerlink" title="第四步：启动并静待自动运行"></a>第四步：启动并静待自动运行</h3><ol>
+<li>点击仓库顶部的 <strong>Actions</strong> 菜单。</li>
+<li>由于是新 Fork 的项目，系统会提示你启用 Action，点击绿色的 <strong>&quot;I understand my workflows, go ahead and enable them&quot;</strong> 按钮。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260623151018665.png" alt="image-20260623151018665"></li>
+<li>默认情况下，脚本每天会自动在后台定时运行。</li>
+<li>如果你想<strong>立马测试一下</strong>是否成功：<ul>
+<li>在左侧点击具体的 Workflow 名字（通常叫 <code>wxread</code> 类似的名字），一般处于<code>Disabled</code>状态，将其改为<code>Enabled</code>。</li>
+<li>看到右侧有一个 <strong>Run workflow</strong> 的灰色按钮，点击它，再点击绿色的 <strong>Run workflow</strong>。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260623151431607.png" alt="image-20260623151431607"></li>
+<li>稍等一两分钟，刷新页面，如果看到出现绿色的勾（✔ Success），说明已经成功运行，你的微信读书时长此时就已经加上去啦！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260623151816995.png" alt="image-20260623151816995"></li>
+</ul>
+</li>
+</ol>
+<p><strong>注意事项：</strong> 微信读书的网页版登录凭证（Cookie）是有有效期的。如果过了一段时间（比如一两周后）发现它不自动加时长了，说明凭证失效了。你只需要重复<strong>第一步</strong>重新抓取一次 <code>read</code> 接口的 <code>cURL (bash)</code>，然后去 <strong>Settings -&gt; Secrets</strong> 里把 <code>WXREAD_CURL_BASH</code> 的值更新一下即可。</p>
+<p>要加上凭证失效的提醒，最简单且对小白最友好的方式就是利用 <strong>GitHub 官方的“工作流失败通知” (Workflow Failure Notification)</strong>。</p>
+<p>因为当你的微信读书凭证（Cookie）失效时，脚本请求网页就会报错，导致 GitHub Action 运行失败（变成红色的 ❌）。只要配置好通知，GitHub 就会在失败的第一时间给你发邮件，或者在手机 App 上推送提醒。</p>
+<p>以下是两种配置提醒的方法，推荐第一种（最省心）：</p>
+<h3 id="方法一：开启-GitHub-官方邮件-App-提醒（最推荐，无需改代码）"><a href="#方法一：开启-GitHub-官方邮件-App-提醒（最推荐，无需改代码）" class="headerlink" title="方法一：开启 GitHub 官方邮件&#x2F;App 提醒（最推荐，无需改代码）"></a>方法一：开启 GitHub 官方邮件&#x2F;App 提醒（最推荐，无需改代码）</h3><p>GitHub 默认会对你自己的项目失败进行提醒，你只需要确认你的接收设置是打开的：</p>
+<ol>
+<li>登录 GitHub，点击网页右上角你的<strong>头像</strong>，选择 <strong>Settings（个人设置）</strong>。</li>
+<li>在左侧菜单栏中找到 <strong>Notifications（通知）</strong>。</li>
+<li>在 <strong>Actions</strong> 这一栏，确保勾选了 <strong>Email（邮件）</strong>。<ul>
+<li><em>如果你手机上装了 GitHub 的手机客户端，也可以勾选 <strong>Web&#x2F;App</strong>，手机就能像微信一样收到弹窗推送。</em></li>
+</ul>
+</li>
+<li>往下滚动找到 <strong>Watching</strong> 或 <strong>System</strong> 相关的触发条件，确保 <strong>Failing workflows（失败的工作流）</strong> 是处于开启接收状态。</li>
+</ol>
+<p><strong>效果：</strong> 一旦哪天凭证失效，脚本运行报错，你的邮箱就会收到一封来自 GitHub 的邮件，提示你 <code>Workflow run failed</code>（工作流运行失败），你看到邮件就知道该去更新凭证了。</p>
+<h3 id="方法二：通过微信或钉钉提醒（需要配置推送服务）"><a href="#方法二：通过微信或钉钉提醒（需要配置推送服务）" class="headerlink" title="方法二：通过微信或钉钉提醒（需要配置推送服务）"></a>方法二：通过微信或钉钉提醒（需要配置推送服务）</h3><p>如果你不想看邮件，希望脚本失效或者每天运行完后<strong>直接在微信上收到通知</strong>，原项目其实已经自带了推送功能（支持 <code>pushplus</code>、<code>wxpusher</code>、<code>企业微信</code>、<code>钉钉</code> 等）。</p>
+<p>这里以最常用的 <strong>pushplus（微信扫码即可接收通知）</strong> 为例：</p>
+<ol>
+<li>手机微信搜索并关注公众号 <strong>pushplus推送加</strong>。</li>
+<li>点击公众号菜单栏里的 <strong>【激活&#x2F;登录】</strong>，登录后在它的官网个人中心拿到你的 <strong><code>Token</code>（一串代码）</strong>。</li>
+<li>回到你 GitHub 的 <code>wxread</code> 仓库，点击 <strong>Settings -&gt; Secrets and variables -&gt; Actions</strong>。</li>
+<li>点击 <strong>New repository secret</strong>（新建密钥）：<ul>
+<li><strong>Name 填入：</strong> <code>PUSH_METHOD</code></li>
+<li><strong>Value 填入：</strong> <code>pushplus</code> （代表你使用这个渠道）</li>
+</ul>
+</li>
+<li>再次点击 <strong>New repository secret</strong>：<ul>
+<li><strong>Name 填入：</strong> <code>PUSH_TOKEN</code></li>
+<li><strong>Value 填入：</strong> 粘贴你刚才在 pushplus 网站上复制的那串 <strong>Token</strong>。</li>
+</ul>
+</li>
+</ol>
+<p><strong>效果：</strong> 这样配置好后，脚本每次运行完（无论成功还是凭证失效失败），你的微信都会收到一条来自“pushplus”的详细战报。如果某天通知里显示错误或者没有增加时长，就说明凭证需要更新了。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IT-issues/">IT-issues</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260623150244514.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="Wechat"/></a><div class="post-qr-code-desc">Wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="Alipay"/></a><div class="post-qr-code-desc">Alipay</div></li><li class="reward-item"><a href="/paypal.me/spritenee" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/paypal.png" alt="Paypal"/></a><div class="post-qr-code-desc">Paypal</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/be0a61d9.html" title="话风一变天地宽"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/you%2520fancy%2520another%2520man's%2520wife.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">话风一变天地宽</div></div></a></div><div class="next-post pull-right"><a href="/posts/e9047fd3.html" title="将MKV中的字幕提取出来，放到另一个MKV中"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/bd205ad7-e241-4eda-9dbf-e2700c48a142.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">将MKV中的字幕提取出来，放到另一个MKV中</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/8ed2456e.html" title="AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202501/image-20250308222701243.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-08</div><div class="title">AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法</div></div></a></div><div><a href="/posts/5d0776d5.html" title="Add to the PATH on Windows 10 and Windows 11"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240127074357404.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-27</div><div class="title">Add to the PATH on Windows 10 and Windows 11</div></div></a></div><div><a href="/posts/da4c0974.html" title="ChatTTS安装使用保姆级教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240604154404896.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-04</div><div class="title">ChatTTS安装使用保姆级教程</div></div></a></div><div><a href="/posts/e7a898a7.html" title="ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240625130250230.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-25</div><div class="title">ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决</div></div></a></div><div><a href="/posts/bb1c127d.html" title="Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240131113536868.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-31</div><div class="title">Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项</div></div></a></div><div><a href="/posts/4ea619b9.html" title="Comprehensive Summary: The Mermaid Renderer Saga"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260709145839751.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-09</div><div class="title">Comprehensive Summary: The Mermaid Renderer Saga</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">AI-China</div><div class="author-info__description">Something about China</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">219</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">345</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">18</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:spritenee@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://youtube.com/spritenee" target="_blank" title="Youtube"><i class="fa-brands fa-youtube" style="color: #f70808;"></i></a><a class="social-icon" href="https://weibo.com/u/1911422681" target="_blank" title="Weibo"><i class="fa-brands fa-weibo" style="color: #8e2525;"></i></a><a class="social-icon" href="https://facebook.com/spritenee" target="_blank" title="Facebook"><i class="fa-brands fa-facebook" style="color: #1f64db;"></i></a><a class="social-icon" href="https://twitter.com/spritenee" target="_blank" title="Twitter"><i class="fa-brands fa-twitter" style="color: #0b62f9;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6%E5%88%B7%E6%97%B6%E9%95%BF-%E4%BF%9D%E6%8C%81%E6%8C%91%E6%88%98%E8%B5%9B%E5%A4%A9%E6%95%B0%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC%E6%93%8D%E4%BD%9C%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">微信读书刷时长+保持挑战赛天数的自动化脚本操作详细教程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E8%8E%B7%E5%8F%96%E4%BD%A0%E7%9A%84%E5%BE%AE%E4%BF%A1%E8%AF%BB%E4%B9%A6%E2%80%9C%E5%87%AD%E8%AF%81%E2%80%9D%EF%BC%88%E6%8A%93%E5%8C%85%EF%BC%89"><span class="toc-number">1.0.1.</span> <span class="toc-text">第一步：获取你的微信读书“凭证”（抓包）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E5%B0%86%E9%A1%B9%E7%9B%AE%E5%A4%8D%E5%88%B6%E5%88%B0%E4%BD%A0%E8%87%AA%E5%B7%B1%E7%9A%84-GitHub"><span class="toc-number">1.0.2.</span> <span class="toc-text">第二步：将项目复制到你自己的 GitHub</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E5%9C%A8-GitHub-%E4%B8%AD%E9%85%8D%E7%BD%AE%E8%BF%90%E8%A1%8C%E5%8F%82%E6%95%B0"><span class="toc-number">1.0.3.</span> <span class="toc-text">第三步：在 GitHub 中配置运行参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E5%90%AF%E5%8A%A8%E5%B9%B6%E9%9D%99%E5%BE%85%E8%87%AA%E5%8A%A8%E8%BF%90%E8%A1%8C"><span class="toc-number">1.0.4.</span> <span class="toc-text">第四步：启动并静待自动运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E5%BC%80%E5%90%AF-GitHub-%E5%AE%98%E6%96%B9%E9%82%AE%E4%BB%B6-App-%E6%8F%90%E9%86%92%EF%BC%88%E6%9C%80%E6%8E%A8%E8%8D%90%EF%BC%8C%E6%97%A0%E9%9C%80%E6%94%B9%E4%BB%A3%E7%A0%81%EF%BC%89"><span class="toc-number">1.0.5.</span> <span class="toc-text">方法一：开启 GitHub 官方邮件&#x2F;App 提醒（最推荐，无需改代码）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BE%AE%E4%BF%A1%E6%88%96%E9%92%89%E9%92%89%E6%8F%90%E9%86%92%EF%BC%88%E9%9C%80%E8%A6%81%E9%85%8D%E7%BD%AE%E6%8E%A8%E9%80%81%E6%9C%8D%E5%8A%A1%EF%BC%89"><span class="toc-number">1.0.6.</span> <span class="toc-text">方法二：通过微信或钉钉提醒（需要配置推送服务）</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/cdf4999a.html" title="抖音分目录下载无水印python实现"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260711091252139.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="抖音分目录下载无水印python实现"/></a><div class="content"><a class="title" href="/posts/cdf4999a.html" title="抖音分目录下载无水印python实现">抖音分目录下载无水印python实现</a><time datetime="2026-07-11T08:49:35.000Z" title="Created 2026-07-11 08:49:35">2026-07-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4ea619b9.html" title="Comprehensive Summary: The Mermaid Renderer Saga"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260709145839751.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Comprehensive Summary: The Mermaid Renderer Saga"/></a><div class="content"><a class="title" href="/posts/4ea619b9.html" title="Comprehensive Summary: The Mermaid Renderer Saga">Comprehensive Summary: The Mermaid Renderer Saga</a><time datetime="2026-07-09T14:52:02.000Z" title="Created 2026-07-09 14:52:02">2026-07-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/6471bbb9.html" title="Git下文件（夹）时间全部错误更新的恢复方法"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260708175303785.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git下文件（夹）时间全部错误更新的恢复方法"/></a><div class="content"><a class="title" href="/posts/6471bbb9.html" title="Git下文件（夹）时间全部错误更新的恢复方法">Git下文件（夹）时间全部错误更新的恢复方法</a><time datetime="2026-07-08T17:17:28.000Z" title="Created 2026-07-08 17:17:28">2026-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/86ab0e76.html" title="大片 REMUX 无损剪辑与多轨对齐优化"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260708142229281.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大片 REMUX 无损剪辑与多轨对齐优化"/></a><div class="content"><a class="title" href="/posts/86ab0e76.html" title="大片 REMUX 无损剪辑与多轨对齐优化">大片 REMUX 无损剪辑与多轨对齐优化</a><time datetime="2026-07-08T14:00:04.000Z" title="Created 2026-07-08 14:00:04">2026-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/e9047fd3.html" title="将MKV中的字幕提取出来，放到另一个MKV中"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/bd205ad7-e241-4eda-9dbf-e2700c48a142.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="将MKV中的字幕提取出来，放到另一个MKV中"/></a><div class="content"><a class="title" href="/posts/e9047fd3.html" title="将MKV中的字幕提取出来，放到另一个MKV中">将MKV中的字幕提取出来，放到另一个MKV中</a><time datetime="2026-06-26T20:13:43.000Z" title="Created 2026-06-26 20:13:43">2026-06-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By AI-China</div><div class="footer_custom_text">Hi, everyone. Just ask me something!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.ai-china.xyz',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.umd.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'spritenee/Giscus',
+      'data-repo-id': 'R_kgDOKmHsUg',
+      'data-category-id': 'DIC_kwDOKmHsUs4Cagfw',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },null)
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Waline' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script src="/inject-mermaid.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!--在此添加你的javascript文件：--><script src="/self/js/algoliasearch.js"></script></body></html>

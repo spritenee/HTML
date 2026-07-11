@@ -1,0 +1,23 @@
+/* 对于 lang 为 zh-CN 的文章，添加首行缩进两个汉字的样式 */
+article#article-container[data-lang="zh-CN"] p {
+  text-indent: 2em; /* 2个汉字的宽度 */
+}
+
+/* 排除引用块中的段落 */
+article#article-container[data-lang="zh-CN"] blockquote p {
+  text-indent: 0;
+}
+
+/* 将所有.post_cover类的object-fit从cover改为contain以完整显示 */
+#recent-posts > .recent-post-item .post_cover .post-bg {
+  object-fit: contain;
+}
+/* 让所有iframe视频居中显示 */
+#article-container iframe {
+  display: block;
+  margin: auto;
+}
+/* fa-star图标变红 */
+.fa-star {
+  color: red
+}
