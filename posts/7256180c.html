@@ -1,0 +1,532 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>抖音抓取不全的max_pages及cookies设置 | Ai-China</title><meta name="author" content="AI-China"><meta name="copyright" content="AI-China"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="抖音抓取不全的max_pages及cookies设置0725版本在抓取少量作者页面内容时没有问题，待抓取某290个作品的主页时出现403报错，且仅呈现145个作品。 这其中包含两个问题：403报错是因为关键cookie缺失；未呈现全部作品则因为max_pages原来仅设置为8，就是翻8页，大概也就是145个作品。 先解决403报错的问题403 错误通常意味着：  Cookies 过期或关键 Coo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="抖音抓取不全的max_pages及cookies设置">
+<meta property="og:url" content="https://www.ai-china.xyz/posts/7256180c.html">
+<meta property="og:site_name" content="Ai-China">
+<meta property="og:description" content="抖音抓取不全的max_pages及cookies设置0725版本在抓取少量作者页面内容时没有问题，待抓取某290个作品的主页时出现403报错，且仅呈现145个作品。 这其中包含两个问题：403报错是因为关键cookie缺失；未呈现全部作品则因为max_pages原来仅设置为8，就是翻8页，大概也就是145个作品。 先解决403报错的问题403 错误通常意味着：  Cookies 过期或关键 Coo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260813072129955.png">
+<meta property="article:published_time" content="2026-08-13T07:08:45.000Z">
+<meta property="article:modified_time" content="2026-08-13T07:08:45.000Z">
+<meta property="article:author" content="AI-China">
+<meta property="article:tag" content="IT-issues">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260813072129955.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.ai-china.xyz/posts/7256180c.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//static.cloudflareinsights.com"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?403c92d1560db157c2d1a5a30189814d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-EEZG901XK6"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EEZG901XK6');
+</script><script defer="defer" data-pjax="data-pjax" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;112faaeb32a149e7acdef445d2cad2f1&quot;}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: {"appId":"6M6J2GXVQ8","apiKey":"db1b88d08993baff4226621c59aedfbf","indexName":"ai-china.xyz","hits":{"per_page":6},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":-1,"unescape":false,"languages":{"hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: 'days',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '抖音抓取不全的max_pages及cookies设置',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-08-13 07:08:45'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/self/custom.css"><script src="/assets/algolia/algoliasearchLite.min.js" async></script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">228</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">345</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260813072129955.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Ai-China"><span class="site-name">Ai-China</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-file-alt"></i><span> Articles</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-exchange-alt"></i><span> Cultural &amp; Economic Exchange</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/ancient-china/"><i class="fa-fw fas fa-yin-yang"></i><span> Ancient China</span></a></li><li><a class="site-page child" href="/modern-china/"><i class="fa-fw fas fa-star"></i><span> Modern China</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-globe"></i><span> Trades &amp; Ads</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/trades-china/"><i class="fa-fw fas fa-road-bridge"></i><span> Trades</span></a></li><li><a class="site-page child" href="/ads-china/"><i class="fa-fw fas fa-volume-high"></i><span> Ads</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-graduation-cap"></i><span> Learning</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/IT-issues/"><i class="fa-fw fas fa-clipboard-question"></i><span> IT issues</span></a></li><li><a class="site-page child" href="/high-school/"><i class="fa-fw fa-brands fa-google-scholar"></i><span> High-school</span></a></li><li><a class="site-page child" href="/languages/"><i class="fa-fw fas fa-language"></i><span> Languages</span></a></li><li><a class="site-page child" href="/programming/"><i class="fa-fw fas fa-robot"></i><span> Programming</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-heart-pulse"></i><span> Health</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/depression/"><i class="fa-fw fas fa-person-drowning"></i><span> Depression</span></a></li><li><a class="site-page child" href="/emotion-management/"><i class="fa-fw fas fa-face-angry"></i><span> Emotion Management</span></a></li><li><a class="site-page child" href="/relationship/"><i class="fa-fw fas fa-hands-praying"></i><span> Relationship</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">抖音抓取不全的max_pages及cookies设置</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-08-13T07:08:45.000Z" title="发表于 2026-08-13 07:08:45">2026-08-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-08-13T07:08:45.000Z" title="更新于 2026-08-13 07:08:45">2026-08-13</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/IT%E5%B8%B8%E8%A7%81%E7%96%91%E9%9A%BE/">IT常见疑难</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="抖音抓取不全的max_pages及cookies设置"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" data-lang="zh-CN"><h1 id="抖音抓取不全的max-pages及cookies设置"><a href="#抖音抓取不全的max-pages及cookies设置" class="headerlink" title="抖音抓取不全的max_pages及cookies设置"></a>抖音抓取不全的max_pages及cookies设置</h1><p>0725版本在抓取少量作者页面内容时没有问题，待抓取某290个作品的主页时出现403报错，且仅呈现145个作品。</p>
+<p>这其中包含两个问题：403报错是因为关键cookie缺失；未呈现全部作品则因为max_pages原来仅设置为8，就是翻8页，大概也就是145个作品。</p>
+<h2 id="先解决403报错的问题"><a href="#先解决403报错的问题" class="headerlink" title="先解决403报错的问题"></a>先解决403报错的问题</h2><p><strong>403 错误</strong>通常意味着：</p>
+<ol>
+<li><strong>Cookies 过期</strong>或<strong>关键 Cookie 缺失</strong>（如 <code>ttwid</code>、<code>msToken</code>）</li>
+<li><strong>请求签名失效</strong>（X-Bogus 或 a-bogus 未正确生成）</li>
+<li><strong>请求频率过高</strong>触发了风控</li>
+</ol>
+<h2 id="🔧-解决方案"><a href="#🔧-解决方案" class="headerlink" title="🔧 解决方案"></a>🔧 解决方案</h2><h3 id="1-更新-Cookies（最重要）"><a href="#1-更新-Cookies（最重要）" class="headerlink" title="1. 更新 Cookies（最重要）"></a>1. <strong>更新 Cookies（最重要）</strong></h3><p>从浏览器重新获取完整的 Cookie 字符串，特别是确保以下关键字段存在且有效：</p>
+<ul>
+<li><code>ttwid</code></li>
+<li><code>msToken</code></li>
+<li><code>odin_tt</code></li>
+<li><code>passport_csrf_token</code></li>
+</ul>
+<p>在 Chrome 中按 <code>F12</code> → <code>Application</code> → <code>Cookies</code> → <code>https://www.douyin.com</code>，逐个检查这些字段是否存在。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260813072129955.png" alt="image-20260813072129955"></p>
+<p><strong>复制所有 Cookie</strong>：在 Cookie 列表上方有一个过滤框，旁边有导出按钮；或者使用控制台输入（在输入此命令前，可能需要先输入<code>allow pasting</code>才能允许粘贴命令）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260813072902482.png" alt="image-20260813072902482"></p>
+<p>手动编辑 <code>config.yml</code>，将 <code>document.cookie</code> 输出的内容按格式填入</p>
+<p>根据运行提示，Cookies中始终缺少<code>msToken</code>，这个字段<strong>极其关键</strong>——它是抖音 Web 端 API 的签名令牌，没有它几乎所有请求都会被拒绝。</p>
+<p>而且，<code>msToken</code> 不是存储在 <code>document.cookie</code> 中的，它是通过 JavaScript 动态生成并存储在 <code>localStorage</code> 中的。</p>
+<p>对于 <code>msToken</code>，可以用控制台生成（随机字符串法，可临时使用）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在抖音页面控制台执行</span></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">from</span>(&#123;<span class="attr">length</span>: <span class="number">128</span>&#125;, <span class="function">() =&gt;</span> <span class="string">&#x27;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#x27;</span>[<span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">62</span>)]).<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260813073949254.png" alt="image-20260813073949254"></p>
+<h3 id="获取真实-msToken-的方法："><a href="#获取真实-msToken-的方法：" class="headerlink" title="获取真实 msToken 的方法："></a>获取真实 msToken 的方法：</h3><p>在抖音页面控制台执行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看 localStorage 中的真实 msToken</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;xmst&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260813081616527.png" alt="image-20260813081616527"></p>
+<p>如果返回 <code>null</code>，说明还没有生成。访问几个抖音页面后，它会自动生成。</p>
+<p>再来修改config.yml文件（默认如下所示）：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260813074108837.png" alt="image-20260813074108837"></p>
+<p> <code>config.yml</code> 文件存在<strong>严重的格式错误</strong>！YAML 对缩进和引号非常敏感。当前格式会导致解析失败。</p>
+<h2 id="🔧-修复后的正确-config-yml"><a href="#🔧-修复后的正确-config-yml" class="headerlink" title="🔧 修复后的正确 config.yml"></a>🔧 修复后的正确 <code>config.yml</code></h2><p>用以下内容<strong>完全替换</strong>你的 <code>config.yml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cookies:</span></span><br><span class="line">  <span class="attr">msToken:</span> </span><br><span class="line">  <span class="attr">ttwid:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="attr">odin_tt:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="attr">sessionid:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="attr">sid_guard:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="attr">passport_csrf_token:</span> <span class="string">e5b5da2ed961d334febc661cc02d4acf</span></span><br><span class="line">  <span class="attr">passport_csrf_token_default:</span> <span class="string">e5b5da2ed961d334febc661cc02d4acf</span></span><br><span class="line">  <span class="attr">passport_assist_user:</span> <span class="string">Cj15iSR8_CDtGWCQDhgElxh0HoMtNYCFcFZgXjSk5w6N652p55qW9PZkkvJFTQflGkoKPAAAAAAAAAAAAABQoIRcCVHdvXj7zo5oSTs8bm9tbPyQCrpUJnRxEg6hjGSeyVAjNfoKw2twxCoi5YOGImv1lQgASIBA_BKAMQ==</span></span><br><span class="line">  <span class="attr">passport_auth_mix_state:</span> <span class="string">n8czfm5yyr9go3oobjtluxp6jx3</span></span><br><span class="line">  <span class="attr">csrf_session_id:</span> <span class="string">3b8ccf27723245112a64531e</span></span><br><span class="line">  <span class="attr">UIFID:</span> <span class="string">5bdad390e71fd6e6e69e3cafe6018169c2447c8bc0b8484cc0f203a274f99fdb4c654015b3b027e971be47a1f52f45a1bb09a670545fbd657b115a37cccc4f6e777c72c15460f5eaba2fb86a3de99f2ddf708914a3c588cbba3a4b8ea44c8dcb17f033f84c1944d6ce6bb220b78a5e0d50256396277c2a9cc103c0c9fc66d54c44172e7172535e5c64a94f1ef0197e9287df4a0d8</span></span><br><span class="line">  <span class="attr">s_v_web_id:</span> <span class="string">verify_msnu8xqt_VmKAOeqw_5uASGu90gMC0rxS</span></span><br><span class="line">  <span class="attr">__ac_nonce:</span> <span class="string">06a7bc59263339a</span></span><br><span class="line">  <span class="attr">__ac_signature:</span> <span class="string">_02B4Z6wo00f01C9W.Uf8BmC.AvfAGGy71</span></span><br><span class="line"></span><br><span class="line"><span class="attr">path:</span> <span class="string">&quot;D:\\Douzy Downloaded&quot;</span></span><br><span class="line"><span class="attr">video:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">music:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">cover:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">mode:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">single</span></span><br><span class="line"><span class="attr">number:</span></span><br><span class="line">  <span class="attr">single:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="📋-还需要手动补充的-Cookie"><a href="#📋-还需要手动补充的-Cookie" class="headerlink" title="📋 还需要手动补充的 Cookie"></a>📋 还需要手动补充的 Cookie</h2><p>文件中<strong>缺少以下关键字段</strong>（它们都是 <code>httpOnly</code> 的，需要从浏览器手动获取）：</p>
+<ol>
+<li><strong>打开 Chrome，进入抖音并登录</strong></li>
+<li><strong><code>F12</code> → <code>Application</code> → <code>Cookies</code> → <code>https://www.douyin.com</code></strong></li>
+<li><strong>逐一双击复制以下字段的 Value</strong>：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">必须</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>ttwid</code></td>
+<td align="left">✅ 必须</td>
+<td align="left">设备标识</td>
+</tr>
+<tr>
+<td align="left"><code>odin_tt</code></td>
+<td align="left">✅ 必须</td>
+<td align="left">用户标识</td>
+</tr>
+<tr>
+<td align="left"><code>sessionid</code></td>
+<td align="left">✅ 必须</td>
+<td align="left">会话ID</td>
+</tr>
+<tr>
+<td align="left"><code>sid_guard</code></td>
+<td align="left">推荐</td>
+<td align="left">会话保护</td>
+</tr>
+</tbody></table>
+<p><strong>将复制的值填入上面 <code>config.yml</code> 的对应位置</strong>（替换空引号 <code>&quot;&quot;</code>）</p>
+<blockquote>
+<p><strong>在 YAML 中，字符串值无论是否带引号，效果是一样的。</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以下三种写法完全等价：</span></span><br><span class="line"><span class="attr">ttwid:</span> <span class="string">abc123</span></span><br><span class="line"><span class="attr">ttwid:</span> <span class="string">&quot;abc123&quot;</span></span><br><span class="line"><span class="attr">ttwid:</span> <span class="string">&#x27;abc123&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="📋-YAML-中引号的规则"><a href="#📋-YAML-中引号的规则" class="headerlink" title="📋 YAML 中引号的规则"></a>📋 YAML 中引号的规则</h2><table>
+<thead>
+<tr>
+<th align="left">情况</th>
+<th align="left">是否需要引号</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">纯数字和字母</td>
+<td align="left">❌ 不需要</td>
+<td align="left"><code>ttwid: abc123</code></td>
+</tr>
+<tr>
+<td align="left">包含特殊字符（如 <code>%</code>、<code>/</code>、<code>:</code>）</td>
+<td align="left">✅ 需要</td>
+<td align="left"><code>odin_tt: &quot;abc%2Fdef&quot;</code></td>
+</tr>
+<tr>
+<td align="left">以数字开头</td>
+<td align="left">✅ 需要</td>
+<td align="left"><code>sessionid: &quot;123abc&quot;</code></td>
+</tr>
+<tr>
+<td align="left">包含空格</td>
+<td align="left">✅ 需要</td>
+<td align="left"><code>name: &quot;hello world&quot;</code></td>
+</tr>
+</tbody></table>
+</blockquote>
+<blockquote>
+<blockquote>
+<h2 id="🔧-如何快速填充-config-yml"><a href="#🔧-如何快速填充-config-yml" class="headerlink" title="🔧 如何快速填充 config.yml"></a>🔧 如何快速填充 config.yml</h2><h3 id="最简单的方法：用浏览器开发者工具复制"><a href="#最简单的方法：用浏览器开发者工具复制" class="headerlink" title="最简单的方法：用浏览器开发者工具复制"></a>最简单的方法：用浏览器开发者工具复制</h3><ol>
+<li><strong>打开 Chrome，进入抖音并登录</strong></li>
+<li><strong>按 <code>F12</code> → <code>Application</code>（应用程序）→ <code>Cookies</code> → <code>https://www.douyin.com</code></strong></li>
+<li><strong>在 Cookie 列表中，逐一双击以下字段的 Value 列，复制值</strong>：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left">字段</th>
+<th align="left">是否必须</th>
+<th align="left">如何获取</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>msToken</code></td>
+<td align="left">✅ 必须</td>
+<td align="left">从 Cookie 列表复制，或在控制台执行特殊命令</td>
+</tr>
+<tr>
+<td align="left"><code>ttwid</code></td>
+<td align="left">✅ 必须</td>
+<td align="left">从 Cookie 列表复制</td>
+</tr>
+<tr>
+<td align="left"><code>odin_tt</code></td>
+<td align="left">✅ 必须</td>
+<td align="left">从 Cookie 列表复制</td>
+</tr>
+<tr>
+<td align="left"><code>sessionid</code></td>
+<td align="left">✅ 必须</td>
+<td align="left">从 Cookie 列表复制</td>
+</tr>
+<tr>
+<td align="left"><code>sid_guard</code></td>
+<td align="left">推荐</td>
+<td align="left">从 Cookie 列表复制</td>
+</tr>
+<tr>
+<td align="left"><code>passport_csrf_token</code></td>
+<td align="left">✅ 必须</td>
+<td align="left">从 Cookie 列表复制</td>
+</tr>
+<tr>
+<td align="left"><code>passport_csrf_token_default</code></td>
+<td align="left">可选</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left"><code>passport_assist_user</code></td>
+<td align="left">可选</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left"><code>passport_auth_mix_state</code></td>
+<td align="left">可选</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left"><code>csrf_session_id</code></td>
+<td align="left">可选</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left"><code>UIFID</code></td>
+<td align="left">可选</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left"><code>s_v_web_id</code></td>
+<td align="left">可选</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left"><code>__ac_nonce</code></td>
+<td align="left">可选</td>
+<td align="left">同上</td>
+</tr>
+<tr>
+<td align="left"><code>__ac_signature</code></td>
+<td align="left">可选</td>
+<td align="left">同上</td>
+</tr>
+</tbody></table>
+<p><strong>核心必须项：<code>msToken</code>、<code>ttwid</code>、<code>odin_tt</code>、<code>sessionid</code>、<code>passport_csrf_token</code></strong></p>
+<hr>
+<h2 id="🚀-最快填充方法"><a href="#🚀-最快填充方法" class="headerlink" title="🚀 最快填充方法"></a>🚀 最快填充方法</h2><p>在抖音页面的控制台（F12 → Console）执行以下命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一次性复制所有关键 Cookie 为 JSON 格式</span></span><br><span class="line"><span class="keyword">var</span> keys = [<span class="string">&#x27;ttwid&#x27;</span>, <span class="string">&#x27;odin_tt&#x27;</span>, <span class="string">&#x27;sessionid&#x27;</span>, <span class="string">&#x27;sid_guard&#x27;</span>, <span class="string">&#x27;passport_csrf_token&#x27;</span>, </span><br><span class="line">            <span class="string">&#x27;passport_csrf_token_default&#x27;</span>, <span class="string">&#x27;passport_assist_user&#x27;</span>, </span><br><span class="line">            <span class="string">&#x27;passport_auth_mix_state&#x27;</span>, <span class="string">&#x27;csrf_session_id&#x27;</span>, <span class="string">&#x27;UIFID&#x27;</span>, </span><br><span class="line">            <span class="string">&#x27;s_v_web_id&#x27;</span>, <span class="string">&#x27;__ac_nonce&#x27;</span>, <span class="string">&#x27;__ac_signature&#x27;</span>];</span><br><span class="line"><span class="keyword">var</span> result = &#123;&#125;;</span><br><span class="line"><span class="variable language_">document</span>.<span class="property">cookie</span>.<span class="title function_">split</span>(<span class="string">&#x27;;&#x27;</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">c</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> parts = c.<span class="title function_">trim</span>().<span class="title function_">split</span>(<span class="string">&#x27;=&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (parts.<span class="property">length</span> &gt;= <span class="number">2</span> &amp;&amp; keys.<span class="title function_">indexOf</span>(parts[<span class="number">0</span>]) !== -<span class="number">1</span>) &#123;</span><br><span class="line">        result[parts[<span class="number">0</span>]] = parts.<span class="title function_">slice</span>(<span class="number">1</span>).<span class="title function_">join</span>(<span class="string">&#x27;=&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(result, <span class="literal">null</span>, <span class="number">2</span>));</span><br></pre></td></tr></table></figure>
+
+<p>执行后会输出一个 JSON 格式的关键 Cookie 列表，你可以复制这些值填入 <code>config.yml</code>。</p>
+</blockquote>
+</blockquote>
+<p>注意：尽管如上修改了<code>config.yml</code>文件的内容格式，运行程序后仍会变成如上图的原始格式，但没关系，运行正常，该填的参数都已经开始运作。</p>
+<h3 id="2-增加延迟、减少页数"><a href="#2-增加延迟、减少页数" class="headerlink" title="2. 增加延迟、减少页数"></a>2. <strong>增加延迟、减少页数</strong></h3><p>修改 <code>__init__</code> 中的反风控参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 __init__ 中修改</span></span><br><span class="line">self.min_delay = <span class="number">2.0</span>   <span class="comment"># 从 1.5 改为 2.0</span></span><br><span class="line">self.max_delay = <span class="number">5.0</span>   <span class="comment"># 从 3.5 改为 5.0</span></span><br><span class="line">self.max_pages = <span class="number">5</span>     <span class="comment"># 从 8 改为 5</span></span><br></pre></td></tr></table></figure>
+
+<p>此为反风控措施，实际上为了解决翻页和作者主页全部作品显示的问题，还要反过来增加这个数值。</p>
+<h3 id="3-添加重试间隔"><a href="#3-添加重试间隔" class="headerlink" title="3. 添加重试间隔"></a>3. <strong>添加重试间隔</strong></h3><p>在 <code>fetch_tab_data</code> 的异常处理中增加更长的等待：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    self.log(<span class="string">f&quot;  ⚠️ 获取第<span class="subst">&#123;page_index&#125;</span>页数据时出错: <span class="subst">&#123;e&#125;</span>\n&quot;</span>)</span><br><span class="line">    <span class="comment"># 403 错误时等待更长时间</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;403&quot;</span> <span class="keyword">in</span> <span class="built_in">str</span>(e) <span class="keyword">or</span> <span class="string">&quot;status=403&quot;</span> <span class="keyword">in</span> <span class="built_in">str</span>(e):</span><br><span class="line">        wait_time = random.uniform(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line">        self.log(<span class="string">f&quot;  ⏳ 遇到 403，等待 <span class="subst">&#123;wait_time:<span class="number">.0</span>f&#125;</span> 秒后重试...\n&quot;</span>)</span><br><span class="line">        time.sleep(wait_time)</span><br><span class="line">    <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-检查-config-yml-中是否有-proxy"><a href="#4-检查-config-yml-中是否有-proxy" class="headerlink" title="4. 检查 config.yml 中是否有 proxy"></a>4. <strong>检查 <code>config.yml</code> 中是否有 <code>proxy</code></strong></h3><p>如果有代理可用，添加：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">proxy:</span> <span class="string">&quot;http://127.0.0.1:7890&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="再来解决多作品同时抓取（翻页）的问题"><a href="#再来解决多作品同时抓取（翻页）的问题" class="headerlink" title="再来解决多作品同时抓取（翻页）的问题"></a>再来解决多作品同时抓取（翻页）的问题</h2><h2 id="🔧-可能的原因和解决方案"><a href="#🔧-可能的原因和解决方案" class="headerlink" title="🔧 可能的原因和解决方案"></a>🔧 可能的原因和解决方案</h2><h3 id="max-pages-太小"><a href="#max-pages-太小" class="headerlink" title="max_pages 太小"></a><code>max_pages</code> 太小</h3><p>你的设置是 <code>max_pages = 5</code>，每页约 18 条，最多获取 90 条。如果作者有 150 个作品，就会少 60 条。</p>
+<p><strong>解决：</strong> 临时增大 <code>max_pages</code>（注意风控）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.max_pages = <span class="number">10</span>  <span class="comment"># 从 5 改为 10，实际上为了下载完整的290个作品，改成了16</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="增大翻页限制并改进翻页逻辑"><a href="#增大翻页限制并改进翻页逻辑" class="headerlink" title="增大翻页限制并改进翻页逻辑"></a>增大翻页限制并改进翻页逻辑</h3><p>在 <code>__init__</code> 中修改：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 反风控参数</span></span><br><span class="line">self.min_delay = <span class="number">2.5</span></span><br><span class="line">self.max_delay = <span class="number">5.5</span></span><br><span class="line">self.max_pages = <span class="number">16</span>  <span class="comment"># 从 5 改为 15，290个作品需要约 16 页</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>仍在0725基础上进行修改，完美解决上述两个问题！</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IT-issues/">IT-issues</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260813072129955.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="Wechat"/></a><div class="post-qr-code-desc">Wechat</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="Alipay"/></a><div class="post-qr-code-desc">Alipay</div></li><li class="reward-item"><a href="/paypal.me/spritenee" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/paypal.png" alt="Paypal"/></a><div class="post-qr-code-desc">Paypal</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/42ff8ddf.html" title="夸克APP下载未能完成的续传方法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202606/image-20260728091723554.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">夸克APP下载未能完成的续传方法</div></div></a></div><div class="next-post pull-right"><a href="/posts/e403982f.html" title="将mem.ai中最大的一篇图片笔记导出的历程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202608/Gemini_Generated_Image_n0t5q3n0t5q3n0t5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">将mem.ai中最大的一篇图片笔记导出的历程</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/8ed2456e.html" title="AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202501/image-20250308222701243.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-08</div><div class="title">AbbyFinereader识别的文字都变成方框（即使手动输入亦如此）的原因和解决方法</div></div></a></div><div><a href="/posts/5d0776d5.html" title="Add to the PATH on Windows 10 and Windows 11"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240127074357404.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-27</div><div class="title">Add to the PATH on Windows 10 and Windows 11</div></div></a></div><div><a href="/posts/e7a898a7.html" title="ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240625130250230.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-25</div><div class="title">ChatTTS安装使用过程中CUDA&#x2F;Pytorch&#x2F;Cudnn&#x2F;VisualStudio等相关疑难的解决</div></div></a></div><div><a href="/posts/da4c0974.html" title="ChatTTS安装使用保姆级教程"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202406/image-20240604154404896.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-04</div><div class="title">ChatTTS安装使用保姆级教程</div></div></a></div><div><a href="/posts/882ce7a3.html" title="Clash Verge 基于域名实现独立链路分流指南"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202608/image-20260828162014326.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-08-28</div><div class="title">Clash Verge 基于域名实现独立链路分流指南</div></div></a></div><div><a href="/posts/bb1c127d.html" title="Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202401/image-20240131113536868.webp" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-01-31</div><div class="title">Cloudflare中www域名指向vercelDNS，根域名指向www的注意事项</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div><div class="comment-switch"><span class="first-comment">Waline</span><span id="switch-btn"></span><span class="second-comment">Giscus</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">AI-China</div><div class="author-info__description">Something about China</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">228</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">345</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:spritenee@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://youtube.com/spritenee" target="_blank" title="Youtube"><i class="fa-brands fa-youtube" style="color: #f70808;"></i></a><a class="social-icon" href="https://weibo.com/u/1911422681" target="_blank" title="Weibo"><i class="fa-brands fa-weibo" style="color: #8e2525;"></i></a><a class="social-icon" href="https://facebook.com/spritenee" target="_blank" title="Facebook"><i class="fa-brands fa-facebook" style="color: #1f64db;"></i></a><a class="social-icon" href="https://twitter.com/spritenee" target="_blank" title="Twitter"><i class="fa-brands fa-twitter" style="color: #0b62f9;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Welcome!</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%96%E9%9F%B3%E6%8A%93%E5%8F%96%E4%B8%8D%E5%85%A8%E7%9A%84max-pages%E5%8F%8Acookies%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">抖音抓取不全的max_pages及cookies设置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%88%E8%A7%A3%E5%86%B3403%E6%8A%A5%E9%94%99%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.1.</span> <span class="toc-text">先解决403报错的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%A7-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.2.</span> <span class="toc-text">🔧 解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9B%B4%E6%96%B0-Cookies%EF%BC%88%E6%9C%80%E9%87%8D%E8%A6%81%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 更新 Cookies（最重要）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E7%9C%9F%E5%AE%9E-msToken-%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">1.2.2.</span> <span class="toc-text">获取真实 msToken 的方法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%A7-%E4%BF%AE%E5%A4%8D%E5%90%8E%E7%9A%84%E6%AD%A3%E7%A1%AE-config-yml"><span class="toc-number">1.3.</span> <span class="toc-text">🔧 修复后的正确 config.yml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-%E8%BF%98%E9%9C%80%E8%A6%81%E6%89%8B%E5%8A%A8%E8%A1%A5%E5%85%85%E7%9A%84-Cookie"><span class="toc-number">1.4.</span> <span class="toc-text">📋 还需要手动补充的 Cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8B-YAML-%E4%B8%AD%E5%BC%95%E5%8F%B7%E7%9A%84%E8%A7%84%E5%88%99"><span class="toc-number">1.5.</span> <span class="toc-text">📋 YAML 中引号的规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%A7-%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E5%A1%AB%E5%85%85-config-yml"><span class="toc-number">1.6.</span> <span class="toc-text">🔧 如何快速填充 config.yml</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A%E7%94%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7%E5%A4%8D%E5%88%B6"><span class="toc-number">1.6.1.</span> <span class="toc-text">最简单的方法：用浏览器开发者工具复制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%9A%80-%E6%9C%80%E5%BF%AB%E5%A1%AB%E5%85%85%E6%96%B9%E6%B3%95"><span class="toc-number">1.7.</span> <span class="toc-text">🚀 最快填充方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A2%9E%E5%8A%A0%E5%BB%B6%E8%BF%9F%E3%80%81%E5%87%8F%E5%B0%91%E9%A1%B5%E6%95%B0"><span class="toc-number">1.7.1.</span> <span class="toc-text">2. 增加延迟、减少页数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B7%BB%E5%8A%A0%E9%87%8D%E8%AF%95%E9%97%B4%E9%9A%94"><span class="toc-number">1.7.2.</span> <span class="toc-text">3. 添加重试间隔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%A3%80%E6%9F%A5-config-yml-%E4%B8%AD%E6%98%AF%E5%90%A6%E6%9C%89-proxy"><span class="toc-number">1.7.3.</span> <span class="toc-text">4. 检查 config.yml 中是否有 proxy</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%8D%E6%9D%A5%E8%A7%A3%E5%86%B3%E5%A4%9A%E4%BD%9C%E5%93%81%E5%90%8C%E6%97%B6%E6%8A%93%E5%8F%96%EF%BC%88%E7%BF%BB%E9%A1%B5%EF%BC%89%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">1.8.</span> <span class="toc-text">再来解决多作品同时抓取（翻页）的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%A7-%E5%8F%AF%E8%83%BD%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%92%8C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">1.9.</span> <span class="toc-text">🔧 可能的原因和解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#max-pages-%E5%A4%AA%E5%B0%8F"><span class="toc-number">1.9.1.</span> <span class="toc-text">max_pages 太小</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E5%A4%A7%E7%BF%BB%E9%A1%B5%E9%99%90%E5%88%B6%E5%B9%B6%E6%94%B9%E8%BF%9B%E7%BF%BB%E9%A1%B5%E9%80%BB%E8%BE%91"><span class="toc-number">1.9.2.</span> <span class="toc-text">增大翻页限制并改进翻页逻辑</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/59ad4201.html" title="跨平台 (Win11 &amp; Android) 机场+自建 IPv6 节点完美分流配置教程"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202609/image-20260917082630218.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="跨平台 (Win11 &amp; Android) 机场+自建 IPv6 节点完美分流配置教程"/></a><div class="content"><a class="title" href="/posts/59ad4201.html" title="跨平台 (Win11 &amp; Android) 机场+自建 IPv6 节点完美分流配置教程">跨平台 (Win11 &amp; Android) 机场+自建 IPv6 节点完美分流配置教程</a><time datetime="2026-09-17T07:52:08.000Z" title="Created 2026-09-17 07:52:08">2026-09-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/d4b71a0.html" title="V2rayN 完美分流保姆级超详细教程"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202608/20260915164009562.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="V2rayN 完美分流保姆级超详细教程"/></a><div class="content"><a class="title" href="/posts/d4b71a0.html" title="V2rayN 完美分流保姆级超详细教程">V2rayN 完美分流保姆级超详细教程</a><time datetime="2026-09-15T16:32:53.000Z" title="Created 2026-09-15 16:32:53">2026-09-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/850f82a7.html" title="段永平采访"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202608/maxresdefault.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="段永平采访"/></a><div class="content"><a class="title" href="/posts/850f82a7.html" title="段永平采访">段永平采访</a><time datetime="2026-09-14T12:35:17.000Z" title="Created 2026-09-14 12:35:17">2026-09-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/aa74c4cd.html" title="网课突破限制与网页倍速/拖动刷课全流程教程"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202608/20260829104245279.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="网课突破限制与网页倍速/拖动刷课全流程教程"/></a><div class="content"><a class="title" href="/posts/aa74c4cd.html" title="网课突破限制与网页倍速/拖动刷课全流程教程">网课突破限制与网页倍速/拖动刷课全流程教程</a><time datetime="2026-08-29T10:26:11.000Z" title="Created 2026-08-29 10:26:11">2026-08-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/882ce7a3.html" title="Clash Verge 基于域名实现独立链路分流指南"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.jsdelivr.net/gh/spritenee/images@main/Pico/202608/image-20260828162014326.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Clash Verge 基于域名实现独立链路分流指南"/></a><div class="content"><a class="title" href="/posts/882ce7a3.html" title="Clash Verge 基于域名实现独立链路分流指南">Clash Verge 基于域名实现独立链路分流指南</a><time datetime="2026-08-28T16:10:57.000Z" title="Created 2026-08-28 16:10:57">2026-08-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By AI-China</div><div class="footer_custom_text">Hi, everyone. Just ask me something!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+  }
+
+  btf.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const initWaline = () => {
+    const waline = Waline.init(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://waline.ai-china.xyz',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, null))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjax', destroyWaline, 'destroyWaline')
+
+  }
+
+  const loadWaline = async () => {
+    if (typeof Waline === 'object') initWaline()
+    else {
+      await getCSS('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.min.css')
+      await getScript('https://cdn.jsdelivr.net/npm/@waline/client@3.0.0-alpha.10/dist/waline.umd.min.js')
+      initWaline()
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'spritenee/Giscus',
+      'data-repo-id': 'R_kgDOKmHsUg',
+      'data-category-id': 'DIC_kwDOKmHsUs4Cagfw',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },null)
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Waline' === 'Giscus' || !false) {
+    if (false) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script src="/inject-mermaid.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></div><!--在此添加你的javascript文件：--><script src="/self/js/algoliasearch.js"></script></body></html>
