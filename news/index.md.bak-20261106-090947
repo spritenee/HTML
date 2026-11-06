@@ -1,0 +1,32 @@
+---
+title: China News, Explained
+date: 2026-11-05
+aside: false
+comments: false
+top_img: false
+---
+
+# China News, Explained
+
+News about China, explained in plain English — so you can understand not only what happened, but why it matters there.
+
+## How each interpretation works
+
+Every piece follows the same four parts, so you always know where you are:
+
+1. **What happened** — the facts, in three or four short sentences. No jargon first.
+2. **Why it matters in China** — the cultural, social, or historical background a foreign reader usually misses.
+3. **Words to learn** — three Chinese words from the story, with characters, pinyin, and a plain English meaning, so the news becomes a language lesson too.
+4. **What to watch next** — one question to keep in mind, not a prediction.
+
+## What this section is not
+
+It is not a news feed, and it does not copy whole articles. Each piece is Allen's own explanation, in his own words, with sources named. It does not take a political side for you — it explains the background so you can form your own view.
+
+## First interpretations
+
+The first interpretations will be linked here as they are published. Nothing here is a placeholder article — if a title is not linked yet, it is still being written.
+
+> Writing template for this section: `templates/news-interpretation-template.md` in the patch package. Copy it for each new piece, fill in every field, and only then publish it as a post.
+
+Want Allen to explain a particular news story? [Contact him](/contact/) and send the link.

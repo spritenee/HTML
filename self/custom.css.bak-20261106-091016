@@ -1,0 +1,136 @@
+/* ai-china.xyz patch v2: fusion layout.
+   TaoTao rhythm (a little every day) + Japanese-tutor minimal layout
+   (warm paper, rust accent, generous white space, one quiet button).
+   These classes are only used by the new landing / lesson pages,
+   so they do not restyle old blog posts. */
+
+.fused-hero {
+  text-align: center;
+  padding: 2.2rem 0 1.2rem;
+}
+
+.fused-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: #b3612e;
+  font-weight: 700;
+}
+
+.fused-hero h1 {
+  font-size: 2.1rem;
+  line-height: 1.25;
+  margin: 1rem 0 0.8rem;
+}
+
+.fused-photo {
+  margin: 1.6rem 0 1.2rem;
+  padding: 2.2rem 1rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #c47a3e, #a85f2b 55%, #7a4a28);
+  color: #fff8ec;
+  font-size: 4rem;
+  line-height: 1.1;
+}
+
+.fused-photo span {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  margin-top: 0.6rem;
+}
+
+.fused-hero a,
+.fused-card a {
+  display: inline-block;
+  border: 1.5px solid #2b2118;
+  border-radius: 999px;
+  padding: 0.65rem 1.4rem;
+  color: #2b2118;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.fused-card {
+  border: 1px solid #e5e0d8;
+  border-radius: 12px;
+  padding: 1.2rem 1.3rem;
+  background: #fffdf9;
+  margin: 1rem 0 1.5rem;
+}
+
+.fused-card h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .fused-hero h1 {
+    font-size: 1.7rem;
+  }
+  .fused-photo {
+    font-size: 3rem;
+  }
+}
+
+/* v2.4: video / audio slots. Used by the homepage, Tai Chi and news pages.
+   Placeholder boxes are visible until Allen drops a real file in and swaps
+   the placeholder div for the <video>/<audio> snippet in README-PATCH-v2.4. */
+.fused-media {
+  margin: 1rem 0 0.2rem;
+}
+.fused-media video,
+.fused-media audio {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  background: #f3ede2;
+  border: 1px solid #e5e0d8;
+}
+.fused-media audio {
+  margin-top: 0.6rem;
+}
+.fused-media figcaption {
+  font-size: 0.82rem;
+  color: #6b5d4f;
+  margin-top: 0.4rem;
+}
+.fused-media-placeholder {
+  border: 1.5px dashed #b3612e;
+  border-radius: 10px;
+  background: #fdf6ec;
+  color: #6b4a2f;
+  text-align: center;
+  padding: 1.1rem 0.8rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+.fused-media-placeholder span {
+  display: block;
+  font-size: 0.78rem;
+  color: #8a7a6a;
+}
+/* Breathing circle for Tai Chi: works with no media file at all.
+   8 seconds per breath: inhale (grow) then exhale (shrink). */
+.fused-breathe-wrap {
+  text-align: center;
+  margin: 1rem 0 0.2rem;
+}
+.fused-breathe {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #e8b07a, #b3612e);
+  animation: fused-breathe 8s ease-in-out infinite;
+}
+.fused-breathe-label {
+  font-size: 0.82rem;
+  color: #6b5d4f;
+  margin-top: 0.5rem;
+}
+@keyframes fused-breathe {
+  0%, 100% { transform: scale(0.82); opacity: 0.75; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fused-breathe { animation: none; }
+}
